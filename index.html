@@ -377,8 +377,8 @@
 </div>
 
 <script>
-  // ==================== URL APPS SCRIPT (SUDAH UPDATE!) ====================
-  const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
+  // ==================== URL APPS SCRIPT (SUDAH UPDATE DENGAN URL BARU!) ====================
+  const API_URL = "https://script.google.com/macros/s/AKfycbwlSgpfOKI5WhPR0f9ePd7G5veuxvFJY_ZHgHrbH37tVugNYr7BGCtEGx2vwtkqTTu2/exec";
   
   let currentUser = null;
   let hasVoted = false;
@@ -518,7 +518,11 @@
         document.getElementById("authContainer").style.display = "none";
         await loadCalonPemilih();
       } else { showAlertModal("Gagal", result.message, "error"); }
-    } catch(e) { hideLoading(); showAlertModal("Error", "Gagal terhubung ke server. Periksa koneksi Anda.", "error"); }
+    } catch(e) { 
+      hideLoading(); 
+      console.error("Login error:", e);
+      showAlertModal("Error", "Gagal terhubung ke server. Periksa koneksi dan URL API.", "error"); 
+    }
   }
 
   async function loadCalonPemilih() {
@@ -563,7 +567,11 @@
           await processVote(namaCalon);
         });
       });
-    } catch(e) { hideLoading(); showAlertModal("Error", "Gagal memuat data calon. Periksa koneksi.", "error"); }
+    } catch(e) { 
+      hideLoading(); 
+      console.error("Load calon error:", e);
+      showAlertModal("Error", "Gagal memuat data calon. Periksa koneksi.", "error"); 
+    }
   }
 
   async function processVote(namaCalon) {
@@ -598,7 +606,11 @@
           document.getElementById("calonContainer").style.display = "none";
           document.getElementById("sukses").style.display = "block";
         } else { showAlertModal("Gagal", result.message, "error"); }
-      } catch(e) { hideLoading(); showAlertModal("Error", "Gagal menyimpan suara. Periksa koneksi Anda.", "error"); }
+      } catch(e) { 
+        hideLoading(); 
+        console.error("Vote error:", e);
+        showAlertModal("Error", "Gagal menyimpan suara. Periksa koneksi Anda.", "error"); 
+      }
     };
   }
 
@@ -628,7 +640,7 @@
       let html = "";
       arr.forEach((item, idx) => {
         let jabatan = idx === 0 ? "Ketua" : idx === 1 ? "Sekretaris" : idx === 2 ? "Bendahara" : "Anggota";
-        html += `<tr><td>${idx + 1}</td><td>${escapeHtml(item.nama)}</td><td><strong>${item.suara}</strong></td><td>${jabatan}</td></tr>`;
+        html += `<tr><td style="border:1px solid #2d4a7c;padding:8px;">${idx + 1}</td><td style="border:1px solid #2d4a7c;padding:8px;">${escapeHtml(item.nama)}</td><td style="border:1px solid #2d4a7c;padding:8px;"><strong>${item.suara}</strong></td><td style="border:1px solid #2d4a7c;padding:8px;">${jabatan}</td></tr>`;
       });
       document.getElementById("hasilTableAdmin").innerHTML = html;
       updateChartAdmin(arr);
