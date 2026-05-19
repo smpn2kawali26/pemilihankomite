@@ -1,580 +1,625 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Pemilihan Komite SMPN 2 Kawali</title>
-
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<style>
-
-body{
-    background:#f2f5f9;
-    font-family:Arial,sans-serif;
-    margin:0;
-    padding:0;
-}
-
-/* =======================
-HEADER
-======================= */
-.header{
-    background:linear-gradient(135deg,#b30000,#ff2e2e);
-    color:white;
-    padding:35px 20px;
-    text-align:center;
-    border-radius:0 0 25px 25px;
-    box-shadow:0 4px 15px rgba(0,0,0,0.2);
-}
-
-.logo{
-    width:100px;
-    height:100px;
-    object-fit:contain;
-    background:white;
-    border-radius:50%;
-    padding:10px;
-    margin-bottom:15px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-
-.header h2{
-    font-size:38px;
-    font-weight:bold;
-}
-
-.header h4{
-    margin-top:10px;
-    font-size:28px;
-}
-
-.header p{
-    margin-top:10px;
-    font-size:18px;
-}
-
-/* =======================
-LOGIN
-======================= */
-.login-box{
-    max-width:420px;
-    margin:35px auto;
-    background:white;
-    padding:30px;
-    border-radius:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-
-.login-box h4{
-    font-weight:bold;
-    color:#b30000;
-}
-
-.login-box input{
-    border-radius:12px;
-    padding:12px;
-}
-
-.login-box button{
-    border-radius:12px;
-    padding:12px;
-    font-size:18px;
-    font-weight:bold;
-}
-
-/* =======================
-CALON
-======================= */
-.calon-container{
-    display:none;
-    padding:30px 10px;
-}
-
-.card-calon{
-    border:none;
-    border-radius:25px;
-    overflow:hidden;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    transition:0.3s;
-    background:white;
-    min-height:100%;
-}
-
-.card-calon:hover{
-    transform:translateY(-5px);
-}
-
-.card-calon img{
-    width:100%;
-    height:350px;
-    object-fit:contain;
-    background:white;
-    padding:10px;
-    border-bottom:1px solid #eee;
-}
-
-.card-calon .card-body{
-    padding:20px;
-}
-
-.card-calon h4{
-    font-weight:bold;
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.card-calon h6{
-    color:#b30000;
-    font-weight:bold;
-}
-
-.card-calon p{
-    text-align:justify;
-    line-height:1.7;
-}
-
-.btn-pilih{
-    background:linear-gradient(135deg,#b30000,#ff3b3b);
-    color:white;
-    border:none;
-    width:100%;
-    border-radius:12px;
-    padding:12px;
-    font-weight:bold;
-    margin-top:20px;
-    font-size:17px;
-    transition:0.3s;
-}
-
-.btn-pilih:hover{
-    transform:scale(1.02);
-}
-
-/* =======================
-NOTIFIKASI
-======================= */
-.notif{
-    position:fixed;
-    top:20px;
-    right:20px;
-    background:white;
-    padding:15px 20px;
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-    z-index:9999;
-    display:none;
-    min-width:300px;
-    animation:slide 0.4s ease;
-}
-
-.notif.success{
-    border-left:6px solid #28a745;
-}
-
-.notif.error{
-    border-left:6px solid #dc3545;
-}
-
-@keyframes slide{
-    from{
-        transform:translateX(100%);
-        opacity:0;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>E-Voting Komite | SMPN 2 Kawali</title>
+  <!-- Bootstrap 5 + Icons + Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    to{
-        transform:translateX(0);
-        opacity:1;
-    }
-}
-
-/* =======================
-SUKSES
-======================= */
-.sukses{
-    display:none;
-    text-align:center;
-    padding:80px 20px;
-}
-
-.sukses h1{
-    font-size:100px;
-}
-
-.sukses h2{
-    color:#b30000;
-    font-size:55px;
-    font-weight:bold;
-}
-
-.sukses p{
-    font-size:24px;
-}
-
-.btn-home{
-    margin-top:30px;
-    padding:14px 25px;
-    border:none;
-    border-radius:12px;
-    background:#b30000;
-    color:white;
-    font-size:18px;
-    font-weight:bold;
-    transition:0.3s;
-}
-
-.btn-home:hover{
-    background:#ff0000;
-}
-
-/* =======================
-RESPONSIVE
-======================= */
-@media(max-width:768px){
-
-    .header h2{
-        font-size:28px;
+    body {
+      background: linear-gradient(145deg, #f4f7fc 0%, #eef2f8 100%);
+      font-family: 'Inter', sans-serif;
+      scroll-behavior: smooth;
     }
 
-    .header h4{
-        font-size:22px;
+    /* custom scroll */
+    ::-webkit-scrollbar {
+      width: 8px;
     }
 
-    .card-calon img{
-        height:300px;
+    ::-webkit-scrollbar-track {
+      background: #e2e8f0;
+      border-radius: 10px;
     }
 
-    .sukses h2{
-        font-size:40px;
+    ::-webkit-scrollbar-thumb {
+      background: #b91c1c;
+      border-radius: 10px;
     }
 
-}
+    /* header premium */
+    .hero-header {
+      background: radial-gradient(circle at 10% 30%, #a00000, #5e0000);
+      backdrop-filter: blur(2px);
+      color: white;
+      padding: 40px 20px 45px;
+      text-align: center;
+      border-bottom-left-radius: 48px;
+      border-bottom-right-radius: 48px;
+      box-shadow: 0 20px 35px -12px rgba(0,0,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
 
-</style>
+    .hero-header::before {
+      content: "⚡";
+      font-size: 180px;
+      opacity: 0.08;
+      position: absolute;
+      bottom: -30px;
+      right: -20px;
+      pointer-events: none;
+      transform: rotate(-10deg);
+    }
 
+    .logo-wrapper {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .logo-wrapper:hover {
+      transform: scale(1.02);
+    }
+
+    .logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 50%;
+    }
+
+    .hero-header h2 {
+      font-size: 2.6rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+    }
+
+    .hero-header h4 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    .hero-header p {
+      font-size: 1.1rem;
+      opacity: 0.92;
+      margin-top: 12px;
+      font-weight: 400;
+    }
+
+    /* card login modern */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(2px);
+      border-radius: 48px;
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: all 0.2s;
+    }
+
+    .login-box {
+      max-width: 460px;
+      margin: 45px auto;
+      padding: 35px 30px;
+    }
+
+    .login-icon {
+      background: #b91c1c20;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: #b91c1c;
+      font-size: 32px;
+    }
+
+    .login-box h4 {
+      font-weight: 800;
+      color: #1e293b;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .form-floating-custom {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-floating-custom input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 28px;
+      border: 1.5px solid #e2e8f0;
+      background: #fefefe;
+      font-size: 1rem;
+      transition: all 0.2s;
+      outline: none;
+    }
+
+    .form-floating-custom input:focus {
+      border-color: #b91c1c;
+      box-shadow: 0 0 0 3px rgba(185,28,28,0.2);
+    }
+
+    .btn-login {
+      background: linear-gradient(95deg, #b91c1c, #dc2626);
+      border: none;
+      border-radius: 40px;
+      padding: 14px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: white;
+      width: 100%;
+      transition: all 0.25s;
+      box-shadow: 0 8px 18px rgba(185,28,28,0.3);
+    }
+
+    .btn-login:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(95deg, #9f1515, #c41e1e);
+      box-shadow: 0 12px 22px rgba(185,28,28,0.4);
+    }
+
+    /* Candidate cards premium */
+    .calon-container {
+      padding: 40px 12px 70px;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .section-title span {
+      background: #b91c1c10;
+      padding: 8px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      color: #b91c1c;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+
+    .section-title h2 {
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 12px;
+    }
+
+    .candidate-card {
+      border: none;
+      border-radius: 32px;
+      background: #ffffff;
+      transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      overflow: hidden;
+      box-shadow: 0 12px 28px -8px rgba(0,0,0,0.1);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .candidate-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 28px 35px -12px rgba(0,0,0,0.2);
+    }
+
+    .candidate-img {
+      background: linear-gradient(145deg, #f8fafc, #ffffff);
+      padding: 28px 20px 20px;
+      text-align: center;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .candidate-img img {
+      width: 180px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 4px solid white;
+      box-shadow: 0 12px 18px -6px rgba(0,0,0,0.2);
+      background: white;
+      transition: 0.2s;
+    }
+
+    .candidate-card:hover .candidate-img img {
+      transform: scale(1.02);
+    }
+
+    .card-body-custom {
+      padding: 24px 22px 28px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .candidate-name {
+      font-size: 1.7rem;
+      font-weight: 800;
+      text-align: center;
+      color: #0f172a;
+      margin-bottom: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    .visi-misi-box {
+      background: #f8fafc;
+      border-radius: 24px;
+      padding: 12px 18px;
+      margin-bottom: 16px;
+    }
+
+    .visi-misi-box h6 {
+      font-weight: 700;
+      color: #b91c1c;
+      font-size: 1rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .visi-misi-box p {
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #1e293b;
+      text-align: justify;
+      margin-bottom: 0;
+    }
+
+    .btn-vote {
+      background: linear-gradient(115deg, #b91c1c, #e11d1d);
+      border: none;
+      border-radius: 40px;
+      padding: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      margin-top: 20px;
+      transition: all 0.2s;
+      width: 100%;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .btn-vote:hover {
+      background: #9b1515;
+      transform: scale(0.98);
+      letter-spacing: 0.5px;
+    }
+
+    /* success panel  */
+    .success-panel {
+      max-width: 600px;
+      margin: 70px auto;
+      background: white;
+      border-radius: 60px;
+      padding: 60px 30px;
+      text-align: center;
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
+    }
+
+    .success-icon {
+      font-size: 90px;
+      color: #2b9348;
+      background: #e6f4ea;
+      width: 150px;
+      height: 150px;
+      line-height: 150px;
+      border-radius: 100px;
+      margin: 0 auto 25px;
+      box-shadow: 0 8px 20px rgba(43,147,72,0.2);
+    }
+
+    .success-panel h2 {
+      font-weight: 800;
+      font-size: 2.8rem;
+      color: #b91c1c;
+    }
+
+    .btn-home-return {
+      background: #1e293b;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 35px;
+      font-weight: 600;
+      color: white;
+      margin-top: 30px;
+      transition: 0.2s;
+    }
+
+    .btn-home-return:hover {
+      background: #b91c1c;
+      transform: translateY(-3px);
+    }
+
+    /* notifikasi modern */
+    .toast-notif {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      background: white;
+      backdrop-filter: blur(12px);
+      padding: 16px 24px;
+      border-radius: 60px;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      border-left: 6px solid;
+      animation: slideInRight 0.3s ease;
+      max-width: 350px;
+    }
+
+    .toast-notif i {
+      font-size: 24px;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(60px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .footer-mini {
+      text-align: center;
+      padding: 25px;
+      font-size: 0.8rem;
+      color: #475569;
+      background: #eef2f8;
+      margin-top: 40px;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-header h2 { font-size: 1.8rem; }
+      .hero-header h4 { font-size: 1.4rem; }
+      .candidate-img img { width: 130px; height: 130px; }
+      .candidate-name { font-size: 1.3rem; }
+      .success-panel h2 { font-size: 2rem; }
+    }
+  </style>
 </head>
-
 <body>
 
-<!-- NOTIF -->
-<div id="notif" class="notif"></div>
+<!-- NOTIF TOAST -->
+<div id="toastNotif" class="toast-notif"></div>
 
-<!-- HEADER -->
-<div class="header">
-
-    <img
-    src="https://drive.google.com/thumbnail?id=14MOrGVFoEKwDkd66Mg8rv4f4bCIaMALG&sz=w1000"
-    class="logo">
-
-    <h2>PEMILIHAN KOMITE SEKOLAH</h2>
-
-    <h4>SMPN 2 KAWALI</h4>
-
-    <p>Masa Bakti 2026–2031</p>
-
+<!-- HEADER HERO -->
+<div class="hero-header">
+  <div class="logo-wrapper">
+    <img src="https://drive.google.com/thumbnail?id=14MOrGVFoEKwDkd66Mg8rv4f4bCIaMALG&sz=w1000" class="logo" alt="Logo Sekolah">
+  </div>
+  <h2>PEMILIHAN KOMITE SEKOLAH</h2>
+  <h4>SMPN 2 KAWALI</h4>
+  <p><i class="fas fa-calendar-alt"></i> Masa Bakti 2026–2031 • <i class="fas fa-vote-yea"></i> Suara Berharga untuk Masa Depan</p>
 </div>
 
-<!-- LOGIN -->
-<div class="login-box" id="loginBox">
-
-    <h4 class="text-center mb-4">
-        LOGIN PESERTA
-    </h4>
-
-    <input
-    type="text"
-    id="nama"
-    class="form-control mb-3"
-    placeholder="NAMA LENGKAP">
-
-    <input
-    type="text"
-    id="alamat"
-    class="form-control mb-3"
-    placeholder="ALAMAT / TEMPAT TINGGAL">
-
-    <input
-    type="password"
-    id="password"
-    class="form-control mb-3"
-    placeholder="PASSWORD">
-
-    <button
-    class="btn btn-danger w-100"
-    onclick="login()">
-
-        LOGIN
-
-    </button>
-
+<!-- LOGIN SECTION -->
+<div id="loginBox" class="glass-card login-box">
+  <div class="login-icon">
+    <i class="fas fa-user-check fa-2x"></i>
+  </div>
+  <h4>✦ Login Pemilih ✦</h4>
+  <div class="form-floating-custom">
+    <input type="text" id="nama" placeholder="Nama Lengkap" autocomplete="off">
+  </div>
+  <div class="form-floating-custom">
+    <input type="text" id="alamat" placeholder="Alamat / Tempat Tinggal" autocomplete="off">
+  </div>
+  <div class="form-floating-custom">
+    <input type="password" id="password" placeholder="Password">
+  </div>
+  <button class="btn-login" onclick="login()">
+    <i class="fas fa-arrow-right-to-bracket"></i> MASUK & BERPARTISIPASI
+  </button>
+  <p class="text-center text-muted mt-3 small"><i class="fas fa-shield-alt"></i> Data Anda aman & rahasia</p>
 </div>
 
-<!-- CALON -->
-<div class="container calon-container"
-id="calonContainer">
-
-    <div class="row"
-    id="listCalon"></div>
-
+<!-- CANDIDATES AREA -->
+<div class="container calon-container" id="calonContainer" style="display: none;">
+  <div class="section-title">
+    <span><i class="fas fa-users-viewfinder"></i> KANDIDAT KOMITE</span>
+    <h2>Pilih Pemimpin Terbaik</h2>
+    <p class="text-secondary">Satu suara, perubahan nyata untuk sekolah kita</p>
+  </div>
+  <div class="row g-4" id="listCalon"></div>
 </div>
 
-<!-- SUKSES -->
-<div class="sukses"
-id="sukses">
-
-    <h1>✅</h1>
-
+<!-- SUCCESS PAGE -->
+<div id="sukses" style="display: none;">
+  <div class="success-panel">
+    <div class="success-icon">
+      <i class="fas fa-check-circle"></i>
+    </div>
     <h2>TERIMA KASIH</h2>
-
-    <p>
-        Suara Anda berhasil disimpan
-    </p>
-
-    <button
-    class="btn-home"
-    onclick="kembaliHome()">
-
-        KEMBALI KE HALAMAN AWAL
-
+    <p class="fs-4 my-3">Suara Anda telah tersimpan dengan aman ✅</p>
+    <p class="text-muted">Partisipasi Anda membangun komite yang lebih baik</p>
+    <button class="btn-home-return" onclick="kembaliHome()">
+      <i class="fas fa-home"></i> Kembali ke Halaman Awal
     </button>
+  </div>
+</div>
 
+<div class="footer-mini">
+  <i class="fas fa-lock"></i> Sistem Voting Transparan • Panitia Pemilihan SMPN 2 Kawali
 </div>
 
 <script>
+  // API ENDPOINT (tetap sama seperti asli)
+  const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
+  let currentUser = null;
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
+  // Notifikasi modern
+  function showNotif(message, type = "success") {
+    const toast = document.getElementById("toastNotif");
+    const icon = type === "success" ? '<i class="fas fa-circle-check" style="color:#2b9348;"></i>' : '<i class="fas fa-circle-exclamation" style="color:#dc2626;"></i>';
+    toast.innerHTML = `${icon} <span style="flex:1;">${message}</span>`;
+    toast.style.display = "flex";
+    toast.style.borderLeftColor = type === "success" ? "#2b9348" : "#dc2626";
+    setTimeout(() => {
+      toast.style.display = "none";
+    }, 3200);
+  }
 
-let currentUser = null;
+  // Fungsi login
+  async function login() {
+    const nama = document.getElementById("nama").value.trim().toUpperCase();
+    const alamat = document.getElementById("alamat").value.trim().toUpperCase();
+    const password = document.getElementById("password").value.trim();
 
-// =======================
-// NOTIFIKASI
-// =======================
-function showNotif(message,type="success"){
-
-    const notif =
-    document.getElementById("notif");
-
-    notif.innerHTML = message;
-
-    notif.className =
-    "notif " + type;
-
-    notif.style.display = "block";
-
-    setTimeout(()=>{
-
-        notif.style.display = "none";
-
-    },3000);
-
-}
-
-// =======================
-// LOGIN
-// =======================
-async function login(){
-
-    const nama =
-    document.getElementById("nama")
-    .value.trim().toUpperCase();
-
-    const alamat =
-    document.getElementById("alamat")
-    .value.trim().toUpperCase();
-
-    const password =
-    document.getElementById("password")
-    .value.trim();
-
-    if(!nama || !alamat || !password){
-
-        showNotif(
-        "Lengkapi data login",
-        "error");
-
-        return;
-
+    if (!nama || !alamat || !password) {
+      showNotif("Harap lengkapi Nama, Alamat & Password!", "error");
+      return;
     }
 
-    const response =
-    await fetch(API_URL,{
-
-        method:"POST",
-
-        body:JSON.stringify({
-
-            action:"login",
-            nama:nama,
-            alamat:alamat,
-            password:password
-
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "login",
+          nama: nama,
+          alamat: alamat,
+          password: password
         })
-
-    });
-
-    const result =
-    await response.json();
-
-    if(result.status){
-
+      });
+      const result = await response.json();
+      if (result.status) {
         currentUser = result;
-
-        showNotif(
-        "Login berhasil",
-        "success");
-
-        document
-        .getElementById("loginBox")
-        .style.display="none";
-
-        loadCalon();
-
-    }else{
-
-        showNotif(
-        result.message,
-        "error");
-
+        showNotif(`Selamat datang, ${nama.split(" ")[0]}! 🎉`, "success");
+        document.getElementById("loginBox").style.display = "none";
+        await loadCalon();
+      } else {
+        showNotif(result.message || "Login gagal, periksa data Anda.", "error");
+      }
+    } catch (err) {
+      console.error(err);
+      showNotif("Gangguan koneksi. Coba lagi.", "error");
     }
+  }
 
-}
-
-// =======================
-// LOAD CALON
-// =======================
-async function loadCalon(){
-
-    const response =
-    await fetch(API_URL + "?action=getCalon");
-
-    const data =
-    await response.json();
-
-    let html = "";
-
-    data.forEach(calon => {
-
+  // Load daftar calon + tampilan kartu premium
+  async function loadCalon() {
+    try {
+      const response = await fetch(API_URL + "?action=getCalon");
+      const data = await response.json();
+      let html = "";
+      data.forEach(calon => {
+        // Memastikan foto tidak error, gunakan default jika perlu
+        let fotoUrl = calon.foto && calon.foto.trim() !== "" ? calon.foto : "https://via.placeholder.com/300x300?text=Kandidat";
         html += `
-
-        <div class="col-md-4 mb-4">
-
-            <div class="card card-calon">
-
-                <img
-                src="${calon.foto}">
-
-                <div class="card-body">
-
-                    <h4>
-                        ${calon.nama}
-                    </h4>
-
-                    <h6>Visi</h6>
-
-                    <p>
-                        ${calon.visi}
-                    </p>
-
-                    <h6>Misi</h6>
-
-                    <p>
-                        ${calon.misi}
-                    </p>
-
-                    <button
-                    class="btn-pilih"
-                    onclick="pilihCalon('${calon.nama}')">
-
-                        PILIH
-
-                    </button>
-
+          <div class="col-md-6 col-lg-4 d-flex">
+            <div class="candidate-card">
+              <div class="candidate-img">
+                <img src="${fotoUrl}" alt="Foto ${calon.nama}" onerror="this.src='https://ui-avatars.com/api/?background=b91c1c&color=fff&rounded=true&size=120&bold=true&name=${encodeURIComponent(calon.nama)}'">
+              </div>
+              <div class="card-body-custom">
+                <div class="candidate-name">${escapeHtml(calon.nama)}</div>
+                <div class="visi-misi-box">
+                  <h6><i class="fas fa-bullseye"></i> Visi</h6>
+                  <p>${escapeHtml(calon.visi) || "Mewujudkan komite profesional dan peduli pendidikan."}</p>
                 </div>
-
+                <div class="visi-misi-box">
+                  <h6><i class="fas fa-chalkboard-user"></i> Misi</h6>
+                  <p>${escapeHtml(calon.misi) || "- Meningkatkan sinergi sekolah & orang tua\n- Transparansi pengelolaan komite"}</p>
+                </div>
+                <button class="btn-vote" onclick="pilihCalon('${escapeHtml(calon.nama).replace(/'/g, "\\'")}')">
+                  <i class="fas fa-check-circle"></i> Berikan Suara
+                </button>
+              </div>
             </div>
-
-        </div>
-
+          </div>
         `;
-
-    });
-
-    document
-    .getElementById("listCalon")
-    .innerHTML = html;
-
-    document
-    .getElementById("calonContainer")
-    .style.display = "block";
-
-}
-
-// =======================
-// PILIH
-// =======================
-async function pilihCalon(nama){
-
-    const konfirmasi =
-    confirm(
-    "Yakin memilih " + nama + " ?");
-
-    if(!konfirmasi) return;
-
-    const response =
-    await fetch(API_URL,{
-
-        method:"POST",
-
-        body:JSON.stringify({
-
-            action:"vote",
-            idPemilih:currentUser.id,
-            pilihan:nama
-
-        })
-
-    });
-
-    const result =
-    await response.json();
-
-    if(result.status){
-
-        showNotif(
-        "Vote berhasil disimpan",
-        "success");
-
-        document
-        .getElementById("calonContainer")
-        .style.display="none";
-
-        document
-        .getElementById("sukses")
-        .style.display="block";
-
-    }else{
-
-        showNotif(
-        result.message,
-        "error");
-
+      });
+      document.getElementById("listCalon").innerHTML = html;
+      document.getElementById("calonContainer").style.display = "block";
+      // scroll smooth ke calon
+      document.getElementById("calonContainer").scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      console.error(err);
+      showNotif("Gagal memuat data calon. Periksa koneksi.", "error");
     }
+  }
 
-}
+  // fungsi pilih calon (vote)
+  async function pilihCalon(namaCalon) {
+    if (!currentUser || !currentUser.id) {
+      showNotif("Sesi login tidak valid, silakan refresh.", "error");
+      return;
+    }
+    const konfirmasi = confirm(`Yakin ingin memilih ${namaCalon} sebagai Ketua Komite?\nSuara Anda tidak dapat diubah.`);
+    if (!konfirmasi) return;
 
-// =======================
-// KEMBALI
-// =======================
-function kembaliHome(){
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({
+          action: "vote",
+          idPemilih: currentUser.id,
+          pilihan: namaCalon
+        })
+      });
+      const result = await response.json();
+      if (result.status) {
+        showNotif(`✅ Suara untuk ${namaCalon} berhasil disimpan! Terima kasih telah berpartisipasi.`, "success");
+        document.getElementById("calonContainer").style.display = "none";
+        document.getElementById("sukses").style.display = "block";
+        // scroll to success
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      } else {
+        showNotif(result.message || "Gagal menyimpan suara, mungkin Anda sudah memilih sebelumnya.", "error");
+      }
+    } catch (err) {
+      console.error(err);
+      showNotif("Kesalahan server, gagal memproses vote.", "error");
+    }
+  }
 
+  // kembali ke awal (reload)
+  function kembaliHome() {
     location.reload();
+  }
 
-}
-
+  // simple escape untuk hindari XSS
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
 </script>
-
 </body>
 </html>
