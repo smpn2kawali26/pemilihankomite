@@ -23,7 +23,7 @@
       position: relative;
     }
 
-    /* WATERMARK BACKGROUND - Karikatur memilih */
+    /* WATERMARK BACKGROUND */
     body::before {
       content: "";
       position: fixed;
@@ -31,15 +31,13 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" opacity="0.08"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%233b82f6;stop-opacity:0.3"/><stop offset="100%" style="stop-color:%2360a5fa;stop-opacity:0.1"/></linearGradient></defs><text x="50%" y="30%" font-size="120" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🗳️</text><text x="30%" y="55%" font-size="70" text-anchor="middle" fill="url(%23grad)" font-family="Arial">✓</text><text x="70%" y="65%" font-size="90" text-anchor="middle" fill="url(%23grad)" font-family="Arial">👥</text><text x="45%" y="80%" font-size="50" text-anchor="middle" fill="url(%23grad)" font-family="Arial">PILIH</text><text x="75%" y="35%" font-size="60" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🏛️</text><circle cx="120" cy="150" r="40" fill="url(%23grad)"/><circle cx="680" cy="450" r="55" fill="url(%23grad)"/><path d="M200 500 L250 450 L300 500" stroke="url(%23grad)" stroke-width="3" fill="none"/><path d="M500 150 L550 100 L600 150" stroke="url(%23grad)" stroke-width="3" fill="none"/><text x="20%" y="90%" font-size="35" text-anchor="middle" fill="url(%23grad)" font-family="Arial">SUARA RAKYAT</text><text x="80%" y="20%" font-size="40" text-anchor="middle" fill="url(%23grad)" font-family="Arial">DEMOKRASI</text></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" opacity="0.08"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%233b82f6;stop-opacity:0.3"/><stop offset="100%" style="stop-color:%2360a5fa;stop-opacity:0.1"/></linearGradient></defs><text x="50%" y="30%" font-size="120" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🗳️</text><text x="30%" y="55%" font-size="70" text-anchor="middle" fill="url(%23grad)" font-family="Arial">✓</text><text x="70%" y="65%" font-size="90" text-anchor="middle" fill="url(%23grad)" font-family="Arial">👥</text><text x="45%" y="80%" font-size="50" text-anchor="middle" fill="url(%23grad)" font-family="Arial">PILIH</text><text x="75%" y="35%" font-size="60" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🏛️</text><circle cx="120" cy="150" r="40" fill="url(%23grad)"/><circle cx="680" cy="450" r="55" fill="url(%23grad)"/><text x="20%" y="90%" font-size="35" text-anchor="middle" fill="url(%23grad)" font-family="Arial">SUARA RAKYAT</text><text x="80%" y="20%" font-size="40" text-anchor="middle" fill="url(%23grad)" font-family="Arial">DEMOKRASI</text></svg>');
       background-repeat: repeat;
       background-size: 280px 280px;
-      background-position: center;
       pointer-events: none;
       z-index: 0;
     }
 
-    /* Tambahan watermark dengan ikon kotak suara */
     body::after {
       content: "📫";
       position: fixed;
@@ -52,13 +50,12 @@
       transform: rotate(-10deg);
     }
 
-    /* Container utama agar di atas watermark */
     .hero-header, .login-box, .calon-container, .admin-dashboard, .success-panel {
       position: relative;
       z-index: 1;
     }
 
-    /* HEADER CINEMATIC BLUE */
+    /* HEADER */
     .hero-header {
       background: linear-gradient(135deg, #0a2b5e 0%, #06316e 30%, #021a4a 100%);
       color: white;
@@ -85,15 +82,6 @@
       50% { transform: translate(10%, 10%) rotate(5deg); }
       100% { transform: translate(-10%, -10%) rotate(0deg); }
     }
-    .hero-header::after {
-      content: "🗳️";
-      font-size: 170px;
-      opacity: 0.05;
-      position: absolute;
-      bottom: -35px;
-      right: -15px;
-      pointer-events: none;
-    }
     .logo-wrapper {
       width: 110px;
       height: 110px;
@@ -116,10 +104,7 @@
     .hero-header h2 {
       font-size: 2rem;
       font-weight: 800;
-      letter-spacing: -0.5px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-      position: relative;
-      z-index: 2;
     }
 
     /* TAB STYLE */
@@ -197,6 +182,10 @@
       transition: 0.25s;
       color: white;
     }
+    .btn-login:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
 
     /* CALON CARD */
     .calon-container {
@@ -218,6 +207,7 @@
       transition: all 0.35s ease;
       overflow: hidden;
       border: 1px solid rgba(59, 130, 246, 0.3);
+      height: 100%;
     }
     .candidate-card:hover {
       transform: translateY(-8px);
@@ -240,6 +230,7 @@
       font-size: 1.5rem;
       font-weight: 800;
       text-align: center;
+      margin-bottom: 16px;
     }
     .visi-misi-box {
       background: rgba(10, 20, 40, 0.6);
@@ -249,9 +240,12 @@
     }
     .visi-misi-box h6 {
       color: #60a5fa;
+      margin-bottom: 6px;
     }
     .visi-misi-box p {
       color: #cbd5e1;
+      font-size: 0.85rem;
+      line-height: 1.5;
     }
     .btn-pilih-modern {
       background: linear-gradient(115deg, #1e4b8f, #3b82f6);
@@ -261,6 +255,17 @@
       font-weight: 700;
       color: white;
       width: 100%;
+      margin-top: 12px;
+      transition: 0.2s;
+    }
+    .btn-pilih-modern:hover {
+      transform: scale(0.98);
+      filter: brightness(1.05);
+    }
+    .btn-pilih-modern:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
     }
 
     /* ADMIN DASHBOARD */
@@ -332,7 +337,7 @@
       color: white;
     }
 
-    /* MODAL ELEGAN TENGAH UNTUK SEMUA NOTIF */
+    /* MODAL ELEGAN */
     .elegant-modal-overlay {
       position: fixed;
       top: 0;
@@ -432,7 +437,6 @@
     .btn-modal-danger {
       background: linear-gradient(105deg, #dc2626, #ef4444);
     }
-
     .loading-toast {
       position: fixed;
       bottom: 30px;
@@ -561,7 +565,7 @@
   <i class="fas fa-check-circle" style="font-size:70px; color:#60a5fa;"></i>
   <h2 class="fw-bold mt-3" style="color:#60a5fa;">TERIMA KASIH</h2>
   <p>Suara Anda berhasil disimpan</p>
-  <button class="btn btn-primary rounded-pill px-4 py-2" onclick="kembaliHome()">Kembali ke Awal</button>
+  <button class="btn btn-primary rounded-pill px-4 py-2" onclick="kembaliHome()">Kembali ke Halaman Awal</button>
 </div>
 
 <div id="loadingToast" class="loading-toast" style="display:none;"><i class="fas fa-spinner fa-pulse"></i> <span>Memproses...</span></div>
@@ -569,7 +573,7 @@
 <script>
   const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
   let currentUser = null;
-  let pendingCandidate = null;
+  let hasVoted = false; // Cegah multiple vote
   let voteChartInstance = null;
   let adminRefreshInterval = null;
   let isAdminMode = false;
@@ -582,7 +586,7 @@
   }
   function hideLoading() { document.getElementById("loadingToast").style.display = "none"; }
 
-  // MODAL ELEGAN TENGAH UNTUK SEMUA KONFIRMASI
+  // MODAL KONFIRMASI
   function showConfirmModal(title, message, action, isDanger = false) {
     let modalHtml = `
       <div class="elegant-modal-overlay" id="elegantModal">
@@ -610,6 +614,28 @@
       await executeAction(pendingAction);
       pendingAction = null;
     };
+  }
+
+  // ALERT MODAL
+  function showAlertModal(title, message, type = "info") {
+    let iconColor = type === "success" ? "#22c55e" : (type === "error" ? "#ef4444" : "#60a5fa");
+    let iconClass = type === "success" ? "fa-check-circle" : (type === "error" ? "fa-times-circle" : "fa-info-circle");
+    let modalHtml = `
+      <div class="elegant-modal-overlay" id="alertModal">
+        <div class="elegant-modal-card">
+          <div class="elegant-modal-icon" style="background: ${type === 'success' ? 'rgba(34,197,94,0.15)' : (type === 'error' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.15)')}">
+            <i class="fas ${iconClass}" style="font-size:42px; color:${iconColor}"></i>
+          </div>
+          <h3>${title}</h3>
+          <div class="elegant-modal-message">${message}</div>
+          <div class="elegant-modal-actions">
+            <button class="btn-modal-confirm" id="alertOkBtn" style="background: linear-gradient(105deg, #2563eb, #3b82f6);">OK</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHtml);
+    document.getElementById("alertOkBtn").onclick = () => { document.getElementById("alertModal").remove(); };
   }
 
   async function executeAction(action) {
@@ -646,28 +672,6 @@
     }
   }
 
-  // ALERT MODAL (untuk notifikasi info/success/error)
-  function showAlertModal(title, message, type = "info") {
-    let iconColor = type === "success" ? "#22c55e" : (type === "error" ? "#ef4444" : "#60a5fa");
-    let iconClass = type === "success" ? "fa-check-circle" : (type === "error" ? "fa-times-circle" : "fa-info-circle");
-    let modalHtml = `
-      <div class="elegant-modal-overlay" id="alertModal">
-        <div class="elegant-modal-card">
-          <div class="elegant-modal-icon" style="background: ${type === 'success' ? 'rgba(34,197,94,0.15)' : (type === 'error' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.15)')}">
-            <i class="fas ${iconClass}" style="font-size:42px; color:${iconColor}"></i>
-          </div>
-          <h3>${title}</h3>
-          <div class="elegant-modal-message">${message}</div>
-          <div class="elegant-modal-actions">
-            <button class="btn-modal-confirm" id="alertOkBtn" style="background: linear-gradient(105deg, #2563eb, #3b82f6);">OK</button>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.insertAdjacentHTML("beforeend", modalHtml);
-    document.getElementById("alertOkBtn").onclick = () => { document.getElementById("alertModal").remove(); };
-  }
-
   function switchTab(tab) {
     const pemilihForm = document.getElementById("pemilihForm");
     const adminForm = document.getElementById("adminForm");
@@ -684,6 +688,7 @@
     }
   }
 
+  // PEMILIH LOGIN
   async function handlePemilihLogin() {
     const nama = document.getElementById("nama").value.trim().toUpperCase();
     const alamat = document.getElementById("alamat").value.trim().toUpperCase();
@@ -696,6 +701,7 @@
       hideLoading();
       if (result.status) {
         currentUser = result;
+        hasVoted = false;
         showAlertModal("Berhasil", "Login berhasil! Silakan pilih calon.", "success");
         document.getElementById("authContainer").style.display = "none";
         await loadCalonPemilih();
@@ -712,38 +718,90 @@
       let html = "";
       data.forEach(calon => {
         let foto = calon.foto || `https://ui-avatars.com/api/?background=2563eb&color=fff&rounded=true&size=120&name=${encodeURIComponent(calon.nama)}`;
-        html += `<div class="col-md-6 col-lg-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}"></div><div class="card-body-custom p-3"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6><i class="fas fa-eye"></i> Visi</h6><p>${escapeHtml(calon.visi || "-")}</p></div><div class="visi-misi-box"><h6><i class="fas fa-bullhorn"></i> Misi</h6><p>${escapeHtml(calon.misi || "-")}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}"><i class="fas fa-vote-yea"></i> Pilih</button></div></div></div>`;
+        html += `<div class="col-md-6 col-lg-4 mb-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}"></div><div class="card-body-custom p-3"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6><i class="fas fa-eye"></i> Visi</h6><p>${escapeHtml(calon.visi || "-")}</p></div><div class="visi-misi-box"><h6><i class="fas fa-bullhorn"></i> Misi</h6><p>${escapeHtml(calon.misi || "-")}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}" data-id="${calon.id}"><i class="fas fa-vote-yea"></i> Pilih</button></div></div></div>`;
       });
       document.getElementById("listCalon").innerHTML = html;
       document.getElementById("calonContainer").style.display = "block";
+      
+      // Attach event ke tombol pilih
       document.querySelectorAll(".btn-pilih-modern").forEach(btn => {
-        btn.addEventListener("click", () => {
-          let nama = btn.getAttribute("data-nama");
-          showConfirmModal("Konfirmasi Pilihan", `Yakin memilih <strong>${nama}</strong> sebagai Ketua Komite?`, `vote_${nama}`);
-          pendingCandidate = nama;
+        btn.addEventListener("click", async (e) => {
+          e.preventDefault();
+          if (hasVoted) {
+            showAlertModal("Perhatian", "Anda sudah memilih! Tidak dapat memilih lagi.", "error");
+            return;
+          }
+          let namaCalon = btn.getAttribute("data-nama");
+          let idCalon = btn.getAttribute("data-id");
+          await processVote(namaCalon, idCalon);
         });
       });
     } catch(e) { hideLoading(); showAlertModal("Error", "Gagal memuat calon", "error"); }
   }
 
-  async function executeVote() {
-    if (!currentUser || !pendingCandidate) return;
-    showLoading("Menyimpan suara...");
-    try {
-      const resp = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "vote", idPemilih: currentUser.id, pilihan: pendingCandidate }) });
-      const result = await resp.json();
-      hideLoading();
-      if (result.status) {
-        showAlertModal("Terima Kasih", "Suara Anda berhasil disimpan!", "success");
-        document.getElementById("calonContainer").style.display = "none";
-        document.getElementById("sukses").style.display = "block";
-      } else { showAlertModal("Gagal", result.message, "error"); }
-    } catch(e) { hideLoading(); showAlertModal("Error", "Gagal menyimpan vote", "error"); }
+  // PROSES VOTE - Dengan loading dan cegah multiple vote
+  async function processVote(namaCalon, idCalon) {
+    // Tampilkan modal konfirmasi dulu
+    let confirmHtml = `
+      <div class="elegant-modal-overlay" id="confirmVoteModal">
+        <div class="elegant-modal-card">
+          <div class="elegant-modal-icon" style="background: rgba(59,130,246,0.15)">
+            <i class="fas fa-ballot" style="font-size:42px; color:#60a5fa"></i>
+          </div>
+          <h3>Konfirmasi Pilihan</h3>
+          <div class="elegant-modal-message">Yakin memilih <strong style="color:#60a5fa;">${namaCalon}</strong> sebagai Ketua Komite?</div>
+          <div class="elegant-modal-info"><i class="fas fa-lock"></i> Suara tidak dapat diubah</div>
+          <div class="elegant-modal-actions">
+            <button class="btn-modal-cancel" id="confirmCancelBtn">Batal</button>
+            <button class="btn-modal-confirm" id="confirmVoteBtn">Ya, Pilih</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", confirmHtml);
+    
+    document.getElementById("confirmCancelBtn").onclick = () => {
+      document.getElementById("confirmVoteModal").remove();
+    };
+    
+    document.getElementById("confirmVoteBtn").onclick = async () => {
+      document.getElementById("confirmVoteModal").remove();
+      
+      if (hasVoted) {
+        showAlertModal("Perhatian", "Anda sudah memilih! Tidak dapat memilih lagi.", "error");
+        return;
+      }
+      
+      showLoading("Menyimpan suara Anda...");
+      try {
+        const resp = await fetch(API_URL, { 
+          method: "POST", 
+          body: JSON.stringify({ 
+            action: "vote", 
+            idPemilih: currentUser.id, 
+            pilihan: namaCalon 
+          }) 
+        });
+        const result = await resp.json();
+        hideLoading();
+        
+        if (result.status) {
+          hasVoted = true;
+          showAlertModal("Berhasil!", "Suara Anda telah tersimpan. Terima kasih telah berpartisipasi!", "success");
+          // Tampilkan halaman sukses
+          document.getElementById("calonContainer").style.display = "none";
+          document.getElementById("sukses").style.display = "block";
+        } else {
+          showAlertModal("Gagal", result.message, "error");
+        }
+      } catch(e) { 
+        hideLoading(); 
+        showAlertModal("Error", "Gagal menyimpan suara. Periksa koneksi Anda.", "error"); 
+      }
+    };
   }
 
-  // Override vote action
-  window.executeVote = executeVote;
-
+  // ADMIN LOGIN
   async function handleAdminLogin() {
     const user = document.getElementById("adminUsername").value.trim();
     const pass = document.getElementById("adminPassword").value.trim();
