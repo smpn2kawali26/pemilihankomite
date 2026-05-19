@@ -4,16 +4,505 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <?!= include('styles'); ?>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0a0f2a 0%, #0d1b5e 30%, #1a237e 60%, #1565c0 100%);
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* HEADER ELEGAN */
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 40px;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+      animation: fadeInDown 0.8s ease;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.9);
+      margin-bottom: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      background: white;
+      object-fit: cover;
+      transition: transform 0.3s;
+    }
+
+    .logo:hover {
+      transform: scale(1.05);
+    }
+
+    .header h1 {
+      font-size: 32px;
+      letter-spacing: 3px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      background: linear-gradient(135deg, #fff, #e3f2fd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .header h2 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      opacity: 0.95;
+    }
+
+    .header p {
+      font-size: 16px;
+      opacity: 0.85;
+      letter-spacing: 1px;
+    }
+
+    /* CARD LOGIN ELEGAN */
+    .card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 30px;
+      padding: 40px 35px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      backdrop-filter: blur(5px);
+      max-width: 450px;
+      margin: 0 auto;
+      animation: fadeInUp 0.6s ease;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .card h3 {
+      text-align: center;
+      background: linear-gradient(135deg, #1a237e, #1565c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 30px;
+      font-size: 26px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px 18px;
+      margin: 12px 0;
+      border: 2px solid #e8e8e8;
+      border-radius: 20px;
+      font-size: 16px;
+      transition: all 0.3s;
+      font-family: 'Poppins', sans-serif;
+      background: #f8f9fa;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #1565c0;
+      box-shadow: 0 0 0 4px rgba(21,101,192,0.15);
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1a237e, #1565c0);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #eceff1, #e0e0e0);
+      color: #1a237e;
+      border: 1px solid #cfd8dc;
+    }
+
+    .btn-vote {
+      background: linear-gradient(135deg, #2e7d32, #43a047);
+      color: white;
+      margin-top: 15px;
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #c62828, #e53935);
+      color: white;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #2e7d32, #43a047);
+      color: white;
+    }
+
+    .btn-logout {
+      background: linear-gradient(135deg, #455a64, #37474f);
+      color: white;
+      width: auto;
+      padding: 10px 30px;
+      margin: 0;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 20px;
+      padding: 12px;
+      border-radius: 15px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .message.error {
+      background: linear-gradient(135deg, #ffebee, #ffcdd2);
+      color: #c62828;
+    }
+
+    .message.success {
+      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      color: #2e7d32;
+    }
+
+    .message.info {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+      color: #1565c0;
+    }
+
+    /* GRID CALON */
+    .candidates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 30px;
+      margin-top: 25px;
+    }
+
+    .candidate-card {
+      background: white;
+      border-radius: 25px;
+      overflow: hidden;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+      transition: all 0.4s ease;
+      animation: fadeInUp 0.5s ease;
+    }
+
+    .candidate-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+    }
+
+    .candidate-card img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
+    }
+
+    .candidate-card h4 {
+      padding: 18px 18px 8px 18px;
+      background: linear-gradient(135deg, #1a237e, #283593);
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .visi-misi {
+      padding: 18px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #424242;
+      min-height: 220px;
+      background: #fafafa;
+    }
+
+    .visi-misi strong {
+      color: #1a237e;
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .visi-misi p {
+      margin-bottom: 10px;
+      text-align: justify;
+    }
+
+    /* WELCOME BANNER */
+    .welcome-banner {
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
+      border-radius: 25px;
+      padding: 25px;
+      margin-bottom: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    .welcome-banner h3 {
+      background: linear-gradient(135deg, #1a237e, #1565c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+      font-size: 24px;
+    }
+
+    /* ADMIN PANEL */
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(255,255,255,0.96);
+      padding: 18px 28px;
+      border-radius: 25px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .admin-header h3 {
+      background: linear-gradient(135deg, #1a237e, #1565c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .voting-control {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 35px;
+      flex-wrap: wrap;
+    }
+
+    .voting-control button {
+      flex: 1;
+      min-width: 160px;
+    }
+
+    /* CHART */
+    .chart-container {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      margin-bottom: 35px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    canvas {
+      max-height: 400px;
+      width: 100%;
+    }
+
+    /* REKAP TABLE */
+    .rekap-container {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .rekap-container h4 {
+      background: linear-gradient(135deg, #1a237e, #1565c0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 20px;
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .rekap-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .rekap-table th,
+    .rekap-table td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .rekap-table th {
+      background: linear-gradient(135deg, #1a237e, #283593);
+      color: white;
+      font-weight: 600;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .rekap-table tr:hover {
+      background: #f5f5f5;
+    }
+
+    .total-row {
+      background: linear-gradient(135deg, #e8eaf6, #c5cae9);
+      font-weight: bold;
+    }
+
+    .winner-row {
+      background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    }
+
+    .vote-count {
+      font-weight: bold;
+      color: #1565c0;
+      font-size: 18px;
+    }
+
+    /* STATS CARD */
+    .stats-card {
+      display: flex;
+      justify-content: space-around;
+      background: linear-gradient(135deg, #1a237e, #0d47a1);
+      border-radius: 25px;
+      padding: 25px;
+      margin-bottom: 25px;
+      color: white;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+      min-width: 110px;
+    }
+
+    .stat-label {
+      display: block;
+      font-size: 14px;
+      opacity: 0.9;
+      margin-bottom: 10px;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      display: block;
+      font-size: 36px;
+      font-weight: 800;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      body {
+        padding: 15px;
+      }
+      
+      .candidates-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .header h1 {
+        font-size: 24px;
+      }
+      
+      .header h2 {
+        font-size: 18px;
+      }
+      
+      .card {
+        margin: 0 5px;
+        padding: 30px 22px;
+      }
+      
+      .stat-value {
+        font-size: 28px;
+      }
+      
+      .voting-control {
+        flex-direction: column;
+      }
+      
+      .voting-control button {
+        width: 100%;
+      }
+      
+      .admin-header {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+  </style>
   <title>Voting Komite SMPN 2 Kawali</title>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://via.placeholder.com/100'">
+      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://via.placeholder.com/110?text=Logo'">
       <h1>PEMILIHAN KOMITE</h1>
       <h2>SMP NEGERI 2 KAWALI</h2>
-      <p>Tahun 2026</p>
+      <p>TAHUN 2026</p>
     </div>
 
     <!-- FORM LOGIN PEMILIH -->
@@ -22,9 +511,9 @@
       <input type="text" id="nama" placeholder="Nama Lengkap" required>
       <input type="text" id="alamat" placeholder="Alamat" required>
       <input type="password" id="password" placeholder="Password (voting2026)" required>
-      <button onclick="doLogin()" class="btn-primary">✅ MASUK</button>
+      <button onclick="doLogin()" class="btn-primary">✅ MASUK & VOTING</button>
       <div id="loginMessage" class="message"></div>
-      <button onclick="showAdminLogin()" class="btn-secondary" style="margin-top: 10px;">👑 Login sebagai Admin</button>
+      <button onclick="showAdminLogin()" class="btn-secondary" style="margin-top: 15px;">👑 Login sebagai Admin</button>
     </div>
 
     <!-- FORM LOGIN ADMIN -->
@@ -32,7 +521,7 @@
       <h3>👑 LOGIN ADMIN</h3>
       <input type="text" id="adminUser" placeholder="Username" required>
       <input type="password" id="adminPass" placeholder="Password" required>
-      <button onclick="doAdminLogin()" class="btn-primary">MASUK SEBAGAI ADMIN</button>
+      <button onclick="doAdminLogin()" class="btn-primary">MASUK</button>
       <div id="adminMessage" class="message"></div>
       <button onclick="showPemilihLogin()" class="btn-secondary">← Kembali ke Login Pemilih</button>
     </div>
@@ -41,10 +530,10 @@
     <div id="votingPanel" style="display:none;">
       <div class="welcome-banner">
         <h3>Selamat Datang, <span id="userName"></span>!</h3>
-        <p>Silakan pilih salah satu calon komite di bawah ini:</p>
+        <p>Silakan pilih salah satu calon komite di bawah ini dengan bijak</p>
       </div>
       <div class="candidates-grid" id="candidatesGrid"></div>
-      <button onclick="logout()" class="btn-secondary" style="margin-top: 20px;">← Keluar</button>
+      <button onclick="logout()" class="btn-secondary" style="margin-top: 25px;">← Keluar</button>
     </div>
 
     <!-- PANEL ADMIN -->
@@ -56,7 +545,7 @@
       
       <div class="stats-card" id="statsCard">
         <div class="stat-item">
-          <span class="stat-label">📊 Total Pemilih Terdaftar</span>
+          <span class="stat-label">📋 Total Pemilih Terdaftar</span>
           <span class="stat-value" id="totalPemilih">0</span>
         </div>
         <div class="stat-item">
@@ -71,7 +560,7 @@
 
       <div class="voting-control">
         <button id="toggleVotingBtn" class="btn-control" onclick="toggleVoting()">Loading...</button>
-        <button onclick="resetVoting()" class="btn-danger">🔄 Reset Voting</button>
+        <button onclick="resetVoting()" class="btn-danger">🔄 Reset Semua Voting</button>
       </div>
 
       <div class="chart-container">
@@ -112,20 +601,19 @@
 
       showMessage('loginMessage', '⏳ Memproses...', 'info');
       
-      try {
-        const result = await google.script.run.withSuccessHandler((res) => {
+      google.script.run
+        .withSuccessHandler((res) => {
           if (res.success) {
             currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
             showVotingPanel();
           } else {
             showMessage('loginMessage', res.message, 'error');
           }
-        }).withFailureHandler((err) => {
+        })
+        .withFailureHandler((err) => {
           showMessage('loginMessage', 'Koneksi error. Coba lagi.', 'error');
-        }).loginPemilih(nama, alamat, password);
-      } catch(e) {
-        showMessage('loginMessage', 'Error: ' + e.message, 'error');
-      }
+        })
+        .loginPemilih(nama, alamat, password);
     }
 
     async function showVotingPanel() {
@@ -135,7 +623,6 @@
       document.getElementById('votingPanel').style.display = 'block';
       document.getElementById('userName').innerText = currentUser.nama;
 
-      // Cek status voting
       const isOpen = await google.script.run.getVotingStatus();
       if (!isOpen) {
         alert('⚠️ Voting sedang ditutup oleh admin. Silakan coba lagi nanti.');
@@ -147,57 +634,52 @@
     }
 
     async function loadCandidates() {
-      try {
-        calonData = await google.script.run.getCalon();
-        const grid = document.getElementById('candidatesGrid');
-        grid.innerHTML = '';
-        
-        if (calonData.length === 0) {
-          grid.innerHTML = '<p style="text-align:center;color:white;">Data calon belum tersedia</p>';
-          return;
-        }
-        
-        calonData.forEach(calon => {
-          const card = document.createElement('div');
-          card.className = 'candidate-card';
-          // Fix Google Drive image URL
-          let fotoUrl = calon.foto;
-          if (fotoUrl.includes('thumbnail?id=')) {
-            fotoUrl = fotoUrl.replace('thumbnail?id=', 'uc?export=view&id=').replace('&sz=w1000', '');
-          } else if (fotoUrl.includes('drive.google.com')) {
-            const match = fotoUrl.match(/id=([a-zA-Z0-9_-]+)/);
-            if (match) fotoUrl = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+      google.script.run
+        .withSuccessHandler((data) => {
+          calonData = data;
+          const grid = document.getElementById('candidatesGrid');
+          grid.innerHTML = '';
+          
+          if (calonData.length === 0) {
+            grid.innerHTML = '<p style="text-align:center;color:white;">Data calon belum tersedia</p>';
+            return;
           }
           
-          card.innerHTML = `
-            <img src="${fotoUrl}" alt="${calon.nama}" onerror="this.src='https://via.placeholder.com/300x250?text=Gambar+Tidak+Tersedia'">
-            <h4>${calon.nama}</h4>
-            <div class="visi-misi">
-              <strong>🌟 Visi:</strong>
-              <p>${calon.visi.substring(0, 150)}${calon.visi.length > 150 ? '...' : ''}</p>
-              <strong>📌 Misi:</strong>
-              <p>${calon.misi.substring(0, 150)}${calon.misi.length > 150 ? '...' : ''}</p>
-            </div>
-            <button onclick="vote(${calon.id})" class="btn-vote">🗳️ PILIH CALON INI</button>
-          `;
-          grid.appendChild(card);
-        });
-      } catch(e) {
-        console.error(e);
-      }
+          calonData.forEach(calon => {
+            const card = document.createElement('div');
+            card.className = 'candidate-card';
+            
+            card.innerHTML = `
+              <img src="${calon.foto}" alt="${calon.nama}" onerror="this.src='https://via.placeholder.com/300x250?text=Gambar+Tidak+Tersedia'">
+              <h4>${calon.nama}</h4>
+              <div class="visi-misi">
+                <strong>🌟 VISI</strong>
+                <p>${calon.visi}</p>
+                <strong>📌 MISI</strong>
+                <p>${calon.misi}</p>
+              </div>
+              <button onclick="vote(${calon.id})" class="btn-vote">🗳️ PILIH CALON INI</button>
+            `;
+            grid.appendChild(card);
+          });
+        })
+        .getCalon();
     }
 
     async function vote(calonId) {
       const confirmVote = confirm(`Anda yakin ingin memilih calon ini?\n\nSuara Anda tidak dapat diubah setelah dipilih.`);
       if (!confirmVote) return;
       
-      const result = await google.script.run.vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
-      if (result.success) {
-        alert('✅ ' + result.message);
-        logout();
-      } else {
-        alert('❌ ' + result.message);
-      }
+      google.script.run
+        .withSuccessHandler((res) => {
+          if (res.success) {
+            alert('✅ ' + res.message);
+            logout();
+          } else {
+            alert('❌ ' + res.message);
+          }
+        })
+        .vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
     }
 
     // ==================== LOGIN ADMIN ====================
@@ -223,37 +705,33 @@
         return;
       }
 
-      const result = await google.script.run.loginAdmin(username, password);
-      if (result.success) {
-        document.getElementById('adminLoginForm').style.display = 'none';
-        document.getElementById('adminPanel').style.display = 'block';
-        loadAdminData();
-      } else {
-        showMessage('adminMessage', 'Username atau password salah!', 'error');
-      }
+      google.script.run
+        .withSuccessHandler((res) => {
+          if (res.success) {
+            document.getElementById('adminLoginForm').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            loadAdminData();
+          } else {
+            showMessage('adminMessage', 'Username atau password salah!', 'error');
+          }
+        })
+        .loginAdmin(username, password);
     }
 
     async function loadAdminData() {
-      try {
-        // Load status voting
-        const status = await google.script.run.getVotingStatus();
-        const toggleBtn = document.getElementById('toggleVotingBtn');
-        toggleBtn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
-        toggleBtn.className = status ? 'btn-danger' : 'btn-success';
-        
-        // Load statistik
-        const stat = await google.script.run.getStatistik();
-        document.getElementById('totalPemilih').innerText = stat.totalPemilih;
-        document.getElementById('totalSuara').innerText = stat.totalSuara;
-        document.getElementById('persentase').innerText = stat.persentase + '%';
-        
-        // Load hasil
-        const hasil = await google.script.run.getHasilVoting();
-        updateRekap(hasil);
-        updateChart(hasil);
-      } catch(e) {
-        console.error(e);
-      }
+      const status = await google.script.run.getVotingStatus();
+      const toggleBtn = document.getElementById('toggleVotingBtn');
+      toggleBtn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+      toggleBtn.className = status ? 'btn-danger' : 'btn-success';
+      
+      const stat = await google.script.run.getStatistik();
+      document.getElementById('totalPemilih').innerText = stat.totalPemilih;
+      document.getElementById('totalSuara').innerText = stat.totalSuara;
+      document.getElementById('persentase').innerText = stat.persentase + '%';
+      
+      const hasil = await google.script.run.getHasilVoting();
+      updateRekap(hasil);
+      updateChart(hasil);
     }
 
     function updateRekap(hasil) {
@@ -264,115 +742,15 @@
       }
       
       let html = '<table class="rekap-table">';
-      html += '<thead><tr><th>Posisi</th><th>Nama Calon</th><th>Jumlah Suara</th><th>Status</th></tr></thead><tbody>';
+      html += '<thead><tr><th>POSISI</th><th>NAMA CALON</th><th>SUARA</th><th>STATUS</th></tr></thead><tbody>';
       
       hasil.forEach(calon => {
-        const isWinner = calon.posisi && calon.posisi.includes('Ketua');
-        html += `<tr class="${isWinner ? 'winner-row' : ''}">
+        html += `<tr>
           <td><strong>${calon.posisi || '−'}</strong></td>
           <td>${calon.nama}</td>
           <td><span class="vote-count">${calon.suara}</span> suara</td>
           <td>${calon.suara > 0 ? '✓' : '−'}</td>
-        </tr>`;
+         </tr>`;
       });
       
-      const total = hasil.reduce((sum, c) => sum + c.suara, 0);
-      html += `<tr class="total-row"><td colspan="2"><strong>📊 TOTAL SUARA</strong></td><td colspan="2"><strong>${total} suara</strong></td></tr>`;
-      html += '</tbody></table>';
-      
-      container.innerHTML = html;
-    }
-
-    function updateChart(hasil) {
-      const ctx = document.getElementById('hasilChart').getContext('2d');
-      if (hasilChart) hasilChart.destroy();
-      
-      if (!hasil || hasil.length === 0) {
-        return;
-      }
-      
-      hasilChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: hasil.map(c => c.nama.length > 20 ? c.nama.substring(0, 20) + '...' : c.nama),
-          datasets: [{
-            label: 'Jumlah Suara',
-            data: hasil.map(c => c.suara),
-            backgroundColor: ['#1a237e', '#283593', '#1565c0', '#1976d2', '#1e88e5'],
-            borderRadius: 8,
-            barPercentage: 0.7
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            legend: { position: 'top' },
-            title: { display: true, text: '📊 GRAFIK HASIL VOTING', font: { size: 14 } }
-          },
-          scales: {
-            y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0 } }
-          }
-        }
-      });
-    }
-
-    async function toggleVoting() {
-      const currentStatus = await google.script.run.getVotingStatus();
-      const newStatus = await google.script.run.setVotingStatus(!currentStatus);
-      const toggleBtn = document.getElementById('toggleVotingBtn');
-      toggleBtn.innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
-      toggleBtn.className = newStatus ? 'btn-danger' : 'btn-success';
-      alert(newStatus ? '✅ Voting sekarang BUKA' : '❌ Voting sekarang TUTUP');
-    }
-
-    async function resetVoting() {
-      const confirmReset = confirm('⚠️ PERINGATAN! ⚠️\n\nAnda yakin ingin mereset SEMUA data voting?\n\nSemua suara akan hilang dan tidak dapat dikembalikan!\n\nTindakan ini hanya boleh dilakukan oleh admin yang berwenang.');
-      
-      if (confirmReset) {
-        const doubleConfirm = confirm('Ketik "RESET" untuk konfirmasi final:');
-        if (doubleConfirm === 'RESET') {
-          const result = await google.script.run.resetVoting();
-          if (result.success) {
-            alert('✅ ' + result.message);
-            loadAdminData();
-          } else {
-            alert('❌ ' + result.message);
-          }
-        } else {
-          alert('Reset dibatalkan.');
-        }
-      }
-    }
-
-    function logout() {
-      currentUser = null;
-      document.getElementById('votingPanel').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('nama').value = '';
-      document.getElementById('alamat').value = '';
-      document.getElementById('password').value = '';
-    }
-
-    function adminLogout() {
-      document.getElementById('adminPanel').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('adminUser').value = '';
-      document.getElementById('adminPass').value = '';
-    }
-
-    function showMessage(elementId, message, type) {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      el.innerText = message;
-      el.className = `message ${type}`;
-      setTimeout(() => {
-        if (el) {
-          el.innerText = '';
-          el.className = 'message';
-        }
-      }, 3000);
-    }
-  </script>
-</body>
-</html>
+      const total =
