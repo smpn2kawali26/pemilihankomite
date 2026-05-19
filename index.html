@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>E-Voting Komite | SMPN 2 Kawali - Cinematic Blue</title>
+  <title>E-Voting Komite | SMPN 2 Kawali</title>
   <!-- Bootstrap 5 + Font Awesome + Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     * {
@@ -31,7 +31,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" opacity="0.08"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%233b82f6;stop-opacity:0.3"/><stop offset="100%" style="stop-color:%2360a5fa;stop-opacity:0.1"/></linearGradient></defs><text x="50%" y="30%" font-size="120" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🗳️</text><text x="30%" y="55%" font-size="70" text-anchor="middle" fill="url(%23grad)" font-family="Arial">✓</text><text x="70%" y="65%" font-size="90" text-anchor="middle" fill="url(%23grad)" font-family="Arial">👥</text><text x="45%" y="80%" font-size="50" text-anchor="middle" fill="url(%23grad)" font-family="Arial">PILIH</text><text x="75%" y="35%" font-size="60" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🏛️</text><circle cx="120" cy="150" r="40" fill="url(%23grad)"/><circle cx="680" cy="450" r="55" fill="url(%23grad)"/><text x="20%" y="90%" font-size="35" text-anchor="middle" fill="url(%23grad)" font-family="Arial">SUARA RAKYAT</text><text x="80%" y="20%" font-size="40" text-anchor="middle" fill="url(%23grad)" font-family="Arial">DEMOKRASI</text></svg>');
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" opacity="0.08"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%233b82f6" stop-opacity="0.3"/><stop offset="100%" stop-color="%2360a5fa" stop-opacity="0.1"/></linearGradient></defs><text x="50%" y="30%" font-size="120" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🗳️</text><text x="30%" y="55%" font-size="70" text-anchor="middle" fill="url(%23grad)" font-family="Arial">✓</text><text x="70%" y="65%" font-size="90" text-anchor="middle" fill="url(%23grad)" font-family="Arial">👥</text><text x="45%" y="80%" font-size="50" text-anchor="middle" fill="url(%23grad)" font-family="Arial">PILIH</text><text x="75%" y="35%" font-size="60" text-anchor="middle" fill="url(%23grad)" font-family="Arial">🏛️</text><circle cx="120" cy="150" r="40" fill="url(%23grad)"/><circle cx="680" cy="450" r="55" fill="url(%23grad)"/><text x="20%" y="90%" font-size="35" text-anchor="middle" fill="url(%23grad)" font-family="Arial">SUARA RAKYAT</text><text x="80%" y="20%" font-size="40" text-anchor="middle" fill="url(%23grad)" font-family="Arial">DEMOKRASI</text></svg>');
       background-repeat: repeat;
       background-size: 280px 280px;
       pointer-events: none;
@@ -106,6 +106,15 @@
       font-weight: 800;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
     }
+    .hero-header h4 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 5px;
+    }
+    .hero-header p {
+      margin-top: 8px;
+      opacity: 0.9;
+    }
 
     /* TAB STYLE */
     .auth-tabs {
@@ -129,6 +138,10 @@
       background: linear-gradient(105deg, #1e4b8f, #2563eb);
       color: white;
       box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+    }
+    .auth-tab-btn:not(.active):hover {
+      background: #1e293b;
+      color: #e2e8f0;
     }
 
     /* LOGIN CARD */
@@ -175,14 +188,16 @@
       color: #64748b;
     }
     
-    /* PASSWORD FIELD WITH EYE ICON */
+    /* PASSWORD FIELD WITH EYE ICON - DIPERBAIKI */
     .password-wrapper {
       position: relative;
       margin-bottom: 18px;
+      width: 100%;
     }
     .password-wrapper .custom-input {
       margin-bottom: 0;
       padding-right: 50px;
+      width: 100%;
     }
     .toggle-password {
       position: absolute;
@@ -191,10 +206,14 @@
       transform: translateY(-50%);
       cursor: pointer;
       color: #64748b;
-      font-size: 1.1rem;
-      transition: 0.2s;
+      font-size: 1.2rem;
       background: transparent;
       border: none;
+      z-index: 10;
+      padding: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .toggle-password:hover {
       color: #60a5fa;
@@ -209,6 +228,7 @@
       width: 100%;
       transition: 0.25s;
       color: white;
+      margin-top: 10px;
     }
     .btn-login:hover {
       transform: translateY(-2px);
@@ -219,14 +239,21 @@
     .calon-container {
       padding: 40px 15px 70px;
     }
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+    }
     .section-title span {
       background: rgba(59, 130, 246, 0.2);
       padding: 6px 24px;
       border-radius: 60px;
       color: #60a5fa;
+      font-size: 0.85rem;
     }
     .section-title h2 {
       color: white;
+      margin-top: 12px;
+      font-size: 2rem;
     }
     .candidate-card {
       border-radius: 38px;
@@ -255,7 +282,7 @@
     }
     .candidate-name {
       color: white;
-      font-size: 1.5rem;
+      font-size: 1.3rem;
       font-weight: 800;
       text-align: center;
       margin-bottom: 16px;
@@ -268,7 +295,9 @@
     }
     .visi-misi-box h6 {
       color: #60a5fa;
+      font-weight: 700;
       margin-bottom: 6px;
+      font-size: 0.9rem;
     }
     .visi-misi-box p {
       color: #cbd5e1;
@@ -290,10 +319,6 @@
       transform: scale(0.98);
       filter: brightness(1.05);
     }
-    .btn-pilih-modern:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
 
     /* ADMIN DASHBOARD */
     .admin-dashboard {
@@ -312,7 +337,7 @@
       color: white;
     }
     .stat-number {
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       font-weight: 800;
       color: #60a5fa;
     }
@@ -322,10 +347,16 @@
       font-weight: 600;
       width: 100%;
       margin-bottom: 8px;
+      border: none;
+    }
+    .btn-danger {
+      background: linear-gradient(105deg, #dc2626, #ef4444);
+    }
+    .btn-success {
+      background: linear-gradient(105deg, #16a34a, #22c55e);
     }
     .btn-reset {
       background: linear-gradient(105deg, #dc2626, #ef4444);
-      border: none;
       color: white;
       margin-top: 10px;
     }
@@ -339,6 +370,7 @@
     }
     .hasil-table h5 {
       color: #60a5fa;
+      margin-bottom: 15px;
     }
     .dark-table {
       width: 100%;
@@ -362,6 +394,7 @@
       border-radius: 40px;
       padding: 8px 20px;
       color: white;
+      margin-bottom: 15px;
     }
 
     /* MODAL ELEGAN */
@@ -371,7 +404,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8);
+      background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(12px);
       z-index: 3000;
       display: flex;
@@ -461,9 +494,6 @@
       color: white;
       cursor: pointer;
     }
-    .btn-modal-danger {
-      background: linear-gradient(105deg, #dc2626, #ef4444);
-    }
     .loading-toast {
       position: fixed;
       bottom: 30px;
@@ -478,17 +508,21 @@
       align-items: center;
       gap: 12px;
       z-index: 2100;
+      font-size: 0.9rem;
     }
     .success-panel {
       text-align: center;
-      padding: 60px 20px;
+      padding: 80px 20px;
       color: white;
       position: relative;
       z-index: 1;
     }
     @media (max-width: 768px) {
       .hero-header h2 { font-size: 1.5rem; }
+      .hero-header h4 { font-size: 1.2rem; }
+      .candidate-name { font-size: 1.1rem; }
       .elegant-modal-card { padding: 30px 20px; }
+      .stat-number { font-size: 2rem; }
     }
   </style>
 </head>
@@ -511,22 +545,26 @@
     <button class="auth-tab-btn active" onclick="switchTab('pemilih')"><i class="fas fa-user-check"></i> Pemilih</button>
     <button class="auth-tab-btn" onclick="switchTab('admin')"><i class="fas fa-user-shield"></i> Admin</button>
   </div>
+  
+  <!-- Form PEMILIH -->
   <div id="pemilihForm">
     <input type="text" id="nama" class="custom-input" placeholder="Nama Lengkap" autocomplete="off">
     <input type="text" id="alamat" class="custom-input" placeholder="Alamat / Tempat Tinggal" autocomplete="off">
     <div class="password-wrapper">
       <input type="password" id="password" class="custom-input" placeholder="Password" autocomplete="off">
-      <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password', this)">
+      <button type="button" class="toggle-password" onclick="togglePassword('password', this)">
         <i class="fas fa-eye"></i>
       </button>
     </div>
     <button class="btn-login" onclick="handlePemilihLogin()"><i class="fas fa-arrow-right-to-bracket"></i> Masuk & Voting</button>
   </div>
+  
+  <!-- Form ADMIN -->
   <div id="adminForm" style="display:none;">
     <input type="text" id="adminUsername" class="custom-input" placeholder="Username Admin" autocomplete="off">
     <div class="password-wrapper">
       <input type="password" id="adminPassword" class="custom-input" placeholder="Password Admin" autocomplete="off">
-      <button type="button" class="toggle-password" onclick="togglePasswordVisibility('adminPassword', this)">
+      <button type="button" class="toggle-password" onclick="togglePassword('adminPassword', this)">
         <i class="fas fa-eye"></i>
       </button>
     </div>
@@ -536,9 +574,9 @@
 
 <!-- PEMILIH AREA -->
 <div id="calonContainer" class="container calon-container" style="display:none;">
-  <div class="section-title text-center">
+  <div class="section-title">
     <span><i class="fas fa-users-viewfinder"></i> Kandidat Ketua Komite</span>
-    <h2 class="mt-2">Pilih Pemimpin Terbaik</h2>
+    <h2>Pilih Pemimpin Terbaik</h2>
   </div>
   <div class="row g-4" id="listCalon"></div>
 </div>
@@ -566,8 +604,8 @@
     </div>
     <div class="col-md-4">
       <div class="stat-card">
-        <button class="btn btn-danger btn-action" onclick="showConfirmModal('Tutup Voting', 'Apakah Anda yakin ingin MENUTUP voting? Peserta tidak dapat memilih lagi.', 'tutup')"><i class="fas fa-lock"></i> TUTUP VOTING</button>
-        <button class="btn btn-success btn-action" onclick="showConfirmModal('Buka Voting', 'Apakah Anda yakin ingin MEMBUKA voting? Peserta dapat memilih.', 'buka')"><i class="fas fa-lock-open"></i> BUKA VOTING</button>
+        <button class="btn-action btn-danger" onclick="showConfirmModal('Tutup Voting', 'Apakah Anda yakin ingin MENUTUP voting? Peserta tidak dapat memilih lagi.', 'tutup')"><i class="fas fa-lock"></i> TUTUP VOTING</button>
+        <button class="btn-action btn-success" onclick="showConfirmModal('Buka Voting', 'Apakah Anda yakin ingin MEMBUKA voting? Peserta dapat memilih.', 'buka')"><i class="fas fa-lock-open"></i> BUKA VOTING</button>
         <button class="btn-reset" onclick="showConfirmModal('Reset Semua Data', 'Tindakan ini akan menghapus SEMUA data pemilih dan hasil voting secara permanen! Data yang dihapus tidak dapat dikembalikan.', 'reset', true)"><i class="fas fa-trash-alt"></i> RESET PEMILIH</button>
       </div>
     </div>
@@ -576,7 +614,7 @@
     <div class="col-lg-5">
       <div class="hasil-table">
         <h5><i class="fas fa-chart-pie"></i> Grafik Suara</h5>
-        <canvas id="voteChart" style="max-height: 300px;"></canvas>
+        <canvas id="voteChart" style="max-height: 300px; width: 100%;"></canvas>
       </div>
     </div>
     <div class="col-lg-7">
@@ -584,7 +622,9 @@
         <h5><i class="fas fa-trophy"></i> Hasil Realtime</h5>
         <div class="table-responsive">
           <table class="dark-table" id="excelTable">
-            <thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead>
+            <thead>
+              <tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr>
+            </thead>
             <tbody id="hasilTableAdmin"></tbody>
           </table>
         </div>
@@ -603,14 +643,16 @@
   <i class="fas fa-check-circle" style="font-size:70px; color:#60a5fa;"></i>
   <h2 class="fw-bold mt-3" style="color:#60a5fa;">TERIMA KASIH</h2>
   <p>Suara Anda berhasil disimpan</p>
-  <button class="btn btn-primary rounded-pill px-4 py-2" onclick="kembaliHome()">Kembali ke Halaman Awal</button>
+  <button class="btn btn-primary rounded-pill px-4 py-2" onclick="location.reload()">Kembali ke Halaman Awal</button>
 </div>
 
-<div id="loadingToast" class="loading-toast" style="display:none;"><i class="fas fa-spinner fa-pulse"></i> <span>Memproses...</span></div>
+<div id="loadingToast" class="loading-toast" style="display:none;">
+  <i class="fas fa-spinner fa-pulse"></i> <span>Memproses...</span>
+</div>
 
 <script>
   // ==================== KONFIGURASI ====================
-  // GANTI URL INI DENGAN URL DEPLOYMENT GOOGLE APPS SCRIPT ANDA
+  // ⚠️ GANTI URL INI DENGAN URL DEPLOYMENT GOOGLE APPS SCRIPT ANDA YANG BARU ⚠️
   const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
   
   let currentUser = null;
@@ -621,9 +663,9 @@
   let pendingAction = null;
 
   // ==================== FUNGSI TOGGLE PASSWORD ====================
-  function togglePasswordVisibility(inputId, button) {
+  function togglePassword(inputId, btn) {
     const input = document.getElementById(inputId);
-    const icon = button.querySelector('i');
+    const icon = btn.querySelector('i');
     if (input.type === 'password') {
       input.type = 'text';
       icon.classList.remove('fa-eye');
@@ -640,7 +682,34 @@
     el.querySelector("span").innerText = msg;
     el.style.display = "flex";
   }
-  function hideLoading() { document.getElementById("loadingToast").style.display = "none"; }
+  
+  function hideLoading() { 
+    document.getElementById("loadingToast").style.display = "none"; 
+  }
+
+  // ALERT MODAL
+  function showAlertModal(title, message, type = "info") {
+    let iconColor = type === "success" ? "#22c55e" : (type === "error" ? "#ef4444" : "#60a5fa");
+    let iconClass = type === "success" ? "fa-check-circle" : (type === "error" ? "fa-times-circle" : "fa-info-circle");
+    let modalHtml = `
+      <div class="elegant-modal-overlay" id="alertModal">
+        <div class="elegant-modal-card">
+          <div class="elegant-modal-icon" style="background: ${type === 'success' ? 'rgba(34,197,94,0.15)' : (type === 'error' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.15)')}">
+            <i class="fas ${iconClass}" style="font-size:42px; color:${iconColor}"></i>
+          </div>
+          <h3>${title}</h3>
+          <div class="elegant-modal-message">${message}</div>
+          <div class="elegant-modal-actions">
+            <button class="btn-modal-confirm" id="alertOkBtn">OK</button>
+          </div>
+        </div>
+      </div>
+    `;
+    document.body.insertAdjacentHTML("beforeend", modalHtml);
+    document.getElementById("alertOkBtn").onclick = () => { 
+      document.getElementById("alertModal").remove(); 
+    };
+  }
 
   // MODAL KONFIRMASI
   function showConfirmModal(title, message, action, isDanger = false) {
@@ -657,41 +726,22 @@
           </div>
           <div class="elegant-modal-actions">
             <button class="btn-modal-cancel" id="modalCancelBtn">Batal</button>
-            <button class="btn-modal-confirm ${isDanger ? 'btn-modal-danger' : ''}" id="modalConfirmBtn">Ya, ${title.split(' ')[0]}</button>
+            <button class="btn-modal-confirm" id="modalConfirmBtn">Ya, ${title.split(' ')[0]}</button>
           </div>
         </div>
       </div>
     `;
     document.body.insertAdjacentHTML("beforeend", modalHtml);
     pendingAction = action;
-    document.getElementById("modalCancelBtn").onclick = () => { document.getElementById("elegantModal").remove(); pendingAction = null; };
+    document.getElementById("modalCancelBtn").onclick = () => { 
+      document.getElementById("elegantModal").remove(); 
+      pendingAction = null; 
+    };
     document.getElementById("modalConfirmBtn").onclick = async () => { 
       document.getElementById("elegantModal").remove(); 
       await executeAction(pendingAction);
       pendingAction = null;
     };
-  }
-
-  // ALERT MODAL
-  function showAlertModal(title, message, type = "info") {
-    let iconColor = type === "success" ? "#22c55e" : (type === "error" ? "#ef4444" : "#60a5fa");
-    let iconClass = type === "success" ? "fa-check-circle" : (type === "error" ? "fa-times-circle" : "fa-info-circle");
-    let modalHtml = `
-      <div class="elegant-modal-overlay" id="alertModal">
-        <div class="elegant-modal-card">
-          <div class="elegant-modal-icon" style="background: ${type === 'success' ? 'rgba(34,197,94,0.15)' : (type === 'error' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.15)')}">
-            <i class="fas ${iconClass}" style="font-size:42px; color:${iconColor}"></i>
-          </div>
-          <h3>${title}</h3>
-          <div class="elegant-modal-message">${message}</div>
-          <div class="elegant-modal-actions">
-            <button class="btn-modal-confirm" id="alertOkBtn" style="background: linear-gradient(105deg, #2563eb, #3b82f6);">OK</button>
-          </div>
-        </div>
-      </div>
-    `;
-    document.body.insertAdjacentHTML("beforeend", modalHtml);
-    document.getElementById("alertOkBtn").onclick = () => { document.getElementById("alertModal").remove(); };
   }
 
   async function executeAction(action) {
@@ -702,7 +752,10 @@
         hideLoading();
         showAlertModal("Berhasil", "Voting telah ditutup. Peserta tidak dapat memilih lagi.", "success");
         loadAdminData();
-      } catch(e) { hideLoading(); showAlertModal("Error", "Gagal menutup voting", "error"); }
+      } catch(e) { 
+        hideLoading(); 
+        showAlertModal("Error", "Gagal menutup voting: " + e.message, "error"); 
+      }
     } 
     else if (action === 'buka') {
       showLoading("Membuka voting...");
@@ -711,7 +764,10 @@
         hideLoading();
         showAlertModal("Berhasil", "Voting telah dibuka. Peserta dapat memilih sekarang.", "success");
         loadAdminData();
-      } catch(e) { hideLoading(); showAlertModal("Error", "Gagal membuka voting", "error"); }
+      } catch(e) { 
+        hideLoading(); 
+        showAlertModal("Error", "Gagal membuka voting: " + e.message, "error"); 
+      }
     }
     else if (action === 'reset') {
       showLoading("Meriset data pemilih...");
@@ -723,7 +779,7 @@
         loadAdminData();
       } catch(e) {
         hideLoading();
-        showAlertModal("Perhatian", "Fungsi reset memerlukan endpoint di Google Apps Script. Tambahkan fungsi resetPemilih() di server.", "error");
+        showAlertModal("Error", "Gagal mereset data: " + e.message, "error");
       }
     }
   }
@@ -744,44 +800,84 @@
     }
   }
 
-  // PEMILIH LOGIN
+  // ==================== PEMILIH LOGIN ====================
   async function handlePemilihLogin() {
     const nama = document.getElementById("nama").value.trim().toUpperCase();
     const alamat = document.getElementById("alamat").value.trim().toUpperCase();
     const password = document.getElementById("password").value.trim();
-    if (!nama || !alamat || !password) { showAlertModal("Perhatian", "Lengkapi semua data login!", "error"); return; }
+    
+    if (!nama || !alamat || !password) { 
+      showAlertModal("Perhatian", "Lengkapi semua data login!", "error"); 
+      return; 
+    }
+    
     showLoading("Memeriksa data...");
     try {
-      const resp = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "login", nama, alamat, password }) });
-      const result = await resp.json();
+      const response = await fetch(API_URL, { 
+        method: "POST", 
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "login", nama, alamat, password }) 
+      });
+      const result = await response.json();
       hideLoading();
+      
       if (result.status) {
         currentUser = result;
         hasVoted = false;
         showAlertModal("Berhasil", "Login berhasil! Silakan pilih calon.", "success");
         document.getElementById("authContainer").style.display = "none";
         await loadCalonPemilih();
-      } else { showAlertModal("Gagal", result.message, "error"); }
-    } catch(e) { hideLoading(); showAlertModal("Error", "Gagal terhubung ke server. Periksa koneksi Anda.", "error"); }
+      } else { 
+        showAlertModal("Gagal", result.message, "error"); 
+      }
+    } catch(e) { 
+      hideLoading(); 
+      console.error("Login error:", e);
+      showAlertModal("Error", "Gagal terhubung ke server. Periksa koneksi dan URL API.", "error"); 
+    }
   }
 
   async function loadCalonPemilih() {
     showLoading("Memuat kandidat...");
     try {
-      const resp = await fetch(API_URL + "?action=getCalon");
-      const data = await resp.json();
+      const response = await fetch(API_URL + "?action=getCalon");
+      const data = await response.json();
       hideLoading();
+      
       let html = "";
       data.forEach(calon => {
         let foto = calon.foto || `https://ui-avatars.com/api/?background=2563eb&color=fff&rounded=true&size=120&name=${encodeURIComponent(calon.nama)}`;
-        html += `<div class="col-md-6 col-lg-4 mb-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}"></div><div class="card-body-custom p-3"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6><i class="fas fa-eye"></i> Visi</h6><p>${escapeHtml(calon.visi || "-")}</p></div><div class="visi-misi-box"><h6><i class="fas fa-bullhorn"></i> Misi</h6><p>${escapeHtml(calon.misi || "-")}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}"><i class="fas fa-vote-yea"></i> Pilih</button></div></div></div>`;
+        html += `
+          <div class="col-md-6 col-lg-4 mb-4">
+            <div class="candidate-card">
+              <div class="candidate-img">
+                <img src="${foto}" alt="${calon.nama}">
+              </div>
+              <div class="card-body-custom p-3">
+                <div class="candidate-name">${escapeHtml(calon.nama)}</div>
+                <div class="visi-misi-box">
+                  <h6><i class="fas fa-eye"></i> Visi</h6>
+                  <p>${escapeHtml(calon.visi || "-")}</p>
+                </div>
+                <div class="visi-misi-box">
+                  <h6><i class="fas fa-bullhorn"></i> Misi</h6>
+                  <p>${escapeHtml(calon.misi || "-")}</p>
+                </div>
+                <button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}">
+                  <i class="fas fa-vote-yea"></i> Pilih
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
       });
+      
       document.getElementById("listCalon").innerHTML = html;
       document.getElementById("calonContainer").style.display = "block";
       
       document.querySelectorAll(".btn-pilih-modern").forEach(btn => {
-        btn.addEventListener("click", async (e) => {
-          e.preventDefault();
+        btn.addEventListener("click", async () => {
           if (hasVoted) {
             showAlertModal("Perhatian", "Anda sudah memilih! Tidak dapat memilih lagi.", "error");
             return;
@@ -790,7 +886,11 @@
           await processVote(namaCalon);
         });
       });
-    } catch(e) { hideLoading(); showAlertModal("Error", "Gagal memuat calon", "error"); }
+    } catch(e) { 
+      hideLoading(); 
+      console.error("Load calon error:", e);
+      showAlertModal("Error", "Gagal memuat data calon. Periksa koneksi.", "error"); 
+    }
   }
 
   async function processVote(namaCalon) {
@@ -826,15 +926,16 @@
       
       showLoading("Menyimpan suara Anda...");
       try {
-        const resp = await fetch(API_URL, { 
+        const response = await fetch(API_URL, { 
           method: "POST", 
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ 
             action: "vote", 
             idPemilih: currentUser.id, 
             pilihan: namaCalon 
           }) 
         });
-        const result = await resp.json();
+        const result = await response.json();
         hideLoading();
         
         if (result.status) {
@@ -847,15 +948,17 @@
         }
       } catch(e) { 
         hideLoading(); 
+        console.error("Vote error:", e);
         showAlertModal("Error", "Gagal menyimpan suara. Periksa koneksi Anda.", "error"); 
       }
     };
   }
 
-  // ADMIN LOGIN
+  // ==================== ADMIN LOGIN ====================
   async function handleAdminLogin() {
     const user = document.getElementById("adminUsername").value.trim();
     const pass = document.getElementById("adminPassword").value.trim();
+    
     if (user === "admin" && pass === "admin123") {
       isAdminMode = true;
       document.getElementById("authContainer").style.display = "none";
@@ -863,27 +966,46 @@
       loadAdminData();
       if (adminRefreshInterval) clearInterval(adminRefreshInterval);
       adminRefreshInterval = setInterval(loadAdminData, 5000);
-    } else { showAlertModal("Login Gagal", "Username atau password admin salah!\n\nUsername: admin\nPassword: admin123", "error"); }
+    } else { 
+      showAlertModal("Login Gagal", "Username atau password admin salah!\n\nUsername: admin\nPassword: admin123", "error"); 
+    }
   }
 
   async function loadAdminData() {
     if (!isAdminMode) return;
     try {
-      const [hasilRes, statusRes] = await Promise.all([fetch(API_URL + "?action=getHasil"), fetch(API_URL + "?action=getStatus")]);
+      const [hasilRes, statusRes] = await Promise.all([
+        fetch(API_URL + "?action=getHasil"), 
+        fetch(API_URL + "?action=getStatus")
+      ]);
       const hasil = await hasilRes.json();
       const status = await statusRes.json();
-      let arr = Object.entries(hasil).map(([nama, suara]) => ({ nama, suara })).sort((a,b)=>b.suara-a.suara);
-      let total = arr.reduce((sum,item)=>sum+item.suara,0);
+      
+      let arr = Object.entries(hasil).map(([nama, suara]) => ({ nama, suara })).sort((a,b) => b.suara - a.suara);
+      let total = arr.reduce((sum, item) => sum + item.suara, 0);
+      
       document.getElementById("totalSuaraAdmin").innerText = total;
-      document.getElementById("statusVotingAdmin").innerHTML = status.statusVoting === "OPEN" ? '<span class="badge bg-success fs-6">✅ VOTING DIBUKA</span>' : '<span class="badge bg-danger fs-6">🔒 VOTING DITUTUP</span>';
+      document.getElementById("statusVotingAdmin").innerHTML = status.statusVoting === "OPEN" 
+        ? '<span class="badge bg-success fs-6">✅ VOTING DIBUKA</span>' 
+        : '<span class="badge bg-danger fs-6">🔒 VOTING DITUTUP</span>';
+      
       let html = "";
       arr.forEach((item, idx) => {
-        let jabatan = idx===0?"Ketua":idx===1?"Sekretaris":idx===2?"Bendahara":"Anggota";
-        html += `<tr><td>${idx+1}</td><td>${escapeHtml(item.nama)}</td><td><strong>${item.suara}</strong></td><td>${jabatan}</td></tr>`;
+        let jabatan = idx === 0 ? "Ketua" : idx === 1 ? "Sekretaris" : idx === 2 ? "Bendahara" : "Anggota";
+        html += `
+          <tr>
+            <td>${idx + 1}</td>
+            <td>${escapeHtml(item.nama)}</td>
+            <td><strong>${item.suara}</strong></td>
+            <td>${jabatan}</td>
+          </tr>
+        `;
       });
       document.getElementById("hasilTableAdmin").innerHTML = html;
       updateChartAdmin(arr);
-    } catch(e) { console.error(e); }
+    } catch(e) { 
+      console.error("Load admin data error:", e); 
+    }
   }
 
   function updateChartAdmin(data) {
@@ -891,8 +1013,24 @@
     if (voteChartInstance) voteChartInstance.destroy();
     voteChartInstance = new Chart(ctx, {
       type: 'bar',
-      data: { labels: data.map(d=>d.nama.length>15?d.nama.slice(0,12)+'...':d.nama), datasets: [{ label: 'Suara', data: data.map(d=>d.suara), backgroundColor: '#3b82f6', borderRadius: 10 }] },
-      options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, grid: { color: '#1e3a5f' }, ticks: { color: '#94a3b8' } }, x: { ticks: { color: '#94a3b8' } } }, plugins: { legend: { labels: { color: '#cbd5e1' } } } }
+      data: { 
+        labels: data.map(d => d.nama.length > 15 ? d.nama.slice(0,12) + '...' : d.nama), 
+        datasets: [{ 
+          label: 'Suara', 
+          data: data.map(d => d.suara), 
+          backgroundColor: '#3b82f6', 
+          borderRadius: 10 
+        }] 
+      },
+      options: { 
+        responsive: true, 
+        maintainAspectRatio: true, 
+        scales: { 
+          y: { beginAtZero: true, grid: { color: '#1e3a5f' }, ticks: { color: '#94a3b8' } }, 
+          x: { ticks: { color: '#94a3b8' } } 
+        }, 
+        plugins: { legend: { labels: { color: '#cbd5e1' } } } 
+      }
     });
   }
 
@@ -902,18 +1040,45 @@
       let cells = row.querySelectorAll("td");
       if (cells.length) rows.push([cells[0]?.innerText, cells[1]?.innerText, cells[2]?.innerText, cells[3]?.innerText]);
     });
-    let htmlContent = `<html><head><meta charset="UTF-8"><title>Hasil Voting</title><style>th,td{border:1px solid black;padding:8px;}</style></head><body><h2>Hasil Voting Komite</h2><table border="1"><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr>${rows.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}εtable</body></html>`;
+    
+    let htmlContent = `
+      <html>
+        <head><meta charset="UTF-8"><title>Hasil Voting</title>
+        <style>th,td{border:1px solid black;padding:8px;}</style>
+        </head>
+        <body>
+          <h2>Hasil Voting Komite SMPN 2 Kawali</h2>
+          <table border="1">
+            <thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead>
+            <tbody>${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody>
+          </table>
+          <p>Total Suara: ${document.getElementById("totalSuaraAdmin").innerText}</p>
+          <p>Dicetak: ${new Date().toLocaleString()}</p>
+        </body>
+      </html>
+    `;
+    
     let blob = new Blob([htmlContent], { type: "application/vnd.ms-excel" });
     let a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
     a.download = `HASIL_VOTING_${new Date().toISOString().slice(0,19)}.xls`;
     a.click();
+    URL.revokeObjectURL(a.href);
     showAlertModal("Berhasil", "File Excel berhasil diunduh", "success");
   }
 
-  function adminLogout() { isAdminMode=false; if(adminRefreshInterval) clearInterval(adminRefreshInterval); document.getElementById("adminDashboard").style.display="none"; document.getElementById("authContainer").style.display="block"; switchTab("pemilih"); }
-  function kembaliHome() { location.reload(); }
-  function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, m => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;' }[m])); }
+  function adminLogout() { 
+    isAdminMode = false; 
+    if (adminRefreshInterval) clearInterval(adminRefreshInterval); 
+    document.getElementById("adminDashboard").style.display = "none"; 
+    document.getElementById("authContainer").style.display = "block"; 
+    switchTab("pemilih"); 
+  }
+
+  function escapeHtml(str) { 
+    if (!str) return ""; 
+    return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); 
+  }
 </script>
 </body>
 </html>
