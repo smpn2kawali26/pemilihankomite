@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-  <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Voting Komite SMPN 2 Kawali</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,7 +28,7 @@
     .header h2 { color: rgba(255,255,255,0.9); font-size: 14px; font-weight: 500; }
     .header p { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 5px; }
     
-    /* REAL TIME CLOCK */
+    /* JAM REAL TIME */
     .clock {
       background: rgba(0,0,0,0.4);
       backdrop-filter: blur(5px);
@@ -150,11 +150,10 @@
       .stat-value { font-size: 22px; }
     }
   </style>
-  <title>Voting Komite SMPN 2 Kawali</title>
 </head>
 <body>
 <div class="container">
-  <!-- HEADER dengan LOGO BARU -->
+  <!-- HEADER dengan LOGO -->
   <div class="header">
     <img src="https://drive.google.com/uc?export=view&id=14MOrGVFoEKwDkd66Mg8rv4f4bCIaMALG" alt="Logo SMPN 2 Kawali" class="logo" onerror="this.src='https://placehold.co/100x100/1a237e/white?text=SMPN2'">
     <h1>PEMILIHAN KOMITE SEKOLAH</h1>
@@ -220,7 +219,7 @@
       <div id="adminMessage" class="message"></div>
     </div>
 
-    <div id="adminPanel" style="display:none;">
+    <div id="adminPanelContent" style="display:none;">
       <div class="stats-card">
         <div><span>📋 Pemilih</span><div class="stat-value" id="totalPemilih">0</div></div>
         <div><span>✅ Suara</span><div class="stat-value" id="totalSuara">0</div></div>
@@ -244,8 +243,28 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
+  // ==================== KONFIGURASI ====================
+  // URL APPS SCRIPT ANDA SUDAH DIMASUKKAN
+  const API_URL = 'https://script.google.com/macros/s/AKfycbwlSgpfOKI5WhPR0f9ePd7G5veuxvFJY_ZHgHrbH37tVugNYr7BGCtEGx2vwtkqTTu2/exec';
+  
   let currentUser = null;
   let hasilChart = null;
+
+  // ==================== FUNGSI CALL API ====================
+  async function callAPI(action, data = {}) {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, ...data })
+      });
+      const result = await response.json();
+      return result;
+    } catch(e) {
+      console.error('API Error:', e);
+      return { success: false, message: 'Koneksi gagal: ' + e.message };
+    }
+  }
 
   // ==================== REAL TIME CLOCK ====================
   function updateClock() {
@@ -274,7 +293,7 @@
   }
 
   // ==================== PEMILIH ====================
-  function doLogin() {
+  async function doLogin() {
     var nama = document.getElementById('nama').value.trim();
     var alamat = document.getElementById('alamat').value.trim();
     var password = document.getElementById('password').value;
@@ -285,69 +304,71 @@
 
     showMessage('loginMessage', '⏳ Memproses...', 'info');
     
-    google.script.run
-      .withSuccessHandler(function(res) {
-        console.log('Login response:', res);
-        if (res.success) {
-          currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
-          document.getElementById('loginForm').style.display = 'none';
-          document.getElementById('votingPanel').style.display = 'block';
-          document.getElementById('userName').innerText = currentUser.nama;
-          loadCandidates();
-        } else {
-          showMessage('loginMessage', res.message, 'error');
-        }
-      })
-      .withFailureHandler(function(err) { 
-        console.error('Login error:', err);
-        showMessage('loginMessage', 'Koneksi error. Coba lagi.', 'error'); 
-      })
-      .loginPemilih(nama, alamat, password);
+    try {
+      const res = await callAPI('loginPemilih', { nama, alamat, password });
+      console.log('Login response:', res);
+      
+      if (res.success) {
+        currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('votingPanel').style.display = 'block';
+        document.getElementById('userName').innerText = currentUser.nama;
+        loadCandidates();
+      } else {
+        showMessage('loginMessage', res.message, 'error');
+      }
+    } catch(e) {
+      showMessage('loginMessage', 'Error: ' + e.message, 'error');
+    }
   }
 
-  function loadCandidates() {
+  async function loadCandidates() {
     var grid = document.getElementById('candidatesGrid');
     grid.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><p>Memuat data calon...</p></div>';
     
-    google.script.run
-      .withSuccessHandler(function(data) {
-        console.log('Calon data:', data);
-        if (!data || data.length === 0) {
-          grid.innerHTML = '<div class="card" style="text-align:center;padding:30px;"><p>⚠️ Data calon belum tersedia.</p><p>Hubungi admin untuk mengisi sheet "calon"</p></div>';
-          return;
-        }
-        grid.innerHTML = '';
-        for (var i = 0; i < data.length; i++) {
-          var calon = data[i];
-          var card = document.createElement('div');
-          card.className = 'candidate-card';
-          card.innerHTML = '<img src="' + calon.foto + '" alt="' + calon.nama + '" onerror="this.src=\'https://placehold.co/400x200/1a237e/white?text=' + encodeURIComponent(calon.nama.split(' ')[0]) + '\'">' +
-            '<h4>' + calon.nama + '</h4>' +
-            '<div class="visi-misi">' +
-            '<strong>🌟 VISI</strong><p>' + (calon.visi.length > 200 ? calon.visi.substring(0,200)+'...' : calon.visi) + '</p>' +
-            '<strong>📌 MISI</strong><p>' + (calon.misi.length > 200 ? calon.misi.substring(0,200)+'...' : calon.misi) + '</p>' +
-            '</div>' +
-            '<button onclick="vote(' + calon.id + ')" class="btn-vote">🗳️ PILIH</button>';
-          grid.appendChild(card);
-        }
-      })
-      .withFailureHandler(function(err) { 
-        console.error('Load candidates error:', err);
-        grid.innerHTML = '<div class="card" style="text-align:center;padding:30px;"><p>❌ Gagal memuat data calon.</p><p>Periksa sheet "calon" di spreadsheet</p></div>';
-      })
-      .getCalon();
+    try {
+      const data = await callAPI('getCalon');
+      console.log('Calon data:', data);
+      
+      if (!data || data.length === 0) {
+        grid.innerHTML = '<div class="card" style="text-align:center;padding:30px;"><p>⚠️ Data calon belum tersedia.</p><p>Hubungi admin untuk mengisi sheet "calon"</p></div>';
+        return;
+      }
+      grid.innerHTML = '';
+      for (var i = 0; i < data.length; i++) {
+        var calon = data[i];
+        var card = document.createElement('div');
+        card.className = 'candidate-card';
+        card.innerHTML = '<img src="' + calon.foto + '" alt="' + calon.nama + '" onerror="this.src=\'https://placehold.co/400x200/1a237e/white?text=' + encodeURIComponent(calon.nama.split(' ')[0]) + '\'">' +
+          '<h4>' + calon.nama + '</h4>' +
+          '<div class="visi-misi">' +
+          '<strong>🌟 VISI</strong><p>' + (calon.visi.length > 200 ? calon.visi.substring(0,200)+'...' : calon.visi) + '</p>' +
+          '<strong>📌 MISI</strong><p>' + (calon.misi.length > 200 ? calon.misi.substring(0,200)+'...' : calon.misi) + '</p>' +
+          '</div>' +
+          '<button onclick="vote(' + calon.id + ')" class="btn-vote">🗳️ PILIH</button>';
+        grid.appendChild(card);
+      }
+    } catch(e) {
+      console.error('Load candidates error:', e);
+      grid.innerHTML = '<div class="card" style="text-align:center;padding:30px;"><p>❌ Gagal memuat data calon.</p><p>Periksa koneksi dan sheet "calon"</p></div>';
+    }
   }
 
-  function vote(calonId) {
+  async function vote(calonId) {
     if (!confirm('Yakin memilih calon ini?\n\nSuara tidak dapat diubah setelah dipilih!')) return;
     
-    google.script.run
-      .withSuccessHandler(function(res) {
-        alert(res.message);
-        if (res.success) logout();
-      })
-      .withFailureHandler(function(err) { alert('Error: ' + err.message); })
-      .vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
+    try {
+      const res = await callAPI('vote', {
+        pemilihId: currentUser.id,
+        calonId: calonId,
+        namaPemilih: currentUser.nama,
+        alamatPemilih: currentUser.alamat
+      });
+      alert(res.message);
+      if (res.success) logout();
+    } catch(e) {
+      alert('Error: ' + e.message);
+    }
   }
 
   function logout() {
@@ -360,40 +381,42 @@
   }
 
   // ==================== ADMIN ====================
-  function doAdminLogin() {
+  async function doAdminLogin() {
     var username = document.getElementById('adminUser').value;
     var password = document.getElementById('adminPass').value;
     
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          document.getElementById('adminLoginForm').style.display = 'none';
-          document.getElementById('adminPanel').style.display = 'block';
-          loadAdminData();
-        } else {
-          showMessage('adminMessage', 'Username atau password salah!', 'error');
-        }
-      })
-      .loginAdmin(username, password);
+    try {
+      const res = await callAPI('loginAdmin', { username, password });
+      if (res.success) {
+        document.getElementById('adminLoginForm').style.display = 'none';
+        document.getElementById('adminPanelContent').style.display = 'block';
+        loadAdminData();
+      } else {
+        showMessage('adminMessage', 'Username atau password salah!', 'error');
+      }
+    } catch(e) {
+      showMessage('adminMessage', 'Error: ' + e.message, 'error');
+    }
   }
 
-  function loadAdminData() {
-    google.script.run.withSuccessHandler(function(status) {
+  async function loadAdminData() {
+    try {
+      const status = await callAPI('getVotingStatus');
       var btn = document.getElementById('toggleVotingBtn');
       btn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
       btn.className = status ? 'btn-danger' : 'btn-success';
-    }).getVotingStatus();
-    
-    google.script.run.withSuccessHandler(function(stat) {
+      
+      const stat = await callAPI('getStatistik');
       document.getElementById('totalPemilih').innerText = stat.totalPemilih;
       document.getElementById('totalSuara').innerText = stat.totalSuara;
       document.getElementById('persentase').innerText = stat.persentase + '%';
-    }).getStatistik();
-    
-    google.script.run.withSuccessHandler(function(hasil) {
+      
+      const hasil = await callAPI('getHasilVoting');
       updateRekap(hasil);
       updateChart(hasil);
-    }).getHasilVoting();
+    } catch(e) {
+      console.error('Load admin data error:', e);
+    }
   }
 
   function updateRekap(hasil) {
@@ -454,25 +477,30 @@
     });
   }
 
-  function toggleVoting() {
-    google.script.run.withSuccessHandler(function(status) {
-      google.script.run.withSuccessHandler(function(newStatus) {
-        var btn = document.getElementById('toggleVotingBtn');
-        btn.innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
-        btn.className = newStatus ? 'btn-danger' : 'btn-success';
-        alert(newStatus ? '✅ Voting telah DIBUKA' : '❌ Voting telah DITUTUP');
-      }).setVotingStatus(!status);
-    }).getVotingStatus();
+  async function toggleVoting() {
+    try {
+      const status = await callAPI('getVotingStatus');
+      const newStatus = await callAPI('setVotingStatus', { status: !status });
+      var btn = document.getElementById('toggleVotingBtn');
+      btn.innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+      btn.className = newStatus ? 'btn-danger' : 'btn-success';
+      alert(newStatus ? '✅ Voting telah DIBUKA' : '❌ Voting telah DITUTUP');
+    } catch(e) {
+      alert('Error: ' + e.message);
+    }
   }
 
-  function resetVoting() {
+  async function resetVoting() {
     if (confirm('⚠️ PERINGATAN! ⚠️\n\nReset semua data voting?\n\nSemua suara akan hilang dan TIDAK DAPAT DIURUNGKAN!')) {
       var confirm2 = prompt('Ketik "RESET" untuk konfirmasi:');
       if (confirm2 === 'RESET') {
-        google.script.run.withSuccessHandler(function() {
+        try {
+          await callAPI('resetVoting');
           alert('✅ Semua data voting telah direset!');
           loadAdminData();
-        }).resetVoting();
+        } catch(e) {
+          alert('Error: ' + e.message);
+        }
       } else {
         alert('Reset dibatalkan.');
       }
@@ -480,7 +508,7 @@
   }
 
   function adminLogout() {
-    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('adminPanelContent').style.display = 'none';
     document.getElementById('adminLoginForm').style.display = 'block';
     document.getElementById('adminUser').value = '';
     document.getElementById('adminPass').value = '';
