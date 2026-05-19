@@ -4,7 +4,7 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -27,9 +27,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: 
-        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0%, transparent 50%);
+      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 50%);
       pointer-events: none;
     }
 
@@ -40,7 +38,7 @@
       z-index: 1;
     }
 
-    /* HEADER ELEGAN */
+    /* HEADER */
     .header {
       text-align: center;
       color: white;
@@ -50,32 +48,20 @@
     }
 
     @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(40px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .logo {
-      width: 110px;
-      height: 110px;
+      width: 120px;
+      height: 120px;
       border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.9);
+      border: 4px solid rgba(255,255,255,0.95);
       margin-bottom: 20px;
       box-shadow: 0 10px 30px rgba(0,0,0,0.3);
       background: white;
@@ -88,9 +74,9 @@
     }
 
     .header h1 {
-      font-size: 32px;
+      font-size: 34px;
       letter-spacing: 3px;
-      font-weight: 700;
+      font-weight: 800;
       margin-bottom: 5px;
       background: linear-gradient(135deg, #fff, #e3f2fd);
       -webkit-background-clip: text;
@@ -99,8 +85,8 @@
     }
 
     .header h2 {
-      font-size: 22px;
-      font-weight: 500;
+      font-size: 24px;
+      font-weight: 600;
       margin-bottom: 5px;
       opacity: 0.95;
     }
@@ -111,17 +97,39 @@
       letter-spacing: 1px;
     }
 
-    /* CARD LOGIN ELEGAN */
+    /* REAL TIME CLOCK */
+    .datetime-container {
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 50px;
+      padding: 10px 25px;
+      margin-top: 15px;
+      display: inline-block;
+      text-align: center;
+      font-weight: 500;
+    }
+
+    .date-text {
+      font-size: 14px;
+      opacity: 0.9;
+    }
+
+    .time-text {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    /* CARD LOGIN - BIRU */
     .card {
-      background: rgba(255,255,255,0.97);
+      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
       border-radius: 30px;
       padding: 40px 35px;
       box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-      backdrop-filter: blur(5px);
-      max-width: 450px;
+      max-width: 480px;
       margin: 0 auto;
       animation: fadeInUp 0.6s ease;
-      border: 1px solid rgba(255,255,255,0.3);
+      border: 1px solid rgba(21,101,192,0.2);
     }
 
     .card h3 {
@@ -131,37 +139,44 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 30px;
-      font-size: 26px;
-      font-weight: 600;
+      font-size: 28px;
+      font-weight: 700;
     }
 
+    /* INPUT BIRU */
     input {
       width: 100%;
-      padding: 15px 18px;
+      padding: 16px 20px;
       margin: 12px 0;
-      border: 2px solid #e8e8e8;
-      border-radius: 20px;
+      border: 2px solid #1a237e20;
+      border-radius: 25px;
       font-size: 16px;
       transition: all 0.3s;
       font-family: 'Poppins', sans-serif;
-      background: #f8f9fa;
+      background: #f0f4fc;
     }
 
     input:focus {
       outline: none;
       border-color: #1565c0;
-      box-shadow: 0 0 0 4px rgba(21,101,192,0.15);
       background: white;
+      box-shadow: 0 0 0 4px rgba(21,101,192,0.2);
     }
 
+    input::placeholder {
+      color: #1a237e80;
+      font-weight: 400;
+    }
+
+    /* BUTTON BIRU */
     button {
       width: 100%;
-      padding: 15px;
+      padding: 16px;
       margin-top: 15px;
       border: none;
-      border-radius: 25px;
+      border-radius: 30px;
       font-size: 16px;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all 0.3s ease;
       font-family: 'Poppins', sans-serif;
@@ -182,9 +197,9 @@
     }
 
     .btn-secondary {
-      background: linear-gradient(135deg, #eceff1, #e0e0e0);
+      background: linear-gradient(135deg, #e8eaf6, #c5cae9);
       color: #1a237e;
-      border: 1px solid #cfd8dc;
+      border: 1px solid #1a237e30;
     }
 
     .btn-vote {
@@ -215,7 +230,7 @@
       text-align: center;
       margin-top: 20px;
       padding: 12px;
-      border-radius: 15px;
+      border-radius: 20px;
       font-size: 14px;
       font-weight: 500;
     }
@@ -235,7 +250,7 @@
       color: #1565c0;
     }
 
-    /* GRID CALON */
+    /* CANDIDATES GRID */
     .candidates-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -249,7 +264,6 @@
       overflow: hidden;
       box-shadow: 0 15px 35px rgba(0,0,0,0.2);
       transition: all 0.4s ease;
-      animation: fadeInUp 0.5s ease;
     }
 
     .candidate-card:hover {
@@ -269,7 +283,7 @@
       background: linear-gradient(135deg, #1a237e, #283593);
       color: white;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
       margin: 0;
     }
 
@@ -295,7 +309,6 @@
       text-align: justify;
     }
 
-    /* WELCOME BANNER */
     .welcome-banner {
       background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
       border-radius: 25px;
@@ -303,7 +316,6 @@
       margin-bottom: 30px;
       text-align: center;
       box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      border: 1px solid rgba(255,255,255,0.5);
     }
 
     .welcome-banner h3 {
@@ -349,7 +361,6 @@
       min-width: 160px;
     }
 
-    /* CHART */
     .chart-container {
       background: white;
       border-radius: 25px;
@@ -363,7 +374,6 @@
       width: 100%;
     }
 
-    /* REKAP TABLE */
     .rekap-container {
       background: white;
       border-radius: 25px;
@@ -378,7 +388,7 @@
       background-clip: text;
       margin-bottom: 20px;
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 700;
     }
 
     .rekap-table {
@@ -397,7 +407,6 @@
       background: linear-gradient(135deg, #1a237e, #283593);
       color: white;
       font-weight: 600;
-      border-radius: 15px 15px 0 0;
     }
 
     .rekap-table tr:hover {
@@ -419,7 +428,6 @@
       font-size: 18px;
     }
 
-    /* STATS CARD */
     .stats-card {
       display: flex;
       justify-content: space-around;
@@ -452,46 +460,17 @@
       font-weight: 800;
     }
 
-    /* RESPONSIVE */
     @media (max-width: 768px) {
-      body {
-        padding: 15px;
-      }
-      
-      .candidates-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      
-      .header h1 {
-        font-size: 24px;
-      }
-      
-      .header h2 {
-        font-size: 18px;
-      }
-      
-      .card {
-        margin: 0 5px;
-        padding: 30px 22px;
-      }
-      
-      .stat-value {
-        font-size: 28px;
-      }
-      
-      .voting-control {
-        flex-direction: column;
-      }
-      
-      .voting-control button {
-        width: 100%;
-      }
-      
-      .admin-header {
-        flex-direction: column;
-        text-align: center;
-      }
+      body { padding: 15px; }
+      .candidates-grid { grid-template-columns: 1fr; gap: 20px; }
+      .header h1 { font-size: 24px; }
+      .header h2 { font-size: 18px; }
+      .card { margin: 0 5px; padding: 30px 22px; }
+      .stat-value { font-size: 28px; }
+      .voting-control { flex-direction: column; }
+      .voting-control button { width: 100%; }
+      .admin-header { flex-direction: column; text-align: center; }
+      .time-text { font-size: 16px; }
     }
   </style>
   <title>Voting Komite SMPN 2 Kawali</title>
@@ -499,10 +478,14 @@
 <body>
   <div class="container">
     <div class="header">
-      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://via.placeholder.com/110?text=Logo'">
+      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://via.placeholder.com/120?text=Logo'">
       <h1>PEMILIHAN KOMITE</h1>
       <h2>SMP NEGERI 2 KAWALI</h2>
       <p>TAHUN 2026</p>
+      <div class="datetime-container" id="datetimeDisplay">
+        <div class="date-text" id="dateText">Memuat...</div>
+        <div class="time-text" id="timeText">--:--:--</div>
+      </div>
     </div>
 
     <!-- FORM LOGIN PEMILIH -->
@@ -531,6 +514,9 @@
       <div class="welcome-banner">
         <h3>Selamat Datang, <span id="userName"></span>!</h3>
         <p>Silakan pilih salah satu calon komite di bawah ini dengan bijak</p>
+        <div class="datetime-container" style="background:#1a237e20; margin-top:10px;">
+          <div class="time-text" id="votingTimeText" style="font-size:14px;">--:--:--</div>
+        </div>
       </div>
       <div class="candidates-grid" id="candidatesGrid"></div>
       <button onclick="logout()" class="btn-secondary" style="margin-top: 25px;">← Keluar</button>
@@ -580,24 +566,37 @@
     let calonData = [];
     let hasilChart = null;
 
+    // ==================== REAL TIME CLOCK ====================
+    function updateRealTimeClock() {
+      const now = new Date();
+      const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        timeZone: 'Asia/Jakarta'
+      };
+      const tanggal = now.toLocaleDateString('id-ID', options);
+      const jam = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' });
+      
+      document.getElementById('dateText').innerHTML = tanggal;
+      document.getElementById('timeText').innerHTML = jam;
+      if (document.getElementById('votingTimeText')) {
+        document.getElementById('votingTimeText').innerHTML = jam;
+      }
+    }
+    setInterval(updateRealTimeClock, 1000);
+    updateRealTimeClock();
+
     // ==================== LOGIN PEMILIH ====================
     async function doLogin() {
       const nama = document.getElementById('nama').value.trim();
       const alamat = document.getElementById('alamat').value.trim();
       const password = document.getElementById('password').value;
 
-      if (!nama) {
-        showMessage('loginMessage', '⚠️ Nama lengkap harus diisi!', 'error');
-        return;
-      }
-      if (!alamat) {
-        showMessage('loginMessage', '⚠️ Alamat harus diisi!', 'error');
-        return;
-      }
-      if (!password) {
-        showMessage('loginMessage', '⚠️ Password harus diisi!', 'error');
-        return;
-      }
+      if (!nama) { showMessage('loginMessage', '⚠️ Nama lengkap harus diisi!', 'error'); return; }
+      if (!alamat) { showMessage('loginMessage', '⚠️ Alamat harus diisi!', 'error'); return; }
+      if (!password) { showMessage('loginMessage', '⚠️ Password harus diisi!', 'error'); return; }
 
       showMessage('loginMessage', '⏳ Memproses...', 'info');
       
@@ -610,9 +609,7 @@
             showMessage('loginMessage', res.message, 'error');
           }
         })
-        .withFailureHandler((err) => {
-          showMessage('loginMessage', 'Koneksi error. Coba lagi.', 'error');
-        })
+        .withFailureHandler(() => showMessage('loginMessage', 'Koneksi error. Coba lagi.', 'error'))
         .loginPemilih(nama, alamat, password);
     }
 
@@ -629,7 +626,6 @@
         logout();
         return;
       }
-
       loadCandidates();
     }
 
@@ -648,7 +644,6 @@
           calonData.forEach(calon => {
             const card = document.createElement('div');
             card.className = 'candidate-card';
-            
             card.innerHTML = `
               <img src="${calon.foto}" alt="${calon.nama}" onerror="this.src='https://via.placeholder.com/300x250?text=Gambar+Tidak+Tersedia'">
               <h4>${calon.nama}</h4>
@@ -741,16 +736,89 @@
         return;
       }
       
-      let html = '<table class="rekap-table">';
-      html += '<thead><tr><th>POSISI</th><th>NAMA CALON</th><th>SUARA</th><th>STATUS</th></tr></thead><tbody>';
-      
+      let html = '<table class="rekap-table"><thead><tr><th>POSISI</th><th>NAMA CALON</th><th>SUARA</th><th>STATUS</th></tr></thead><tbody>';
       hasil.forEach(calon => {
         html += `<tr>
           <td><strong>${calon.posisi || '−'}</strong></td>
           <td>${calon.nama}</td>
           <td><span class="vote-count">${calon.suara}</span> suara</td>
           <td>${calon.suara > 0 ? '✓' : '−'}</td>
-         </tr>`;
+        </tr>`;
       });
+      const total = hasil.reduce((sum, c) => sum + c.suara, 0);
+      html += `<tr class="total-row"><td colspan="2"><strong>📊 TOTAL SUARA</strong></td><td colspan="2"><strong>${total} suara</strong></td></tr>`;
+      html += '</tbody></table>';
+      container.innerHTML = html;
+    }
+
+    function updateChart(hasil) {
+      const ctx = document.getElementById('hasilChart').getContext('2d');
+      if (hasilChart) hasilChart.destroy();
+      if (!hasil || hasil.length === 0) return;
       
-      const total =
+      hasilChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: hasil.map(c => c.nama.length > 20 ? c.nama.substring(0, 20) + '...' : c.nama),
+          datasets: [{
+            label: 'Jumlah Suara',
+            data: hasil.map(c => c.suara),
+            backgroundColor: ['#1a237e', '#283593', '#1565c0', '#1976d2', '#1e88e5'],
+            borderRadius: 10,
+            barPercentage: 0.7
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: true,
+          plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: '📊 GRAFIK HASIL VOTING', font: { size: 14, weight: 'bold' } }
+          },
+          scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0 } } }
+        }
+      });
+    }
+
+    async function toggleVoting() {
+      const currentStatus = await google.script.run.getVotingStatus();
+      const newStatus = await google.script.run.setVotingStatus(!currentStatus);
+      const toggleBtn = document.getElementById('toggleVotingBtn');
+      toggleBtn.innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+      toggleBtn.className = newStatus ? 'btn-danger' : 'btn-success';
+      alert(newStatus ? '✅ Voting sekarang BUKA' : '❌ Voting sekarang TUTUP');
+    }
+
+    async function resetVoting() {
+      const confirmReset = confirm('⚠️ PERINGATAN! ⚠️\n\nAnda yakin ingin mereset SEMUA data voting?\n\nSemua suara akan hilang dan tidak dapat dikembalikan!');
+      if (confirmReset) {
+        await google.script.run.resetVoting();
+        alert('✅ Voting berhasil direset!');
+        loadAdminData();
+      }
+    }
+
+    function logout() {
+      currentUser = null;
+      document.getElementById('votingPanel').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('nama').value = '';
+      document.getElementById('alamat').value = '';
+      document.getElementById('password').value = '';
+    }
+
+    function adminLogout() {
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+    }
+
+    function showMessage(elementId, message, type) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      el.innerText = message;
+      el.className = `message ${type}`;
+      setTimeout(() => { if (el) { el.innerText = ''; el.className = 'message'; } }, 3000);
+    }
+  </script>
+</body>
+</html>
