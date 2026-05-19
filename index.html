@@ -1,591 +1,271 @@
 <!DOCTYPE html>
-<html lang="id">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>E-Voting Komite SMPN 2 Kawali</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-            padding: 30px;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .header h1 {
-            color: #333;
-            font-size: 28px;
-        }
-
-        .header p {
-            color: #666;
-            margin-top: 10px;
-        }
-
-        /* Tab Styles */
-        .tabs {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #e0e0e0;
-        }
-
-        .tab {
-            padding: 12px 24px;
-            background: none;
-            border: none;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: #666;
-            font-weight: 600;
-        }
-
-        .tab.active {
-            color: #667eea;
-            border-bottom: 3px solid #667eea;
-        }
-
-        /* Form Styles */
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #333;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: border 0.3s;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            width: 100%;
-            font-weight: 600;
-        }
-
-        button:hover {
-            transform: translateY(-2px);
-        }
-
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        /* Candidate Cards */
-        .candidates-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .candidate-card {
-            border: 2px solid #e0e0e0;
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .candidate-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .candidate-card.selected {
-            border-color: #667eea;
-            background: #f0f0ff;
-        }
-
-        .candidate-number {
-            background: #667eea;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        .candidate-name {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-
-        .candidate-vision {
-            color: #666;
-            font-size: 14px;
-            margin-top: 10px;
-        }
-
-        /* Alert Styles */
-        .alert {
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-        }
-
-        .alert.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        .alert.info {
-            background: #d1ecf1;
-            color: #0c5460;
-            border: 1px solid #bee5eb;
-        }
-
-        /* Result Table */
-        .result-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .result-table th, .result-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .result-table th {
-            background: #f5f5f5;
-            font-weight: 600;
-        }
-
-        .progress-bar {
-            background: #e0e0e0;
-            border-radius: 10px;
-            overflow: hidden;
-            height: 30px;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 12px;
-            transition: width 0.5s;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .admin-panel {
-            margin-top: 30px;
-            padding-top: 30px;
-            border-top: 2px solid #e0e0e0;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .status-open {
-            background: #d4edda;
-            color: #155724;
-        }
-
-        .status-closed {
-            background: #f8d7da;
-            color: #721c24;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 20px;
-            }
-            .tabs {
-                flex-direction: column;
-            }
-        }
-    </style>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?!= include('styles'); ?>
+  <title>Voting Komite SMPN 2 Kawali</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <h1>🗳️ E-Voting Komite SMPN 2 Kawali</h1>
-            <p>Pemilihan Ketua Komite Sekolah Periode 2024-2026</p>
-        </div>
-
-        <div class="tabs">
-            <button class="tab active" onclick="showTab('voter')">👤 Pemilih</button>
-            <button class="tab" onclick="showTab('admin')">🔐 Admin</button>
-        </div>
-
-        <!-- Alert Container -->
-        <div id="alert" class="alert"></div>
-
-        <!-- Voter Panel -->
-        <div id="voterPanel">
-            <div id="loginForm">
-                <h3>Login Pemilih</h3>
-                <div class="form-group">
-                    <label>Nomor Induk Pemilih (NIS/NIP)</label>
-                    <input type="text" id="voterId" placeholder="Masukkan NIS/NIP Anda">
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="voterPassword" placeholder="Masukkan password">
-                </div>
-                <button onclick="loginVoter()">Login & Voting</button>
-            </div>
-
-            <div id="votingForm" class="hidden">
-                <h3>Pilih Calon Ketua Komite</h3>
-                <div id="candidatesList" class="candidates-grid"></div>
-                <div class="form-group" style="margin-top: 20px;">
-                    <button id="submitVoteBtn" onclick="submitVote()" disabled>Konfirmasi Pilihan</button>
-                </div>
-                <button onclick="logoutVoter()" style="background: #6c757d; margin-top: 10px;">Logout</button>
-            </div>
-
-            <div id="voterResultInfo" class="hidden">
-                <div class="alert success" style="display: block;">
-                    ✅ Terima kasih! Anda sudah memberikan suara.
-                </div>
-                <button onclick="logoutVoter()" style="background: #6c757d;">Logout</button>
-            </div>
-        </div>
-
-        <!-- Admin Panel -->
-        <div id="adminPanel" class="hidden">
-            <div id="adminLoginForm">
-                <h3>Login Admin</h3>
-                <div class="form-group">
-                    <label>Username Admin</label>
-                    <input type="text" id="adminUser" placeholder="Username">
-                </div>
-                <div class="form-group">
-                    <label>Password Admin</label>
-                    <input type="password" id="adminPass" placeholder="Password">
-                </div>
-                <button onclick="loginAdmin()">Login Admin</button>
-            </div>
-
-            <div id="adminDashboard" class="hidden">
-                <div id="votingStatusPanel" style="margin-bottom: 20px;">
-                    <h4>Status Voting: <span id="votingStatusLabel">-</span></h4>
-                    <button id="toggleVotingBtn" onclick="toggleVotingStatus()" class="button"></button>
-                </div>
-
-                <h3>Hasil Voting Sementara</h3>
-                <div id="resultsContainer"></div>
-
-                <div class="admin-panel">
-                    <h3>Manajemen Data</h3>
-                    <button onclick="resetVoting()" style="background: #dc3545; margin-top: 10px;">Reset Semua Data Voting</button>
-                    <button onclick="exportResults()" style="background: #28a745; margin-top: 10px;">Export Hasil ke CSV</button>
-                </div>
-
-                <button onclick="logoutAdmin()" style="background: #6c757d; margin-top: 20px;">Logout Admin</button>
-            </div>
-        </div>
+  <div class="container">
+    <div class="header">
+      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo">
+      <h1>PEMILIHAN KOMITE</h1>
+      <h2>SMP NEGERI 2 KAWALI</h2>
+      <p>Tahun 2026</p>
     </div>
 
-    <script>
-        let currentVoter = null;
-        let currentAdmin = false;
-        let selectedCandidate = null;
-        let votingStatus = false;
+    <div id="loginForm" class="card">
+      <h3>🔐 LOGIN PEMILIH</h3>
+      <input type="text" id="nama" placeholder="Nama Lengkap" required>
+      <input type="text" id="alamat" placeholder="Alamat" required>
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="doLogin()" class="btn-primary">MASUK</button>
+      <div id="loginMessage" class="message"></div>
+    </div>
 
-        // Show tab
-        window.showTab = function(tab) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            if(tab === 'voter') {
-                document.getElementById('voterPanel').style.display = 'block';
-                document.getElementById('adminPanel').classList.add('hidden');
-                document.getElementById('adminPanel').style.display = 'none';
-            } else {
-                document.getElementById('voterPanel').style.display = 'none';
-                document.getElementById('adminPanel').classList.remove('hidden');
-                document.getElementById('adminPanel').style.display = 'block';
-            }
-        };
+    <div id="votingPanel" style="display:none;">
+      <div class="welcome-banner">
+        <h3>Selamat Datang, <span id="userName"></span>!</h3>
+      </div>
+      <div class="candidates-grid" id="candidatesGrid"></div>
+    </div>
 
-        // Show alert
-        function showAlert(message, type) {
-            const alertDiv = document.getElementById('alert');
-            alertDiv.className = `alert ${type}`;
-            alertDiv.innerHTML = message;
-            alertDiv.style.display = 'block';
-            setTimeout(() => {
-                alertDiv.style.display = 'none';
-            }, 3000);
+    <div id="adminPanel" style="display:none;">
+      <div class="admin-header">
+        <h3>📊 Panel Admin</h3>
+        <button onclick="logout()" class="btn-logout">Keluar</button>
+      </div>
+      
+      <div class="voting-control">
+        <button id="toggleVotingBtn" class="btn-control" onclick="toggleVoting()">Loading...</button>
+        <button onclick="resetVoting()" class="btn-danger">Reset Voting</button>
+      </div>
+
+      <div id="diagramContainer" class="chart-container">
+        <canvas id="hasilChart"></canvas>
+      </div>
+
+      <div class="rekap-suara" id="rekapSuara"></div>
+    </div>
+
+    <div id="adminLoginForm" class="card" style="display:none;">
+      <h3>👑 LOGIN ADMIN</h3>
+      <input type="text" id="adminUser" placeholder="Username">
+      <input type="password" id="adminPass" placeholder="Password">
+      <button onclick="doAdminLogin()" class="btn-primary">MASUK SEBAGAI ADMIN</button>
+      <div id="adminMessage" class="message"></div>
+      <button onclick="showPemilihLogin()" class="btn-secondary">← Kembali ke Login Pemilih</button>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    let currentUser = null;
+    let calonData = [];
+    let hasilChart = null;
+
+    // ==================== LOGIN PEMILIH ====================
+    async function doLogin() {
+      const nama = document.getElementById('nama').value.trim();
+      const alamat = document.getElementById('alamat').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (!nama || !alamat) {
+        showMessage('loginMessage', 'Lengkapi nama dan alamat!', 'error');
+        return;
+      }
+
+      const result = await google.script.run.withSuccessHandler((res) => {
+        if (res.success) {
+          currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
+          showVotingPanel();
+        } else {
+          showMessage('loginMessage', res.message, 'error');
         }
+      }).loginPemilih(nama, alamat, password);
+    }
 
-        // Login Voter
-        window.loginVoter = function() {
-            const voterId = document.getElementById('voterId').value;
-            const password = document.getElementById('voterPassword').value;
-            
-            if(!voterId || !password) {
-                showAlert('Harap isi NIS/NIP dan password!', 'error');
-                return;
-            }
+    async function showVotingPanel() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('adminLoginForm').style.display = 'none';
+      document.getElementById('votingPanel').style.display = 'block';
+      document.getElementById('userName').innerText = currentUser.nama;
 
-            google.script.run.withSuccessHandler(function(result) {
-                if(result.success) {
-                    currentVoter = result.data;
-                    checkVoterStatus();
-                } else {
-                    showAlert(result.message, 'error');
-                }
-            }).loginVoter(voterId, password);
-        };
-
-        function checkVoterStatus() {
-            google.script.run.withSuccessHandler(function(hasVoted) {
-                if(hasVoted) {
-                    document.getElementById('loginForm').classList.add('hidden');
-                    document.getElementById('votingForm').classList.add('hidden');
-                    document.getElementById('voterResultInfo').classList.remove('hidden');
-                } else {
-                    loadCandidates();
-                    document.getElementById('loginForm').classList.add('hidden');
-                    document.getElementById('votingForm').classList.remove('hidden');
-                    document.getElementById('voterResultInfo').classList.add('hidden');
-                }
-            }).checkVoterStatus(currentVoter.id);
+      const status = await google.script.run.withSuccessHandler((isOpen) => {
+        if (!isOpen) {
+          showMessage('loginMessage', 'Voting sedang ditutup!', 'error');
+          setTimeout(() => logout(), 2000);
         }
+      }).getVotingStatus();
 
-        function loadCandidates() {
-            google.script.run.withSuccessHandler(function(candidates) {
-                const container = document.getElementById('candidatesList');
-                container.innerHTML = '';
-                candidates.forEach(candidate => {
-                    const card = document.createElement('div');
-                    card.className = 'candidate-card';
-                    card.onclick = () => selectCandidate(candidate.id);
-                    card.innerHTML = `
-                        <div class="candidate-number">${candidate.nomor_urut}</div>
-                        <div class="candidate-name">${candidate.nama}</div>
-                        <div class="candidate-vision">${candidate.visi_misi.substring(0, 100)}...</div>
-                    `;
-                    container.appendChild(card);
-                });
-            }).getCandidates();
+      loadCandidates();
+    }
+
+    async function loadCandidates() {
+      calonData = await google.script.run.withSuccessHandler((data) => {
+        const grid = document.getElementById('candidatesGrid');
+        grid.innerHTML = '';
+        
+        data.forEach(calon => {
+          const card = document.createElement('div');
+          card.className = 'candidate-card';
+          card.innerHTML = `
+            <img src="${calon.foto.replace('thumbnail?id=', 'uc?export=view&id=').replace('&sz=w1000', '')}" alt="${calon.nama}">
+            <h4>${calon.nama}</h4>
+            <div class="visi-misi">
+              <strong>Visi:</strong>
+              <p>${calon.visi}</p>
+              <strong>Misi:</strong>
+              <p>${calon.misi}</p>
+            </div>
+            <button onclick="vote(${calon.id})" class="btn-vote">🗳️ PILIH</button>
+          `;
+          grid.appendChild(card);
+        });
+      }).getCalon();
+    }
+
+    async function vote(calonId) {
+      const result = await google.script.run.withSuccessHandler((res) => {
+        if (res.success) {
+          alert(res.message);
+          logout();
+        } else {
+          alert(res.message);
         }
+      }).vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
+    }
 
-        window.selectCandidate = function(candidateId) {
-            selectedCandidate = candidateId;
-            document.querySelectorAll('.candidate-card').forEach(card => {
-                card.classList.remove('selected');
-            });
-            event.target.closest('.candidate-card').classList.add('selected');
-            document.getElementById('submitVoteBtn').disabled = false;
-        };
+    // ==================== LOGIN ADMIN ====================
+    function showAdminLogin() {
+      document.getElementById('loginForm').style.display = 'none';
+      document.getElementById('adminLoginForm').style.display = 'block';
+    }
 
-        window.submitVote = function() {
-            if(!selectedCandidate) {
-                showAlert('Pilih calon terlebih dahulu!', 'error');
-                return;
-            }
-            
-            if(confirm('Apakah Anda yakin dengan pilihan Anda? Suara tidak dapat diubah!')) {
-                google.script.run.withSuccessHandler(function(result) {
-                    if(result.success) {
-                        showAlert('Terima kasih! Suara Anda telah tersimpan.', 'success');
-                        document.getElementById('votingForm').classList.add('hidden');
-                        document.getElementById('voterResultInfo').classList.remove('hidden');
-                    } else {
-                        showAlert(result.message, 'error');
-                    }
-                }).submitVote(currentVoter.id, selectedCandidate);
-            }
-        };
+    function showPemilihLogin() {
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('adminLoginForm').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'none';
+    }
 
-        window.logoutVoter = function() {
-            currentVoter = null;
-            selectedCandidate = null;
-            document.getElementById('loginForm').classList.remove('hidden');
-            document.getElementById('votingForm').classList.add('hidden');
-            document.getElementById('voterResultInfo').classList.add('hidden');
-            document.getElementById('voterId').value = '';
-            document.getElementById('voterPassword').value = '';
-        };
+    async function doAdminLogin() {
+      const username = document.getElementById('adminUser').value;
+      const password = document.getElementById('adminPass').value;
 
-        // Admin functions
-        window.loginAdmin = function() {
-            const username = document.getElementById('adminUser').value;
-            const password = document.getElementById('adminPass').value;
-            
-            google.script.run.withSuccessHandler(function(result) {
-                if(result.success) {
-                    currentAdmin = true;
-                    document.getElementById('adminLoginForm').classList.add('hidden');
-                    document.getElementById('adminDashboard').classList.remove('hidden');
-                    loadAdminData();
-                } else {
-                    showAlert('Username atau password admin salah!', 'error');
-                }
-            }).loginAdmin(username, password);
-        };
+      const result = await google.script.run.loginAdmin(username, password);
+      if (result.success) {
+        document.getElementById('adminLoginForm').style.display = 'none';
+        document.getElementById('adminPanel').style.display = 'block';
+        loadAdminData();
+      } else {
+        showMessage('adminMessage', 'Username atau password salah!', 'error');
+      }
+    }
 
-        function loadAdminData() {
-            loadVotingResults();
-            loadVotingStatus();
+    async function loadAdminData() {
+      // Load status voting
+      const status = await google.script.run.getVotingStatus();
+      const toggleBtn = document.getElementById('toggleVotingBtn');
+      toggleBtn.innerText = status ? 'Tutup Voting' : 'Buka Voting';
+      toggleBtn.className = status ? 'btn-danger' : 'btn-success';
+      
+      // Load hasil
+      const hasil = await google.script.run.getHasilVoting();
+      updateRekap(hasil);
+      updateChart(hasil);
+    }
+
+    function updateRekap(hasil) {
+      const container = document.getElementById('rekapSuara');
+      let html = '<table class="rekap-table"><tr><th>Posisi</th><th>Nama Calon</th><th>Jumlah Suara</th></tr>';
+      
+      hasil.forEach(calon => {
+        html += `<tr>
+          <td><strong>${calon.posisi || '-'}</strong></td>
+          <td>${calon.nama}</td>
+          <td>${calon.suara} suara</td>
+        </tr>`;
+      });
+      
+      // Tambahkan total suara
+      const total = hasil.reduce((sum, c) => sum + c.suara, 0);
+      html += `<tr class="total-row"><td colspan="2"><strong>Total Suara</strong></td><td><strong>${total}</strong></td></tr>`;
+      html += '</table>';
+      
+      container.innerHTML = html;
+    }
+
+    function updateChart(hasil) {
+      const ctx = document.getElementById('hasilChart').getContext('2d');
+      if (hasilChart) hasilChart.destroy();
+      
+      hasilChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: hasil.map(c => c.nama.split(' ')[0]),
+          datasets: [{
+            label: 'Jumlah Suara',
+            data: hasil.map(c => c.suara),
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderRadius: 8
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { position: 'top' },
+            title: { display: true, text: 'Grafik Hasil Voting' }
+          }
         }
+      });
+    }
 
-        function loadVotingResults() {
-            google.script.run.withSuccessHandler(function(results) {
-                const container = document.getElementById('resultsContainer');
-                if(results.length === 0) {
-                    container.innerHTML = '<p>Belum ada data voting.</p>';
-                    return;
-                }
-                
-                let totalVotes = results.reduce((sum, r) => sum + r.jumlah_suara, 0);
-                let html = '<table class="result-table"><thead><tr><th>No Urut</th><th>Nama Calon</th><th>Suara</th><th>Persentase</th></tr></thead><tbody>';
-                
-                results.forEach(result => {
-                    let percentage = totalVotes > 0 ? (result.jumlah_suara / totalVotes * 100).toFixed(1) : 0;
-                    html += `
-                        <tr>
-                            <td>${result.nomor_urut}</td>
-                            <td>${result.nama}</td>
-                            <td>${result.jumlah_suara}</td>
-                            <td>
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: ${percentage}%">${percentage}%</div>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                });
-                html += '</tbody></table>';
-                container.innerHTML = html;
-            }).getVotingResults();
-        }
+    async function toggleVoting() {
+      const status = await google.script.run.getVotingStatus();
+      const newStatus = await google.script.run.setVotingStatus(!status);
+      loadAdminData();
+    }
 
-        function loadVotingStatus() {
-            google.script.run.withSuccessHandler(function(status) {
-                votingStatus = status;
-                const statusSpan = document.getElementById('votingStatusLabel');
-                const toggleBtn = document.getElementById('toggleVotingBtn');
-                
-                if(status) {
-                    statusSpan.innerHTML = '<span class="status-badge status-open">🔓 Terbuka</span>';
-                    toggleBtn.innerHTML = '🔒 Tutup Voting';
-                    toggleBtn.style.background = '#dc3545';
-                } else {
-                    statusSpan.innerHTML = '<span class="status-badge status-closed">🔒 Tertutup</span>';
-                    toggleBtn.innerHTML = '🔓 Buka Voting';
-                    toggleBtn.style.background = '#28a745';
-                }
-            }).getVotingStatus();
-        }
+    async function resetVoting() {
+      if (confirm('Yakin ingin mereset semua data voting? Tindakan ini tidak dapat dibatalkan!')) {
+        await google.script.run.resetVoting();
+        loadAdminData();
+        alert('Voting berhasil direset!');
+      }
+    }
 
-        window.toggleVotingStatus = function() {
-            google.script.run.withSuccessHandler(function(result) {
-                if(result.success) {
-                    showAlert(`Voting ${result.status ? 'dibuka' : 'ditutup'}!`, 'success');
-                    loadVotingStatus();
-                }
-            }).toggleVotingStatus();
-        };
+    function logout() {
+      currentUser = null;
+      document.getElementById('votingPanel').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('nama').value = '';
+      document.getElementById('alamat').value = '';
+      document.getElementById('password').value = '';
+    }
 
-        window.resetVoting = function() {
-            if(confirm('PERINGATAN! Tindakan ini akan menghapus SEMUA data voting. Lanjutkan?')) {
-                google.script.run.withSuccessHandler(function(result) {
-                    if(result.success) {
-                        showAlert('Semua data voting telah direset!', 'success');
-                        loadAdminData();
-                    }
-                }).resetAllVotingData();
-            }
-        };
+    function showMessage(elementId, message, type) {
+      const el = document.getElementById(elementId);
+      el.innerText = message;
+      el.className = `message ${type}`;
+      setTimeout(() => {
+        el.innerText = '';
+        el.className = 'message';
+      }, 3000);
+    }
 
-        window.exportResults = function() {
-            google.script.run.withSuccessHandler(function(csvContent) {
-                const blob = new Blob([csvContent], {type: 'text/csv'});
-                const link = document.createElement('a');
-                const url = URL.createObjectURL(blob);
-                link.href = url;
-                link.download = `hasil_voting_${new Date().toISOString().slice(0,19)}.csv`;
-                link.click();
-                URL.revokeObjectURL(url);
-            }).exportResultsToCSV();
-        };
-
-        window.logoutAdmin = function() {
-            currentAdmin = false;
-            document.getElementById('adminLoginForm').classList.remove('hidden');
-            document.getElementById('adminDashboard').classList.add('hidden');
-            document.getElementById('adminUser').value = '';
-            document.getElementById('adminPass').value = '';
-        };
-    </script>
+    // Tambahkan tombol admin di halaman login
+    document.addEventListener('DOMContentLoaded', () => {
+      const loginDiv = document.getElementById('loginForm');
+      const adminBtn = document.createElement('button');
+      adminBtn.innerText = 'Login sebagai Admin';
+      adminBtn.className = 'btn-secondary';
+      adminBtn.onclick = showAdminLogin;
+      adminBtn.style.marginTop = '10px';
+      loginDiv.appendChild(adminBtn);
+    });
+  </script>
 </body>
 </html>
