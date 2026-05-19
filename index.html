@@ -3,64 +3,89 @@
 <head>
   <base target="_top">
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <?!= include('styles'); ?>
   <title>Voting Komite SMPN 2 Kawali</title>
 </head>
 <body>
   <div class="container">
     <div class="header">
-      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo">
+      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://via.placeholder.com/100'">
       <h1>PEMILIHAN KOMITE</h1>
       <h2>SMP NEGERI 2 KAWALI</h2>
       <p>Tahun 2026</p>
     </div>
 
+    <!-- FORM LOGIN PEMILIH -->
     <div id="loginForm" class="card">
       <h3>🔐 LOGIN PEMILIH</h3>
       <input type="text" id="nama" placeholder="Nama Lengkap" required>
       <input type="text" id="alamat" placeholder="Alamat" required>
-      <input type="password" id="password" placeholder="Password">
-      <button onclick="doLogin()" class="btn-primary">MASUK</button>
+      <input type="password" id="password" placeholder="Password (voting2026)" required>
+      <button onclick="doLogin()" class="btn-primary">✅ MASUK</button>
       <div id="loginMessage" class="message"></div>
+      <button onclick="showAdminLogin()" class="btn-secondary" style="margin-top: 10px;">👑 Login sebagai Admin</button>
     </div>
 
-    <div id="votingPanel" style="display:none;">
-      <div class="welcome-banner">
-        <h3>Selamat Datang, <span id="userName"></span>!</h3>
-      </div>
-      <div class="candidates-grid" id="candidatesGrid"></div>
-    </div>
-
-    <div id="adminPanel" style="display:none;">
-      <div class="admin-header">
-        <h3>📊 Panel Admin</h3>
-        <button onclick="logout()" class="btn-logout">Keluar</button>
-      </div>
-      
-      <div class="voting-control">
-        <button id="toggleVotingBtn" class="btn-control" onclick="toggleVoting()">Loading...</button>
-        <button onclick="resetVoting()" class="btn-danger">Reset Voting</button>
-      </div>
-
-      <div id="diagramContainer" class="chart-container">
-        <canvas id="hasilChart"></canvas>
-      </div>
-
-      <div class="rekap-suara" id="rekapSuara"></div>
-    </div>
-
+    <!-- FORM LOGIN ADMIN -->
     <div id="adminLoginForm" class="card" style="display:none;">
       <h3>👑 LOGIN ADMIN</h3>
-      <input type="text" id="adminUser" placeholder="Username">
-      <input type="password" id="adminPass" placeholder="Password">
+      <input type="text" id="adminUser" placeholder="Username" required>
+      <input type="password" id="adminPass" placeholder="Password" required>
       <button onclick="doAdminLogin()" class="btn-primary">MASUK SEBAGAI ADMIN</button>
       <div id="adminMessage" class="message"></div>
       <button onclick="showPemilihLogin()" class="btn-secondary">← Kembali ke Login Pemilih</button>
     </div>
+
+    <!-- PANEL VOTING PEMILIH -->
+    <div id="votingPanel" style="display:none;">
+      <div class="welcome-banner">
+        <h3>Selamat Datang, <span id="userName"></span>!</h3>
+        <p>Silakan pilih salah satu calon komite di bawah ini:</p>
+      </div>
+      <div class="candidates-grid" id="candidatesGrid"></div>
+      <button onclick="logout()" class="btn-secondary" style="margin-top: 20px;">← Keluar</button>
+    </div>
+
+    <!-- PANEL ADMIN -->
+    <div id="adminPanel" style="display:none;">
+      <div class="admin-header">
+        <h3>📊 DASHBOARD ADMIN</h3>
+        <button onclick="adminLogout()" class="btn-logout">Keluar</button>
+      </div>
+      
+      <div class="stats-card" id="statsCard">
+        <div class="stat-item">
+          <span class="stat-label">📊 Total Pemilih Terdaftar</span>
+          <span class="stat-value" id="totalPemilih">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">✅ Total Suara Masuk</span>
+          <span class="stat-value" id="totalSuara">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">📈 Partisipasi</span>
+          <span class="stat-value" id="persentase">0%</span>
+        </div>
+      </div>
+
+      <div class="voting-control">
+        <button id="toggleVotingBtn" class="btn-control" onclick="toggleVoting()">Loading...</button>
+        <button onclick="resetVoting()" class="btn-danger">🔄 Reset Voting</button>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="hasilChart"></canvas>
+      </div>
+
+      <div class="rekap-container">
+        <h4>🏆 HASIL REKAP SUARA</h4>
+        <div id="rekapSuara"></div>
+      </div>
+    </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script>
     let currentUser = null;
     let calonData = [];
@@ -72,76 +97,115 @@
       const alamat = document.getElementById('alamat').value.trim();
       const password = document.getElementById('password').value;
 
-      if (!nama || !alamat) {
-        showMessage('loginMessage', 'Lengkapi nama dan alamat!', 'error');
+      if (!nama) {
+        showMessage('loginMessage', '⚠️ Nama lengkap harus diisi!', 'error');
+        return;
+      }
+      if (!alamat) {
+        showMessage('loginMessage', '⚠️ Alamat harus diisi!', 'error');
+        return;
+      }
+      if (!password) {
+        showMessage('loginMessage', '⚠️ Password harus diisi!', 'error');
         return;
       }
 
-      const result = await google.script.run.withSuccessHandler((res) => {
-        if (res.success) {
-          currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
-          showVotingPanel();
-        } else {
-          showMessage('loginMessage', res.message, 'error');
-        }
-      }).loginPemilih(nama, alamat, password);
+      showMessage('loginMessage', '⏳ Memproses...', 'info');
+      
+      try {
+        const result = await google.script.run.withSuccessHandler((res) => {
+          if (res.success) {
+            currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
+            showVotingPanel();
+          } else {
+            showMessage('loginMessage', res.message, 'error');
+          }
+        }).withFailureHandler((err) => {
+          showMessage('loginMessage', 'Koneksi error. Coba lagi.', 'error');
+        }).loginPemilih(nama, alamat, password);
+      } catch(e) {
+        showMessage('loginMessage', 'Error: ' + e.message, 'error');
+      }
     }
 
     async function showVotingPanel() {
       document.getElementById('loginForm').style.display = 'none';
       document.getElementById('adminLoginForm').style.display = 'none';
+      document.getElementById('adminPanel').style.display = 'none';
       document.getElementById('votingPanel').style.display = 'block';
       document.getElementById('userName').innerText = currentUser.nama;
 
-      const status = await google.script.run.withSuccessHandler((isOpen) => {
-        if (!isOpen) {
-          showMessage('loginMessage', 'Voting sedang ditutup!', 'error');
-          setTimeout(() => logout(), 2000);
-        }
-      }).getVotingStatus();
+      // Cek status voting
+      const isOpen = await google.script.run.getVotingStatus();
+      if (!isOpen) {
+        alert('⚠️ Voting sedang ditutup oleh admin. Silakan coba lagi nanti.');
+        logout();
+        return;
+      }
 
       loadCandidates();
     }
 
     async function loadCandidates() {
-      calonData = await google.script.run.withSuccessHandler((data) => {
+      try {
+        calonData = await google.script.run.getCalon();
         const grid = document.getElementById('candidatesGrid');
         grid.innerHTML = '';
         
-        data.forEach(calon => {
+        if (calonData.length === 0) {
+          grid.innerHTML = '<p style="text-align:center;color:white;">Data calon belum tersedia</p>';
+          return;
+        }
+        
+        calonData.forEach(calon => {
           const card = document.createElement('div');
           card.className = 'candidate-card';
+          // Fix Google Drive image URL
+          let fotoUrl = calon.foto;
+          if (fotoUrl.includes('thumbnail?id=')) {
+            fotoUrl = fotoUrl.replace('thumbnail?id=', 'uc?export=view&id=').replace('&sz=w1000', '');
+          } else if (fotoUrl.includes('drive.google.com')) {
+            const match = fotoUrl.match(/id=([a-zA-Z0-9_-]+)/);
+            if (match) fotoUrl = `https://drive.google.com/uc?export=view&id=${match[1]}`;
+          }
+          
           card.innerHTML = `
-            <img src="${calon.foto.replace('thumbnail?id=', 'uc?export=view&id=').replace('&sz=w1000', '')}" alt="${calon.nama}">
+            <img src="${fotoUrl}" alt="${calon.nama}" onerror="this.src='https://via.placeholder.com/300x250?text=Gambar+Tidak+Tersedia'">
             <h4>${calon.nama}</h4>
             <div class="visi-misi">
-              <strong>Visi:</strong>
-              <p>${calon.visi}</p>
-              <strong>Misi:</strong>
-              <p>${calon.misi}</p>
+              <strong>🌟 Visi:</strong>
+              <p>${calon.visi.substring(0, 150)}${calon.visi.length > 150 ? '...' : ''}</p>
+              <strong>📌 Misi:</strong>
+              <p>${calon.misi.substring(0, 150)}${calon.misi.length > 150 ? '...' : ''}</p>
             </div>
-            <button onclick="vote(${calon.id})" class="btn-vote">🗳️ PILIH</button>
+            <button onclick="vote(${calon.id})" class="btn-vote">🗳️ PILIH CALON INI</button>
           `;
           grid.appendChild(card);
         });
-      }).getCalon();
+      } catch(e) {
+        console.error(e);
+      }
     }
 
     async function vote(calonId) {
-      const result = await google.script.run.withSuccessHandler((res) => {
-        if (res.success) {
-          alert(res.message);
-          logout();
-        } else {
-          alert(res.message);
-        }
-      }).vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
+      const confirmVote = confirm(`Anda yakin ingin memilih calon ini?\n\nSuara Anda tidak dapat diubah setelah dipilih.`);
+      if (!confirmVote) return;
+      
+      const result = await google.script.run.vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
+      if (result.success) {
+        alert('✅ ' + result.message);
+        logout();
+      } else {
+        alert('❌ ' + result.message);
+      }
     }
 
     // ==================== LOGIN ADMIN ====================
     function showAdminLogin() {
       document.getElementById('loginForm').style.display = 'none';
       document.getElementById('adminLoginForm').style.display = 'block';
+      document.getElementById('adminUser').value = '';
+      document.getElementById('adminPass').value = '';
     }
 
     function showPemilihLogin() {
@@ -154,6 +218,11 @@
       const username = document.getElementById('adminUser').value;
       const password = document.getElementById('adminPass').value;
 
+      if (!username || !password) {
+        showMessage('adminMessage', 'Isi username dan password!', 'error');
+        return;
+      }
+
       const result = await google.script.run.loginAdmin(username, password);
       if (result.success) {
         document.getElementById('adminLoginForm').style.display = 'none';
@@ -165,34 +234,51 @@
     }
 
     async function loadAdminData() {
-      // Load status voting
-      const status = await google.script.run.getVotingStatus();
-      const toggleBtn = document.getElementById('toggleVotingBtn');
-      toggleBtn.innerText = status ? 'Tutup Voting' : 'Buka Voting';
-      toggleBtn.className = status ? 'btn-danger' : 'btn-success';
-      
-      // Load hasil
-      const hasil = await google.script.run.getHasilVoting();
-      updateRekap(hasil);
-      updateChart(hasil);
+      try {
+        // Load status voting
+        const status = await google.script.run.getVotingStatus();
+        const toggleBtn = document.getElementById('toggleVotingBtn');
+        toggleBtn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+        toggleBtn.className = status ? 'btn-danger' : 'btn-success';
+        
+        // Load statistik
+        const stat = await google.script.run.getStatistik();
+        document.getElementById('totalPemilih').innerText = stat.totalPemilih;
+        document.getElementById('totalSuara').innerText = stat.totalSuara;
+        document.getElementById('persentase').innerText = stat.persentase + '%';
+        
+        // Load hasil
+        const hasil = await google.script.run.getHasilVoting();
+        updateRekap(hasil);
+        updateChart(hasil);
+      } catch(e) {
+        console.error(e);
+      }
     }
 
     function updateRekap(hasil) {
       const container = document.getElementById('rekapSuara');
-      let html = '<table class="rekap-table"><tr><th>Posisi</th><th>Nama Calon</th><th>Jumlah Suara</th></tr>';
+      if (!hasil || hasil.length === 0) {
+        container.innerHTML = '<p style="text-align:center;">Belum ada suara masuk</p>';
+        return;
+      }
+      
+      let html = '<table class="rekap-table">';
+      html += '<thead><tr><th>Posisi</th><th>Nama Calon</th><th>Jumlah Suara</th><th>Status</th></tr></thead><tbody>';
       
       hasil.forEach(calon => {
-        html += `<tr>
-          <td><strong>${calon.posisi || '-'}</strong></td>
+        const isWinner = calon.posisi && calon.posisi.includes('Ketua');
+        html += `<tr class="${isWinner ? 'winner-row' : ''}">
+          <td><strong>${calon.posisi || '−'}</strong></td>
           <td>${calon.nama}</td>
-          <td>${calon.suara} suara</td>
+          <td><span class="vote-count">${calon.suara}</span> suara</td>
+          <td>${calon.suara > 0 ? '✓' : '−'}</td>
         </tr>`;
       });
       
-      // Tambahkan total suara
       const total = hasil.reduce((sum, c) => sum + c.suara, 0);
-      html += `<tr class="total-row"><td colspan="2"><strong>Total Suara</strong></td><td><strong>${total}</strong></td></tr>`;
-      html += '</table>';
+      html += `<tr class="total-row"><td colspan="2"><strong>📊 TOTAL SUARA</strong></td><td colspan="2"><strong>${total} suara</strong></td></tr>`;
+      html += '</tbody></table>';
       
       container.innerHTML = html;
     }
@@ -201,71 +287,92 @@
       const ctx = document.getElementById('hasilChart').getContext('2d');
       if (hasilChart) hasilChart.destroy();
       
+      if (!hasil || hasil.length === 0) {
+        return;
+      }
+      
       hasilChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: hasil.map(c => c.nama.split(' ')[0]),
+          labels: hasil.map(c => c.nama.length > 20 ? c.nama.substring(0, 20) + '...' : c.nama),
           datasets: [{
             label: 'Jumlah Suara',
             data: hasil.map(c => c.suara),
-            backgroundColor: 'rgba(54, 162, 235, 0.7)',
-            borderRadius: 8
+            backgroundColor: ['#1a237e', '#283593', '#1565c0', '#1976d2', '#1e88e5'],
+            borderRadius: 8,
+            barPercentage: 0.7
           }]
         },
         options: {
           responsive: true,
+          maintainAspectRatio: true,
           plugins: {
             legend: { position: 'top' },
-            title: { display: true, text: 'Grafik Hasil Voting' }
+            title: { display: true, text: '📊 GRAFIK HASIL VOTING', font: { size: 14 } }
+          },
+          scales: {
+            y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0 } }
           }
         }
       });
     }
 
     async function toggleVoting() {
-      const status = await google.script.run.getVotingStatus();
-      const newStatus = await google.script.run.setVotingStatus(!status);
-      loadAdminData();
+      const currentStatus = await google.script.run.getVotingStatus();
+      const newStatus = await google.script.run.setVotingStatus(!currentStatus);
+      const toggleBtn = document.getElementById('toggleVotingBtn');
+      toggleBtn.innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+      toggleBtn.className = newStatus ? 'btn-danger' : 'btn-success';
+      alert(newStatus ? '✅ Voting sekarang BUKA' : '❌ Voting sekarang TUTUP');
     }
 
     async function resetVoting() {
-      if (confirm('Yakin ingin mereset semua data voting? Tindakan ini tidak dapat dibatalkan!')) {
-        await google.script.run.resetVoting();
-        loadAdminData();
-        alert('Voting berhasil direset!');
+      const confirmReset = confirm('⚠️ PERINGATAN! ⚠️\n\nAnda yakin ingin mereset SEMUA data voting?\n\nSemua suara akan hilang dan tidak dapat dikembalikan!\n\nTindakan ini hanya boleh dilakukan oleh admin yang berwenang.');
+      
+      if (confirmReset) {
+        const doubleConfirm = confirm('Ketik "RESET" untuk konfirmasi final:');
+        if (doubleConfirm === 'RESET') {
+          const result = await google.script.run.resetVoting();
+          if (result.success) {
+            alert('✅ ' + result.message);
+            loadAdminData();
+          } else {
+            alert('❌ ' + result.message);
+          }
+        } else {
+          alert('Reset dibatalkan.');
+        }
       }
     }
 
     function logout() {
       currentUser = null;
       document.getElementById('votingPanel').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'none';
       document.getElementById('loginForm').style.display = 'block';
       document.getElementById('nama').value = '';
       document.getElementById('alamat').value = '';
       document.getElementById('password').value = '';
     }
 
+    function adminLogout() {
+      document.getElementById('adminPanel').style.display = 'none';
+      document.getElementById('loginForm').style.display = 'block';
+      document.getElementById('adminUser').value = '';
+      document.getElementById('adminPass').value = '';
+    }
+
     function showMessage(elementId, message, type) {
       const el = document.getElementById(elementId);
+      if (!el) return;
       el.innerText = message;
       el.className = `message ${type}`;
       setTimeout(() => {
-        el.innerText = '';
-        el.className = 'message';
+        if (el) {
+          el.innerText = '';
+          el.className = 'message';
+        }
       }, 3000);
     }
-
-    // Tambahkan tombol admin di halaman login
-    document.addEventListener('DOMContentLoaded', () => {
-      const loginDiv = document.getElementById('loginForm');
-      const adminBtn = document.createElement('button');
-      adminBtn.innerText = 'Login sebagai Admin';
-      adminBtn.className = 'btn-secondary';
-      adminBtn.onclick = showAdminLogin;
-      adminBtn.style.marginTop = '10px';
-      loginDiv.appendChild(adminBtn);
-    });
   </script>
 </body>
 </html>
