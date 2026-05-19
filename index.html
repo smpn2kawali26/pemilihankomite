@@ -3,11 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>E-Voting Komite | SMPN 2 Kawali - Elegan & Modern</title>
-  <!-- Bootstrap + Font Awesome + Google Fonts (Inter & Plus Jakarta) -->
+  <title>E-Voting Komite | SMPN 2 Kawali</title>
+  <!-- Bootstrap 5 + Font Awesome + Google Fonts -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     * {
       margin: 0;
@@ -16,102 +17,112 @@
     }
 
     body {
-      background: linear-gradient(145deg, #f4f8fe 0%, #eef2f9 100%);
-      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
-      scroll-behavior: smooth;
-    }
-
-    /* custom scroll */
-    ::-webkit-scrollbar {
-      width: 7px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #dfe6ef;
-      border-radius: 12px;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #b91c1c;
-      border-radius: 12px;
+      background: linear-gradient(135deg, #f0f4fa 0%, #e8edf5 100%);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
     }
 
     /* HEADER ELEGAN */
     .hero-header {
       background: radial-gradient(circle at 20% 30%, #b02a2a, #631111);
       color: white;
-      padding: 44px 20px 50px;
+      padding: 35px 20px 40px;
       text-align: center;
-      border-bottom-left-radius: 58px;
-      border-bottom-right-radius: 58px;
-      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.3);
+      border-bottom-left-radius: 48px;
+      border-bottom-right-radius: 48px;
+      box-shadow: 0 15px 35px -10px rgba(0,0,0,0.25);
       position: relative;
       overflow: hidden;
     }
     .hero-header::after {
       content: "🗳️";
-      font-size: 190px;
+      font-size: 170px;
       opacity: 0.07;
       position: absolute;
-      bottom: -40px;
-      right: -20px;
+      bottom: -35px;
+      right: -15px;
       pointer-events: none;
-      transform: rotate(8deg);
     }
     .logo-wrapper {
-      width: 128px;
-      height: 128px;
+      width: 110px;
+      height: 110px;
       background: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
-      box-shadow: 0 20px 30px rgba(0,0,0,0.25);
-      transition: transform 0.2s;
-    }
-    .logo-wrapper:hover {
-      transform: scale(1.02);
+      margin: 0 auto 18px;
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
     }
     .logo {
-      width: 108px;
-      height: 108px;
+      width: 92px;
+      height: 92px;
       object-fit: contain;
       border-radius: 50%;
     }
     .hero-header h2 {
-      font-size: 2.5rem;
+      font-size: 2rem;
       font-weight: 800;
       letter-spacing: -0.5px;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
     }
     .hero-header h4 {
-      font-size: 1.8rem;
+      font-size: 1.5rem;
       font-weight: 600;
       margin-top: 5px;
+    }
+
+    /* TAB STYLE */
+    .auth-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      border-bottom: none;
+    }
+    .auth-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 12px 32px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: all 0.25s;
+      color: #64748b;
+      cursor: pointer;
+    }
+    .auth-tab-btn.active {
+      background: linear-gradient(105deg, #b22222, #dc3c3c);
+      color: white;
+      box-shadow: 0 5px 12px rgba(178,34,34,0.3);
+    }
+    .auth-tab-btn:not(.active):hover {
+      background: #e2e8f0;
+      color: #1e293b;
     }
 
     /* LOGIN CARD */
     .glass-card {
       background: rgba(255,255,255,0.98);
       backdrop-filter: blur(2px);
-      border-radius: 52px;
-      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.25);
+      border-radius: 48px;
+      box-shadow: 0 25px 45px -15px rgba(0,0,0,0.2);
     }
     .login-box {
-      max-width: 480px;
-      margin: 48px auto;
-      padding: 38px 32px;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 35px 32px;
     }
     .login-icon {
       background: #b2222218;
-      width: 80px;
-      height: 80px;
+      width: 75px;
+      height: 75px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 18px;
       color: #b22222;
-      font-size: 38px;
+      font-size: 34px;
     }
     .custom-input {
       width: 100%;
@@ -122,11 +133,11 @@
       font-size: 1rem;
       transition: 0.2s;
       outline: none;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
     .custom-input:focus {
       border-color: #b22222;
-      box-shadow: 0 0 0 4px rgba(178,34,34,0.15);
+      box-shadow: 0 0 0 4px rgba(178,34,34,0.12);
     }
     .btn-login {
       background: linear-gradient(105deg, #b22222, #dc3c3c);
@@ -137,82 +148,80 @@
       font-size: 1rem;
       width: 100%;
       transition: 0.25s;
+      color: white;
     }
     .btn-login:hover {
-      transform: translateY(-3px);
+      transform: translateY(-2px);
       filter: brightness(1.02);
-      box-shadow: 0 12px 22px rgba(178,34,34,0.35);
+      box-shadow: 0 8px 18px rgba(178,34,34,0.3);
     }
 
-    /* CARD CALON */
+    /* CALON CARD */
     .calon-container {
-      padding: 45px 20px 70px;
+      padding: 40px 15px 70px;
     }
     .section-title {
       text-align: center;
-      margin-bottom: 45px;
+      margin-bottom: 40px;
     }
     .section-title span {
       background: #b2222215;
-      padding: 8px 28px;
-      border-radius: 80px;
+      padding: 6px 24px;
+      border-radius: 60px;
       font-weight: 600;
       color: #b22222;
       font-size: 0.85rem;
     }
     .candidate-card {
       border: none;
-      border-radius: 42px;
+      border-radius: 38px;
       background: #ffffff;
-      transition: all 0.35s cubic-bezier(0.2,0.9,0.4,1.1);
+      transition: all 0.35s ease;
       overflow: hidden;
-      box-shadow: 0 18px 32px -12px rgba(0,0,0,0.1);
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
       height: 100%;
-      display: flex;
-      flex-direction: column;
     }
     .candidate-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 28px 38px -12px rgba(0,0,0,0.2);
+      transform: translateY(-8px);
+      box-shadow: 0 25px 35px -12px rgba(0,0,0,0.2);
     }
     .candidate-img {
       background: #fafdff;
-      padding: 28px 20px 18px;
+      padding: 25px 20px 15px;
       text-align: center;
     }
     .candidate-img img {
-      width: 150px;
-      height: 150px;
+      width: 140px;
+      height: 140px;
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid white;
-      box-shadow: 0 10px 18px rgba(0,0,0,0.12);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.1);
     }
     .card-body-custom {
-      padding: 24px 24px 30px;
-      flex: 1;
+      padding: 20px 22px 28px;
     }
     .candidate-name {
-      font-size: 1.7rem;
+      font-size: 1.5rem;
       font-weight: 800;
       text-align: center;
       color: #0f1a2a;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .visi-misi-box {
       background: #f8fafd;
-      border-radius: 28px;
-      padding: 14px 18px;
-      margin-bottom: 16px;
+      border-radius: 24px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
     }
     .visi-misi-box h6 {
       font-weight: 800;
       color: #b91c1c;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
+      margin-bottom: 6px;
+      font-size: 0.9rem;
     }
     .visi-misi-box p {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       line-height: 1.5;
       text-align: justify;
       color: #1f2a41;
@@ -220,25 +229,20 @@
     .btn-pilih-modern {
       background: linear-gradient(115deg, #b22222, #e04545);
       border: none;
-      border-radius: 48px;
-      padding: 14px 12px;
+      border-radius: 44px;
+      padding: 12px;
       font-weight: 700;
-      font-size: 1rem;
       color: white;
       width: 100%;
-      margin-top: 16px;
+      margin-top: 12px;
       transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
     }
     .btn-pilih-modern:hover {
-      background: #971c1c;
       transform: scale(0.98);
+      background: #971c1c;
     }
 
-    /* ========= MODAL KONFIRMASI TENGAH - SUPER ELEGAN ========= */
+    /* MODAL KONFIRMASI */
     .custom-modal-overlay {
       display: none;
       position: fixed;
@@ -246,439 +250,391 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(12px);
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(10px);
       z-index: 2000;
       align-items: center;
       justify-content: center;
-      animation: fadeInModal 0.2s ease;
     }
-    @keyframes fadeInModal {
-      from { opacity: 0; backdrop-filter: blur(0px); }
-      to { opacity: 1; backdrop-filter: blur(12px); }
-    }
-    .modal-confirm-card-elegant {
-      background: #ffffff;
-      max-width: 520px;
+    .modal-confirm-card {
+      background: white;
+      max-width: 450px;
       width: 90%;
-      border-radius: 56px;
-      padding: 36px 30px 42px;
+      border-radius: 48px;
+      padding: 32px 28px;
       text-align: center;
-      box-shadow: 0 40px 65px rgba(0,0,0,0.4);
-      animation: slideUpElegant 0.3s cubic-bezier(0.2,0.9,0.4,1.2);
-      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
+      animation: slideUp 0.25s ease;
     }
-    @keyframes slideUpElegant {
-      from { transform: translateY(50px); opacity: 0; }
+    @keyframes slideUp {
+      from { transform: translateY(40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-    .modal-icon-circle {
-      background: #fff4ef;
-      width: 90px;
-      height: 90px;
+    .modal-icon {
+      background: #fff0e6;
+      width: 75px;
+      height: 75px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 18px;
-      font-size: 48px;
+      margin: 0 auto 16px;
+      font-size: 38px;
       color: #b22222;
-      box-shadow: 0 8px 18px rgba(178,34,34,0.1);
     }
-    .modal-confirm-card-elegant h3 {
+    .modal-confirm-card h3 {
       font-weight: 800;
-      font-size: 2rem;
-      color: #0b1f33;
-      margin-bottom: 8px;
-      letter-spacing: -0.3px;
+      font-size: 1.7rem;
     }
     .candidate-name-highlight {
-      background: linear-gradient(125deg, #fff0e6, #ffe6db);
-      padding: 10px 20px;
+      background: #f1f5f9;
+      padding: 8px 18px;
       border-radius: 60px;
       display: inline-block;
       font-weight: 800;
       color: #b22222;
-      font-size: 1.35rem;
-      margin: 16px 0 10px;
+      margin: 12px 0;
     }
-    .modal-message {
-      font-size: 1rem;
-      color: #2c3f5c;
-      line-height: 1.5;
-      margin: 12px 0 10px;
-    }
-    .warning-text {
-      font-size: 0.85rem;
-      color: #a03e1c;
-      background: #fff0e6;
-      display: inline-block;
-      padding: 5px 16px;
-      border-radius: 60px;
-      font-weight: 500;
-    }
-    .modal-actions-row {
+    .modal-actions {
       display: flex;
-      gap: 18px;
+      gap: 15px;
       justify-content: center;
-      margin-top: 28px;
-      flex-wrap: wrap;
+      margin-top: 20px;
     }
-    .btn-cancel-elegant {
-      background: #f1f5f9;
+    .btn-cancel {
+      background: #eef2ff;
       border: none;
-      padding: 14px 30px;
-      border-radius: 60px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #1e293b;
-      transition: 0.2s;
-      min-width: 130px;
+      padding: 12px 28px;
+      border-radius: 44px;
+      font-weight: 600;
     }
-    .btn-cancel-elegant:hover {
-      background: #e2e8f0;
-      transform: translateY(-2px);
-    }
-    .btn-confirm-elegant {
+    .btn-confirm {
       background: linear-gradient(105deg, #b22222, #dd4040);
       border: none;
-      padding: 14px 30px;
-      border-radius: 60px;
+      padding: 12px 28px;
+      border-radius: 44px;
       font-weight: 700;
-      font-size: 1rem;
       color: white;
-      box-shadow: 0 8px 18px rgba(178,34,34,0.3);
-      transition: 0.2s;
-      min-width: 130px;
-    }
-    .btn-confirm-elegant:hover {
-      transform: translateY(-2px);
-      filter: brightness(1.02);
     }
 
-    /* LOADING PROCESS NOTIFICATION (sedang proses) */
+    /* ADMIN DASHBOARD */
+    .admin-dashboard {
+      display: none;
+      padding: 25px 20px 50px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 28px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+    .stat-number {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #b91c1c;
+    }
+    .btn-action {
+      border-radius: 40px;
+      padding: 10px;
+      font-weight: 600;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+    .hasil-table {
+      background: white;
+      border-radius: 28px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+    .refresh-timer {
+      font-size: 0.7rem;
+      color: #64748b;
+    }
+    .logout-btn {
+      background: #1e293b;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 20px;
+      color: white;
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
     .loading-toast {
       position: fixed;
       bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
       background: #1e293b;
-      backdrop-filter: blur(16px);
       color: white;
-      padding: 14px 32px;
-      border-radius: 80px;
+      padding: 12px 28px;
+      border-radius: 60px;
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-weight: 600;
-      font-size: 1rem;
+      gap: 12px;
       z-index: 2100;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-      font-family: monospace;
-      letter-spacing: 0.3px;
-      border: 1px solid rgba(255,255,255,0.2);
-      animation: fadeUpLoad 0.2s ease;
+      font-weight: 500;
     }
-    @keyframes fadeUpLoad {
-      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
-      to { opacity: 1; transform: translateX(-50%) translateY(0); }
-    }
-
-    /* SUCCESS PANEL */
     .success-panel {
-      max-width: 600px;
-      margin: 80px auto;
-      background: white;
-      border-radius: 68px;
-      padding: 55px 30px;
       text-align: center;
+      padding: 60px 20px;
     }
-    .btn-home-return {
-      background: #0f172a;
-      border-radius: 60px;
-      padding: 14px 32px;
-      font-weight: 600;
-    }
-    .btn-home-return:hover {
-      background: #b22222;
-    }
-    .footer-mini {
-      text-align: center;
-      padding: 22px;
-      font-size: 0.8rem;
-      color: #556b86;
-    }
-
-    @media (max-width: 550px) {
-      .hero-header h2 { font-size: 1.6rem; }
-      .candidate-name { font-size: 1.3rem; }
-      .modal-confirm-card-elegant { padding: 28px 18px; }
-      .modal-actions-row { gap: 12px; }
-      .btn-cancel-elegant, .btn-confirm-elegant { padding: 10px 20px; min-width: 110px; }
+    @media (max-width: 768px) {
+      .hero-header h2 { font-size: 1.5rem; }
+      .candidate-name { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
 
-<!-- TOAST NOTIF (biasa) -->
-<div id="toastNotif" style="position:fixed; top:20px; right:20px; background:white; border-radius:60px; padding:12px 24px; display:none; align-items:center; gap:12px; z-index:2200; box-shadow:0 12px 28px rgba(0,0,0,0.2); border-left:5px solid; font-weight:500;"></div>
-
-<!-- LOADING PROSES -->
-<div id="loadingProcess" style="display:none;" class="loading-toast">
-  <i class="fas fa-spinner fa-pulse"></i> <span id="loadingMessage">Sedang memproses...</span>
-</div>
-
 <!-- HEADER -->
 <div class="hero-header">
   <div class="logo-wrapper">
-    <img src="https://drive.google.com/thumbnail?id=14MOrGVFoEKwDkd66Mg8rv4f4bCIaMALG&sz=w1000" class="logo" alt="Logo Sekolah">
+    <img src="https://drive.google.com/thumbnail?id=14MOrGVFoEKwDkd66Mg8rv4f4bCIaMALG&sz=w1000" class="logo" alt="Logo">
   </div>
   <h2>PEMILIHAN KOMITE SEKOLAH</h2>
   <h4>SMPN 2 KAWALI</h4>
-  <p><i class="fas fa-gavel"></i> Masa Bakti 2026–2031 • Suara Berintegritas</p>
+  <p>Masa Bakti 2026–2031 • Suara Berintegritas</p>
 </div>
 
-<!-- LOGIN -->
-<div id="loginBox" class="glass-card login-box">
-  <div class="login-icon"><i class="fas fa-user-graduate"></i></div>
-  <h4 class="text-center fw-bold">Login Pemilih</h4>
-  <input type="text" id="nama" class="custom-input" placeholder="Nama Lengkap" autocomplete="off">
-  <input type="text" id="alamat" class="custom-input" placeholder="Alamat / Tempat Tinggal">
-  <input type="password" id="password" class="custom-input" placeholder="Kata Sandi">
-  <button class="btn-login" onclick="handleLogin()"><i class="fas fa-arrow-right-to-bracket"></i> MASUK KE VOTING</button>
+<!-- AREA LOGIN (PEMILIH & ADMIN dalam 1 card) -->
+<div id="authContainer" class="login-box glass-card">
+  <div class="login-icon"><i class="fas fa-fingerprint"></i></div>
+  
+  <div class="auth-tabs">
+    <button class="auth-tab-btn active" data-tab="pemilih" onclick="switchTab('pemilih')">
+      <i class="fas fa-user-check"></i> Pemilih
+    </button>
+    <button class="auth-tab-btn" data-tab="admin" onclick="switchTab('admin')">
+      <i class="fas fa-user-shield"></i> Admin
+    </button>
+  </div>
+
+  <!-- Form PEMILIH -->
+  <div id="pemilihForm">
+    <input type="text" id="nama" class="custom-input" placeholder="Nama Lengkap" autocomplete="off">
+    <input type="text" id="alamat" class="custom-input" placeholder="Alamat / Tempat Tinggal">
+    <input type="password" id="password" class="custom-input" placeholder="Password">
+    <button class="btn-login" onclick="handlePemilihLogin()">
+      <i class="fas fa-arrow-right-to-bracket"></i> Masuk & Voting
+    </button>
+  </div>
+
+  <!-- Form ADMIN (tersembunyi) -->
+  <div id="adminForm" style="display:none;">
+    <input type="text" id="adminUsername" class="custom-input" placeholder="Username Admin">
+    <input type="password" id="adminPassword" class="custom-input" placeholder="Password Admin">
+    <button class="btn-login" onclick="handleAdminLogin()">
+      <i class="fas fa-chart-line"></i> Masuk ke Dashboard Admin
+    </button>
+  </div>
 </div>
 
-<!-- CALON CONTAINER -->
-<div class="container calon-container" id="calonContainer" style="display: none;">
+<!-- AREA PEMILIH (Setelah login) -->
+<div id="calonContainer" class="container calon-container" style="display:none;">
   <div class="section-title">
-    <span><i class="fas fa-users"></i> Kandidat Ketua Komite</span>
+    <span><i class="fas fa-users-viewfinder"></i> Kandidat Ketua Komite</span>
     <h2 class="mt-2">Pilih Pemimpin Terbaik</h2>
   </div>
   <div class="row g-4" id="listCalon"></div>
 </div>
 
-<!-- SUKSES -->
-<div id="sukses" style="display: none;">
-  <div class="success-panel text-center">
-    <i class="fas fa-check-circle" style="font-size: 85px; color: #2b6e3c;"></i>
-    <h2 class="fw-bold mt-3" style="color:#b22222;">TERIMA KASIH</h2>
-    <p class="fs-4">✅ Suara Anda berhasil disimpan</p>
-    <button class="btn-home-return mt-3 text-white border-0" onclick="kembaliHome()"><i class="fas fa-home"></i> Kembali ke Halaman Awal</button>
+<!-- AREA ADMIN DASHBOARD -->
+<div id="adminDashboard" class="container admin-dashboard">
+  <div class="d-flex justify-content-end">
+    <button class="logout-btn" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Keluar Admin</button>
+  </div>
+  <div class="row g-4 mb-4">
+    <div class="col-md-4">
+      <div class="stat-card"><i class="fas fa-vote-yea fa-2x" style="color:#b91c1c;"></i>
+        <div class="stat-number" id="totalSuaraAdmin">0</div><div class="stat-label">Total Suara</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card"><i class="fas fa-toggle-on fa-2x" style="color:#b91c1c;"></i>
+        <div id="statusVotingAdmin" class="fw-bold fs-4 mt-2">--</div><div class="stat-label">Status Voting</div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <button class="btn btn-danger btn-action" onclick="tutupVotingAdmin()"><i class="fas fa-lock"></i> TUTUP VOTING</button>
+        <button class="btn btn-success btn-action" onclick="bukaVotingAdmin()"><i class="fas fa-lock-open"></i> BUKA VOTING</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-5">
+      <div class="hasil-table"><h5><i class="fas fa-chart-pie"></i> Grafik Suara</h5><canvas id="voteChart"></canvas></div>
+    </div>
+    <div class="col-lg-7">
+      <div class="hasil-table"><h5><i class="fas fa-trophy"></i> Hasil Realtime</h5>
+        <table class="table table-bordered"><thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead><tbody id="hasilTableAdmin"></tbody></table>
+        <button class="btn btn-primary mt-2" onclick="downloadExcelAdmin()"><i class="fas fa-file-excel"></i> Download Excel</button>
+        <button class="btn btn-secondary mt-2" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
+      </div>
+    </div>
   </div>
 </div>
 
-<div class="footer-mini">
-  <i class="fas fa-shield-alt"></i> Sistem Voting Transparan • Panitia Pemilihan SMPN 2 Kawali
+<!-- SUKSES VOTE -->
+<div id="sukses" style="display:none;" class="success-panel">
+  <i class="fas fa-check-circle" style="font-size:70px; color:#2b6e3c;"></i>
+  <h2 class="fw-bold mt-3" style="color:#b22222;">TERIMA KASIH</h2>
+  <p>Suara Anda berhasil disimpan</p>
+  <button class="btn btn-dark rounded-pill px-4 py-2" onclick="kembaliHome()">Kembali ke Awal</button>
 </div>
 
-<!-- MODAL KONFIRMASI TENGAH (ELEGAN) -->
-<div id="confirmModal" class="custom-modal-overlay">
-  <div class="modal-confirm-card-elegant">
-    <div class="modal-icon-circle">
-      <i class="fas fa-ballot-check"></i>
-    </div>
-    <h3>Konfirmasi Pilihan</h3>
-    <div id="modalCandidateDisplay" class="candidate-name-highlight">Calon</div>
-    <p class="modal-message">Yakin ingin memilih <strong id="modalCandidateNameBold"></strong> sebagai Ketua Komite?</p>
-    <div class="warning-text"><i class="fas fa-lock"></i> Suara bersifat final & tidak dapat diubah</div>
-    <div class="modal-actions-row">
-      <button id="modalCancelBtn" class="btn-cancel-elegant"><i class="fas fa-times"></i> Batal</button>
-      <button id="modalConfirmBtn" class="btn-confirm-elegant"><i class="fas fa-check"></i> Ya, Pilih</button>
-    </div>
-  </div>
-</div>
+<div id="loadingToast" class="loading-toast" style="display:none;"><i class="fas fa-spinner fa-pulse"></i> <span>Memproses...</span></div>
 
 <script>
-  // API URL
   const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
   let currentUser = null;
   let pendingCandidate = null;
+  let voteChartInstance = null;
+  let adminRefreshInterval = null;
+  let isAdminMode = false;
 
-  // Fungsi loading toast (sedang proses)
-  function showLoading(message = "Sedang memproses...") {
-    const loadEl = document.getElementById("loadingProcess");
-    const spanMsg = document.getElementById("loadingMessage");
-    if (spanMsg) spanMsg.innerText = message;
-    if (loadEl) loadEl.style.display = "flex";
+  function showLoading(msg = "Memproses...") {
+    let el = document.getElementById("loadingToast");
+    el.querySelector("span").innerText = msg;
+    el.style.display = "flex";
+  }
+  function hideLoading() { document.getElementById("loadingToast").style.display = "none"; }
+  function showNotif(msg, type) { alert(msg); } // sederhana
+
+  function switchTab(tab) {
+    const pemilihForm = document.getElementById("pemilihForm");
+    const adminForm = document.getElementById("adminForm");
+    const btns = document.querySelectorAll(".auth-tab-btn");
+    btns.forEach(btn => btn.classList.remove("active"));
+    if (tab === "pemilih") {
+      pemilihForm.style.display = "block";
+      adminForm.style.display = "none";
+      document.querySelector(".auth-tab-btn[data-tab='pemilih']").classList.add("active");
+    } else {
+      pemilihForm.style.display = "none";
+      adminForm.style.display = "block";
+      document.querySelector(".auth-tab-btn[data-tab='admin']").classList.add("active");
+    }
   }
 
-  function hideLoading() {
-    const loadEl = document.getElementById("loadingProcess");
-    if (loadEl) loadEl.style.display = "none";
-  }
-
-  // Notif kecil (kanan atas)
-  function showNotif(message, type = "success") {
-    const toast = document.getElementById("toastNotif");
-    const icon = type === "success" ? '<i class="fas fa-circle-check" style="color:#15803d;"></i>' : '<i class="fas fa-circle-exclamation" style="color:#dc2626;"></i>';
-    toast.innerHTML = `${icon} <span>${message}</span>`;
-    toast.style.display = "flex";
-    toast.style.borderLeftColor = type === "success" ? "#15803d" : "#dc2626";
-    setTimeout(() => { toast.style.display = "none"; }, 3000);
-  }
-
-  // Login handler dengan loading proses
-  async function handleLogin() {
+  // PEMILIH LOGIN
+  async function handlePemilihLogin() {
     const nama = document.getElementById("nama").value.trim().toUpperCase();
     const alamat = document.getElementById("alamat").value.trim().toUpperCase();
     const password = document.getElementById("password").value.trim();
-    if (!nama || !alamat || !password) {
-      showNotif("Lengkapi Nama, Alamat & Password!", "error");
-      return;
-    }
-    showLoading("Memeriksa data login...");
+    if (!nama || !alamat || !password) { alert("Lengkapi data!"); return; }
+    showLoading("Memeriksa data...");
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({ action: "login", nama, alamat, password })
-      });
-      const result = await response.json();
+      const resp = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "login", nama, alamat, password }) });
+      const result = await resp.json();
       hideLoading();
       if (result.status) {
         currentUser = result;
-        showNotif(`Selamat datang, ${nama.split(" ")[0]}!`, "success");
-        document.getElementById("loginBox").style.display = "none";
-        await loadCalon();
-      } else {
-        showNotif(result.message || "Login gagal, periksa kembali.", "error");
-      }
-    } catch (err) {
-      hideLoading();
-      showNotif("Gagal terhubung ke server.", "error");
-    }
+        alert("Login berhasil! Silakan pilih calon.");
+        document.getElementById("authContainer").style.display = "none";
+        await loadCalonPemilih();
+      } else { alert(result.message); }
+    } catch(e) { hideLoading(); alert("Gagal koneksi"); }
   }
 
-  // Load calon dan inject tombol pilih
-  async function loadCalon() {
-    showLoading("Mengambil data kandidat...");
+  async function loadCalonPemilih() {
+    showLoading("Memuat kandidat...");
     try {
-      const response = await fetch(API_URL + "?action=getCalon");
-      const data = await response.json();
+      const resp = await fetch(API_URL + "?action=getCalon");
+      const data = await resp.json();
       hideLoading();
       let html = "";
       data.forEach(calon => {
-        let fotoUrl = (calon.foto && calon.foto.trim() !== "") ? calon.foto : `https://ui-avatars.com/api/?background=b91c1c&color=fff&rounded=true&size=140&bold=true&name=${encodeURIComponent(calon.nama)}`;
-        html += `
-          <div class="col-md-6 col-lg-4 d-flex">
-            <div class="candidate-card">
-              <div class="candidate-img">
-                <img src="${fotoUrl}" alt="${calon.nama}" onerror="this.src='https://ui-avatars.com/api/?background=9f2a2a&color=fff&rounded=true&size=140&bold=true&name=${encodeURIComponent(calon.nama)}'">
-              </div>
-              <div class="card-body-custom">
-                <div class="candidate-name">${escapeHtml(calon.nama)}</div>
-                <div class="visi-misi-box">
-                  <h6><i class="fas fa-eye"></i> Visi</h6>
-                  <p>${escapeHtml(calon.visi) || "Membangun sinergi yang kuat antara masyarakat dan sekolah demi terciptanya pendidikan yang unggul"}</p>
-                </div>
-                <div class="visi-misi-box">
-                  <h6><i class="fas fa-bullhorn"></i> Misi</h6>
-                  <p>${escapeHtml(calon.misi) || "Meningkatkan partisipasi wali murid; mendukung program sekolah; transparansi dan akuntabilitas."}</p>
-                </div>
-                <button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama).replace(/"/g, '&quot;')}">
-                  <i class="fas fa-vote-yea"></i> Pilih
-                </button>
-              </div>
-            </div>
-          </div>
-        `;
+        let foto = calon.foto || `https://ui-avatars.com/api/?background=b91c1c&color=fff&rounded=true&size=120&name=${encodeURIComponent(calon.nama)}`;
+        html += `<div class="col-md-6 col-lg-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}"></div><div class="card-body-custom"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6>Visi</h6><p>${escapeHtml(calon.visi || "-")}</p></div><div class="visi-misi-box"><h6>Misi</h6><p>${escapeHtml(calon.misi || "-")}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}"><i class="fas fa-vote-yea"></i> Pilih</button></div></div></div>`;
       });
       document.getElementById("listCalon").innerHTML = html;
       document.getElementById("calonContainer").style.display = "block";
-      // Attach event ke semua tombol pilih
-      document.querySelectorAll('.btn-pilih-modern').forEach(btn => {
-        btn.addEventListener('click', (e) => {
-          const namaCalon = btn.getAttribute('data-nama');
-          if (namaCalon) openConfirmModal(namaCalon);
-        });
+      document.querySelectorAll(".btn-pilih-modern").forEach(btn => {
+        btn.addEventListener("click", () => openConfirmModal(btn.getAttribute("data-nama")));
       });
-    } catch (err) {
-      hideLoading();
-      showNotif("Gagal memuat data calon", "error");
-    }
+    } catch(e) { hideLoading(); alert("Gagal muat calon"); }
   }
 
-  // Buka modal konfirmasi (tengah, elegan)
-  function openConfirmModal(candidateName) {
-    pendingCandidate = candidateName;
+  function openConfirmModal(nama) {
+    pendingCandidate = nama;
+    let modalHtml = `<div class="custom-modal-overlay" id="confirmModal"><div class="modal-confirm-card"><div class="modal-icon"><i class="fas fa-ballot"></i></div><h3>Konfirmasi Pilihan</h3><div class="candidate-name-highlight">${nama}</div><p>Yakin memilih sebagai Ketua Komite?<br>Suara tidak dapat diubah.</p><div class="modal-actions"><button class="btn-cancel" id="modalCancelBtn">Batal</button><button class="btn-confirm" id="modalConfirmBtn">Ya, Pilih</button></div></div></div>`;
+    document.body.insertAdjacentHTML("beforeend", modalHtml);
     const modal = document.getElementById("confirmModal");
-    const displaySpan = document.getElementById("modalCandidateDisplay");
-    const boldSpan = document.getElementById("modalCandidateNameBold");
-    if (displaySpan) displaySpan.innerText = candidateName;
-    if (boldSpan) boldSpan.innerText = candidateName;
     modal.style.display = "flex";
-    // Hapus event listener lama dengan clone + replace (biar clean)
-    const confirmBtn = document.getElementById("modalConfirmBtn");
-    const cancelBtn = document.getElementById("modalCancelBtn");
-    const newConfirm = confirmBtn.cloneNode(true);
-    const newCancel = cancelBtn.cloneNode(true);
-    confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
-    cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
-
-    newConfirm.addEventListener('click', async () => {
-      closeModal();
-      await executeVote(pendingCandidate);
-    });
-    newCancel.addEventListener('click', () => {
-      closeModal();
-      showNotif("Vote dibatalkan", "success");
-    });
-    // Klik overlay bisa menutup
-    modal.onclick = (e) => {
-      if (e.target === modal) closeModal();
-    };
+    document.getElementById("modalCancelBtn").onclick = () => { modal.remove(); };
+    document.getElementById("modalConfirmBtn").onclick = async () => { modal.remove(); await executeVote(); };
   }
 
-  function closeModal() {
-    document.getElementById("confirmModal").style.display = "none";
-    pendingCandidate = null;
-  }
-
-  // Eksekusi vote dengan loading proses
-  async function executeVote(candidateName) {
-    if (!currentUser || !currentUser.id) {
-      showNotif("Sesi login habis, silakan refresh.", "error");
-      location.reload();
-      return;
-    }
-    showLoading(`Menyimpan suara untuk ${candidateName}...`);
+  async function executeVote() {
+    if (!currentUser || !pendingCandidate) return;
+    showLoading("Menyimpan suara...");
     try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          action: "vote",
-          idPemilih: currentUser.id,
-          pilihan: candidateName
-        })
-      });
-      const result = await response.json();
+      const resp = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "vote", idPemilih: currentUser.id, pilihan: pendingCandidate }) });
+      const result = await resp.json();
       hideLoading();
       if (result.status) {
-        showNotif(`✅ Suara untuk ${candidateName} berhasil disimpan! Terima kasih.`, "success");
+        alert("Vote berhasil! Terima kasih.");
         document.getElementById("calonContainer").style.display = "none";
         document.getElementById("sukses").style.display = "block";
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      } else {
-        showNotif(result.message || "Gagal menyimpan suara, mungkin Anda sudah memilih.", "error");
-      }
-    } catch (err) {
-      hideLoading();
-      showNotif("Kesalahan jaringan, gagal memproses vote.", "error");
-    }
+      } else { alert(result.message); }
+    } catch(e) { hideLoading(); alert("Gagal vote"); }
   }
 
-  function kembaliHome() {
-    location.reload();
+  // ADMIN LOGIN
+  async function handleAdminLogin() {
+    const user = document.getElementById("adminUsername").value.trim();
+    const pass = document.getElementById("adminPassword").value.trim();
+    // hardcoded admin (bisa disesuaikan)
+    if (user === "admin" && pass === "admin123") {
+      isAdminMode = true;
+      document.getElementById("authContainer").style.display = "none";
+      document.getElementById("adminDashboard").style.display = "block";
+      loadAdminData();
+      if (adminRefreshInterval) clearInterval(adminRefreshInterval);
+      adminRefreshInterval = setInterval(loadAdminData, 5000);
+    } else { alert("Username atau password admin salah!"); }
   }
 
-  function escapeHtml(str) {
-    if (!str) return "";
-    return str.replace(/[&<>]/g, function(m) {
-      if (m === '&') return '&amp;';
-      if (m === '<') return '&lt;';
-      if (m === '>') return '&gt;';
-      return m;
+  async function loadAdminData() {
+    if (!isAdminMode) return;
+    try {
+      const [hasilRes, statusRes] = await Promise.all([
+        fetch(API_URL + "?action=getHasil"),
+        fetch(API_URL + "?action=getStatus")
+      ]);
+      const hasil = await hasilRes.json();
+      const status = await statusRes.json();
+      let arr = Object.entries(hasil).map(([nama, suara]) => ({ nama, suara })).sort((a,b)=>b.suara-a.suara);
+      let total = arr.reduce((sum,item)=>sum+item.suara,0);
+      document.getElementById("totalSuaraAdmin").innerText = total;
+      document.getElementById("statusVotingAdmin").innerHTML = status.statusVoting === "OPEN" ? '<span class="badge bg-success fs-6">✅ VOTING DIBUKA</span>' : '<span class="badge bg-danger fs-6">🔒 VOTING DITUTUP</span>';
+      let html = "";
+      arr.forEach((item, idx) => {
+        let jabatan = idx===0?"Ketua":idx===1?"Sekretaris":idx===2?"Bendahara":"Anggota";
+        html += `<tr><td>${idx+1}</td><td>${escapeHtml(item.nama)}</td><td><strong>${item.suara}</strong></td><td>${jabatan}</td></tr>`;
+      });
+      document.getElementById("hasilTableAdmin").innerHTML = html;
+      updateChartAdmin(arr);
+    } catch(e) { console.error(e); }
+  }
+
+  function updateChartAdmin(data) {
+    const ctx = document.getElementById('voteChart').getContext('2d');
+    if (voteChartInstance) voteChartInstance.destroy();
+    voteChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: data.map(d=>d.nama.length>15?d.nama.slice(0,12)+'...':d.nama), datasets: [{ label: 'Suara', data: data.map(d=>d.suara), backgroundColor: '#b91c1c', borderRadius: 10 }] },
+      options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true } } }
     });
   }
+
+  async function tutupVotingAdmin() { if(confirm("Tutup voting?")){ await fetch(API_URL,{method:"POST",body:JSON.stringify({action:"closeVoting"})}); loadAdminData(); alert("Voting ditutup"); } }
+  async function bukaVotingAdmin() { if(confirm("Buka voting?")){ await fetch(API_URL,{method:"POST",body:JSON.stringify({action:"openVoting"})}); loadAdminData(); alert("Voting dibuka"); } }
+  function downloadExcelAdmin() { let html = document.querySelector("#hasilTableAdmin").closest("table").outerHTML; let blob = new Blob(["<html><body>"+html+"</body></html>"], {type:"application/vnd.ms-excel"}); let a=document.createElement("a"); a.href=URL.createObjectURL(blob); a.download="hasil_voting.xls"; a.click(); }
+  function adminLogout() { isAdminMode=false; if(adminRefreshInterval) clearInterval(adminRefreshInterval); document.getElementById("adminDashboard").style.display="none"; document.getElementById("authContainer").style.display="block"; document.getElementById("adminUsername").value=""; document.getElementById("adminPassword").value=""; switchTab("pemilih"); }
+  function kembaliHome() { location.reload(); }
+  function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
 </script>
 </body>
 </html>
