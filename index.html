@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>E-Voting Komite | SMPN 2 Kawali</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -14,32 +14,7 @@
       background: linear-gradient(135deg, #0a1628 0%, #0f1a2f 50%, #0c1126 100%);
       font-family: 'Inter', sans-serif;
       min-height: 100vh;
-      position: relative;
     }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" opacity="0.06"><defs><linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%233b82f6"/><stop offset="100%" stop-color="%2360a5fa"/></linearGradient></defs><text x="50%" y="30%" font-size="120" text-anchor="middle" fill="url(%23grad)">🗳️</text><text x="30%" y="55%" font-size="70" text-anchor="middle" fill="url(%23grad)">✓</text><text x="70%" y="65%" font-size="90" text-anchor="middle" fill="url(%23grad)">👥</text><text x="45%" y="80%" font-size="50" text-anchor="middle" fill="url(%23grad)">PILIH</text><text x="75%" y="35%" font-size="60" text-anchor="middle" fill="url(%23grad)">🏛️</text></svg>');
-      background-repeat: repeat;
-      background-size: 280px;
-      pointer-events: none;
-      z-index: 0;
-    }
-    body::after {
-      content: "📫";
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      font-size: 120px;
-      opacity: 0.04;
-      pointer-events: none;
-      z-index: 0;
-    }
-    .hero-header, .login-box, .calon-container, .admin-dashboard, .success-panel { position: relative; z-index: 1; }
     .hero-header {
       background: linear-gradient(135deg, #0a2b5e 0%, #06316e 30%, #021a4a 100%);
       color: white;
@@ -48,23 +23,6 @@
       border-bottom-left-radius: 48px;
       border-bottom-right-radius: 48px;
       box-shadow: 0 15px 35px -10px rgba(0,0,0,0.4);
-      position: relative;
-      overflow: hidden;
-    }
-    .hero-header::before {
-      content: "";
-      position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%);
-      animation: shimmer 8s ease-in-out infinite;
-    }
-    @keyframes shimmer {
-      0% { transform: translate(-10%, -10%) rotate(0deg); }
-      50% { transform: translate(10%, 10%) rotate(5deg); }
-      100% { transform: translate(-10%, -10%) rotate(0deg); }
     }
     .logo-wrapper {
       width: 110px;
@@ -78,9 +36,8 @@
       box-shadow: 0 15px 25px rgba(0,0,0,0.3);
     }
     .logo { width: 92px; height: 92px; object-fit: contain; border-radius: 50%; }
-    .hero-header h2 { font-size: 2rem; font-weight: 800; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .hero-header h2 { font-size: 2rem; font-weight: 800; }
     .hero-header h4 { font-size: 1.5rem; font-weight: 600; margin-top: 5px; }
-    .hero-header p { margin-top: 8px; opacity: 0.9; }
     .auth-tabs { display: flex; justify-content: center; gap: 15px; margin-bottom: 25px; }
     .auth-tab-btn {
       background: transparent;
@@ -89,7 +46,6 @@
       font-size: 1rem;
       font-weight: 600;
       border-radius: 50px;
-      transition: all 0.25s;
       color: #94a3b8;
       cursor: pointer;
     }
@@ -102,7 +58,6 @@
       background: rgba(15, 25, 45, 0.95);
       backdrop-filter: blur(10px);
       border-radius: 48px;
-      box-shadow: 0 25px 45px -15px rgba(0,0,0,0.4);
       border: 1px solid rgba(56,189,248,0.2);
     }
     .login-box { max-width: 500px; margin: 40px auto; padding: 35px 32px; }
@@ -126,13 +81,11 @@
       background: #0f172a;
       color: white;
       font-size: 1rem;
-      transition: 0.2s;
-      outline: none;
+      margin-bottom: 18px;
     }
-    .custom-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 4px rgba(59,130,246,0.2); }
-    .custom-input::placeholder { color: #64748b; }
-    .password-wrapper { position: relative; margin-bottom: 18px; width: 100%; }
-    .password-wrapper .custom-input { margin-bottom: 0; padding-right: 50px; width: 100%; }
+    .custom-input:focus { border-color: #3b82f6; outline: none; }
+    .password-wrapper { position: relative; margin-bottom: 18px; }
+    .password-wrapper .custom-input { margin-bottom: 0; padding-right: 50px; }
     .toggle-password {
       position: absolute;
       right: 18px;
@@ -140,13 +93,10 @@
       transform: translateY(-50%);
       cursor: pointer;
       color: #64748b;
-      font-size: 1.2rem;
       background: transparent;
       border: none;
-      z-index: 10;
-      padding: 8px;
+      font-size: 1.2rem;
     }
-    .toggle-password:hover { color: #60a5fa; }
     .btn-login {
       background: linear-gradient(105deg, #1e4b8f, #2563eb);
       border: none;
@@ -154,11 +104,9 @@
       padding: 14px;
       font-weight: 700;
       width: 100%;
-      transition: 0.25s;
       color: white;
       margin-top: 10px;
     }
-    .btn-login:hover { transform: translateY(-2px); filter: brightness(1.05); }
     .calon-container { padding: 40px 15px 70px; }
     .section-title { text-align: center; margin-bottom: 40px; }
     .section-title span {
@@ -166,25 +114,21 @@
       padding: 6px 24px;
       border-radius: 60px;
       color: #60a5fa;
-      font-size: 0.85rem;
     }
-    .section-title h2 { color: white; margin-top: 12px; font-size: 2rem; }
+    .section-title h2 { color: white; margin-top: 12px; }
     .candidate-card {
       border-radius: 38px;
       background: rgba(15,25,45,0.95);
-      backdrop-filter: blur(5px);
-      transition: all 0.35s ease;
-      overflow: hidden;
       border: 1px solid rgba(59,130,246,0.3);
       height: 100%;
+      overflow: hidden;
     }
-    .candidate-card:hover { transform: translateY(-8px); border-color: rgba(59,130,246,0.6); }
     .candidate-img {
       background: rgba(10,20,40,0.8);
-      padding: 25px 20px 15px;
+      padding: 25px;
       text-align: center;
     }
-    .candidate-img img { width: 120px; height: 120px; object-fit: cover; border-radius: 50%; border: 3px solid #3b82f6; }
+    .candidate-img img { width: 120px; height: 120px; border-radius: 50%; border: 3px solid #3b82f6; object-fit: cover; }
     .candidate-name { color: white; font-size: 1.3rem; font-weight: 800; text-align: center; margin-bottom: 16px; }
     .visi-misi-box {
       background: rgba(10,20,40,0.6);
@@ -192,8 +136,8 @@
       padding: 12px 16px;
       margin-bottom: 14px;
     }
-    .visi-misi-box h6 { color: #60a5fa; font-weight: 700; margin-bottom: 6px; font-size: 0.9rem; }
-    .visi-misi-box p { color: #cbd5e1; font-size: 0.85rem; line-height: 1.5; }
+    .visi-misi-box h6 { color: #60a5fa; margin-bottom: 6px; }
+    .visi-misi-box p { color: #cbd5e1; font-size: 0.85rem; }
     .btn-pilih-modern {
       background: linear-gradient(115deg, #1e4b8f, #3b82f6);
       border: none;
@@ -202,14 +146,10 @@
       font-weight: 700;
       color: white;
       width: 100%;
-      margin-top: 12px;
-      transition: 0.2s;
     }
-    .btn-pilih-modern:hover { transform: scale(0.98); filter: brightness(1.05); }
-    .admin-dashboard { display: none; padding: 25px 20px 50px; position: relative; z-index: 1; }
+    .admin-dashboard { display: none; padding: 25px 20px 50px; }
     .stat-card {
       background: rgba(15,25,45,0.95);
-      backdrop-filter: blur(5px);
       border-radius: 28px;
       padding: 20px;
       text-align: center;
@@ -223,24 +163,21 @@
     .btn-reset { background: linear-gradient(105deg, #dc2626, #ef4444); color: white; margin-top: 10px; }
     .hasil-table {
       background: rgba(15,25,45,0.95);
-      backdrop-filter: blur(5px);
       border-radius: 28px;
       padding: 20px;
       margin-top: 20px;
       border: 1px solid rgba(59,130,246,0.3);
     }
-    .hasil-table h5 { color: #60a5fa; margin-bottom: 15px; }
+    .hasil-table h5 { color: #60a5fa; }
     .dark-table { width: 100%; border-collapse: collapse; }
     .dark-table th, .dark-table td { border: 1px solid #2d4a7c; padding: 10px; color: #e2e8f0; }
     .dark-table th { background: linear-gradient(105deg, #1e3a5f, #1e4b8f); color: white; }
-    .dark-table td { background: rgba(10,20,35,0.8); }
     .logout-btn {
       background: linear-gradient(105deg, #1e4b8f, #3b82f6);
       border: none;
       border-radius: 40px;
       padding: 8px 20px;
       color: white;
-      margin-bottom: 15px;
     }
     .elegant-modal-overlay {
       position: fixed;
@@ -254,11 +191,6 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: fadeInModal 0.25s ease;
-    }
-    @keyframes fadeInModal {
-      from { opacity: 0; backdrop-filter: blur(0px); }
-      to { opacity: 1; backdrop-filter: blur(12px); }
     }
     .elegant-modal-card {
       background: linear-gradient(145deg, #0f172a, #0a0f1f);
@@ -268,21 +200,13 @@
       padding: 40px 32px;
       text-align: center;
       border: 1px solid rgba(59,130,246,0.5);
-      box-shadow: 0 40px 60px rgba(0,0,0,0.5);
-      animation: slideUpModal 0.3s ease;
     }
-    @keyframes slideUpModal {
-      from { transform: translateY(50px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .elegant-modal-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
-    .elegant-modal-card h3 { font-size: 1.6rem; font-weight: 800; color: white; margin-bottom: 12px; }
-    .elegant-modal-message { color: #cbd5e1; font-size: 1rem; line-height: 1.6; margin-bottom: 20px; }
-    .elegant-modal-warning { background: rgba(239,68,68,0.15); padding: 10px 16px; border-radius: 60px; display: inline-block; font-size: 0.85rem; color: #f87171; margin-bottom: 28px; }
-    .elegant-modal-info { background: rgba(59,130,246,0.15); padding: 10px 16px; border-radius: 60px; display: inline-block; font-size: 0.85rem; color: #60a5fa; margin-bottom: 28px; }
-    .elegant-modal-actions { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-    .btn-modal-cancel { background: #1e293b; border: 1px solid #334155; padding: 12px 28px; border-radius: 60px; font-weight: 600; color: #cbd5e1; cursor: pointer; }
-    .btn-modal-confirm { background: linear-gradient(105deg, #2563eb, #3b82f6); border: none; padding: 12px 28px; border-radius: 60px; font-weight: 700; color: white; cursor: pointer; }
+    .elegant-modal-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; background: rgba(59,130,246,0.15); }
+    .elegant-modal-card h3 { font-size: 1.6rem; font-weight: 800; color: white; }
+    .elegant-modal-message { color: #cbd5e1; margin: 20px 0; }
+    .elegant-modal-actions { display: flex; gap: 16px; justify-content: center; }
+    .btn-modal-cancel { background: #1e293b; border: 1px solid #334155; padding: 12px 28px; border-radius: 60px; color: #cbd5e1; cursor: pointer; }
+    .btn-modal-confirm { background: linear-gradient(105deg, #2563eb, #3b82f6); border: none; padding: 12px 28px; border-radius: 60px; color: white; cursor: pointer; }
     .loading-toast {
       position: fixed;
       bottom: 30px;
@@ -298,13 +222,10 @@
       gap: 12px;
       z-index: 2100;
     }
-    .success-panel { text-align: center; padding: 80px 20px; color: white; position: relative; z-index: 1; }
+    .success-panel { text-align: center; padding: 80px 20px; color: white; }
     @media (max-width: 768px) {
       .hero-header h2 { font-size: 1.5rem; }
-      .hero-header h4 { font-size: 1.2rem; }
       .candidate-name { font-size: 1.1rem; }
-      .elegant-modal-card { padding: 30px 20px; }
-      .stat-number { font-size: 2rem; }
     }
   </style>
 </head>
@@ -384,7 +305,7 @@
     <div class="col-lg-5">
       <div class="hasil-table">
         <h5><i class="fas fa-chart-pie"></i> Grafik Suara</h5>
-        <canvas id="voteChart" style="max-height: 300px; width: 100%;"></canvas>
+        <canvas id="voteChart" style="max-height: 300px;"></canvas>
       </div>
     </div>
     <div class="col-lg-7">
@@ -400,7 +321,6 @@
           <button class="btn btn-primary" onclick="downloadExcelAdmin()"><i class="fas fa-file-excel"></i> Download Excel</button>
           <button class="btn btn-secondary" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
         </div>
-        <div class="text-end mt-2 text-muted small">Auto refresh setiap 5 detik</div>
       </div>
     </div>
   </div>
@@ -418,7 +338,7 @@
 </div>
 
 <script>
-  // ⚠️ GANTI URL INI DENGAN URL DEPLOYMENT APPS SCRIPT ANDA ⚠️
+  // ⚠️ URL APPS SCRIPT ANDA ⚠️
   const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
   
   let currentUser = null;
@@ -450,12 +370,12 @@
   function hideLoading() { document.getElementById("loadingToast").style.display = "none"; }
 
   function showAlertModal(title, message, type = "info") {
-    let iconColor = type === "success" ? "#22c55e" : (type === "error" ? "#ef4444" : "#60a5fa");
-    let iconClass = type === "success" ? "fa-check-circle" : (type === "error" ? "fa-times-circle" : "fa-info-circle");
+    let iconColor = type === "success" ? "#22c55e" : "#ef4444";
+    let iconClass = type === "success" ? "fa-check-circle" : "fa-times-circle";
     let modalHtml = `
       <div class="elegant-modal-overlay" id="alertModal">
         <div class="elegant-modal-card">
-          <div class="elegant-modal-icon" style="background: ${type === 'success' ? 'rgba(34,197,94,0.15)' : (type === 'error' ? 'rgba(239,68,68,0.15)' : 'rgba(59,130,246,0.15)')}">
+          <div class="elegant-modal-icon" style="background: ${type === 'success' ? 'rgba(34,197,94,0.15)' : 'rgba(239,68,68,0.15)'}">
             <i class="fas ${iconClass}" style="font-size:42px; color:${iconColor}"></i>
           </div>
           <h3>${title}</h3>
@@ -479,53 +399,44 @@
           </div>
           <h3>${title}</h3>
           <div class="elegant-modal-message">${message}</div>
-          <div class="${isDanger ? 'elegant-modal-warning' : 'elegant-modal-info'}">
-            <i class="fas ${isDanger ? 'fa-trash-alt' : 'fa-info-circle'}"></i> ${isDanger ? 'Data yang dihapus tidak dapat dikembalikan' : 'Konfirmasi tindakan Anda'}
-          </div>
           <div class="elegant-modal-actions">
             <button class="btn-modal-cancel" id="modalCancelBtn">Batal</button>
-            <button class="btn-modal-confirm" id="modalConfirmBtn">Ya, ${title.split(' ')[0]}</button>
+            <button class="btn-modal-confirm" id="modalConfirmBtn">Ya</button>
           </div>
         </div>
       </div>
     `;
     document.body.insertAdjacentHTML("beforeend", modalHtml);
     pendingAction = action;
-    document.getElementById("modalCancelBtn").onclick = () => { document.getElementById("elegantModal").remove(); pendingAction = null; };
-    document.getElementById("modalConfirmBtn").onclick = async () => { 
-      document.getElementById("elegantModal").remove(); 
-      await executeAction(pendingAction);
-      pendingAction = null;
+    document.getElementById("modalCancelBtn").onclick = () => { document.getElementById("elegantModal").remove(); };
+    document.getElementById("modalConfirmBtn").onclick = async () => {
+      document.getElementById("elegantModal").remove();
+      if (pendingAction === 'tutup') await tutupVoting();
+      else if (pendingAction === 'buka') await bukaVoting();
+      else if (pendingAction === 'reset') await resetData();
     };
   }
 
-  async function executeAction(action) {
-    if (action === 'tutup') {
-      showLoading("Menutup voting...");
-      try {
-        await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "closeVoting" }) });
-        hideLoading();
-        showAlertModal("Berhasil", "Voting telah ditutup.", "success");
-        loadAdminData();
-      } catch(e) { hideLoading(); showAlertModal("Error", "Gagal menutup voting", "error"); }
-    } else if (action === 'buka') {
-      showLoading("Membuka voting...");
-      try {
-        await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "openVoting" }) });
-        hideLoading();
-        showAlertModal("Berhasil", "Voting telah dibuka.", "success");
-        loadAdminData();
-      } catch(e) { hideLoading(); showAlertModal("Error", "Gagal membuka voting", "error"); }
-    } else if (action === 'reset') {
-      showLoading("Meriset data...");
-      try {
-        const resp = await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "resetPemilih" }) });
-        const result = await resp.json();
-        hideLoading();
-        showAlertModal("Reset Berhasil", result.message, "success");
-        loadAdminData();
-      } catch(e) { hideLoading(); showAlertModal("Error", "Gagal mereset data", "error"); }
-    }
+  async function tutupVoting() {
+    showLoading("Menutup voting...");
+    await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "closeVoting" }) });
+    hideLoading();
+    showAlertModal("Berhasil", "Voting ditutup", "success");
+    loadAdminData();
+  }
+  async function bukaVoting() {
+    showLoading("Membuka voting...");
+    await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "openVoting" }) });
+    hideLoading();
+    showAlertModal("Berhasil", "Voting dibuka", "success");
+    loadAdminData();
+  }
+  async function resetData() {
+    showLoading("Meriset data...");
+    await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "resetPemilih" }) });
+    hideLoading();
+    showAlertModal("Berhasil", "Data telah direset", "success");
+    loadAdminData();
   }
 
   function switchTab(tab) {
@@ -573,7 +484,7 @@
       let html = "";
       data.forEach(calon => {
         let foto = calon.foto || `https://ui-avatars.com/api/?background=2563eb&color=fff&rounded=true&size=120&name=${encodeURIComponent(calon.nama)}`;
-        html += `<div class="col-md-6 col-lg-4 mb-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}"></div><div class="card-body-custom p-3"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6><i class="fas fa-eye"></i> Visi</h6><p>${escapeHtml(calon.visi)}</p></div><div class="visi-misi-box"><h6><i class="fas fa-bullhorn"></i> Misi</h6><p>${escapeHtml(calon.misi)}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}"><i class="fas fa-vote-yea"></i> Pilih</button></div></div></div>`;
+        html += `<div class="col-md-6 col-lg-4 mb-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}"></div><div class="card-body-custom p-3"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6>Visi</h6><p>${escapeHtml(calon.visi)}</p></div><div class="visi-misi-box"><h6>Misi</h6><p>${escapeHtml(calon.misi)}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}">Pilih</button></div></div></div>`;
       });
       document.getElementById("listCalon").innerHTML = html;
       document.getElementById("calonContainer").style.display = "block";
@@ -592,8 +503,7 @@
         <div class="elegant-modal-card">
           <div class="elegant-modal-icon" style="background: rgba(59,130,246,0.15)"><i class="fas fa-ballot" style="font-size:42px; color:#60a5fa"></i></div>
           <h3>Konfirmasi Pilihan</h3>
-          <div class="elegant-modal-message">Yakin memilih <strong style="color:#60a5fa;">${namaCalon}</strong> sebagai Ketua Komite?</div>
-          <div class="elegant-modal-info"><i class="fas fa-lock"></i> Suara tidak dapat diubah</div>
+          <div class="elegant-modal-message">Yakin memilih <strong>${namaCalon}</strong> sebagai Ketua Komite?</div>
           <div class="elegant-modal-actions"><button class="btn-modal-cancel" id="confirmCancelBtn">Batal</button><button class="btn-modal-confirm" id="confirmVoteBtn">Ya, Pilih</button></div>
         </div>
       </div>
@@ -647,7 +557,7 @@
       });
       document.getElementById("hasilTableAdmin").innerHTML = html;
       if (voteChartInstance) voteChartInstance.destroy();
-      voteChartInstance = new Chart(document.getElementById('voteChart'), { type: 'bar', data: { labels: arr.map(d => d.nama.length > 15 ? d.nama.slice(0,12)+'...' : d.nama), datasets: [{ label: 'Suara', data: arr.map(d => d.suara), backgroundColor: '#3b82f6', borderRadius: 10 }] }, options: { responsive: true, maintainAspectRatio: true, scales: { y: { beginAtZero: true, grid: { color: '#1e3a5f' }, ticks: { color: '#94a3b8' } }, x: { ticks: { color: '#94a3b8' } } }, plugins: { legend: { labels: { color: '#cbd5e1' } } } } });
+      voteChartInstance = new Chart(document.getElementById('voteChart'), { type: 'bar', data: { labels: arr.map(d => d.nama.length > 15 ? d.nama.slice(0,12)+'...' : d.nama), datasets: [{ label: 'Suara', data: arr.map(d => d.suara), backgroundColor: '#3b82f6', borderRadius: 10 }] }, options: { responsive: true } });
     } catch(e) { console.error(e); }
   }
 
@@ -663,7 +573,6 @@
     a.href = URL.createObjectURL(blob);
     a.download = `HASIL_VOTING_${new Date().toISOString().slice(0,19)}.xls`;
     a.click();
-    showAlertModal("Berhasil", "File Excel berhasil diunduh", "success");
   }
 
   function adminLogout() { isAdminMode = false; if (adminRefreshInterval) clearInterval(adminRefreshInterval); document.getElementById("adminDashboard").style.display = "none"; document.getElementById("authContainer").style.display = "block"; switchTab("pemilih"); }
