@@ -681,4 +681,13 @@
     a.href = URL.createObjectURL(blob);
     a.download = `HASIL_VOTING_KOMITE_${new Date().toISOString().slice(0,19).replace(/:/g, '-')}.xls`;
     a.click();
-    URL.revokeObject
+    URL.revokeObjectURL(a.href);
+    alert("File Excel berhasil diunduh dengan format tabel bergaris!");
+  }
+  
+  function adminLogout() { isAdminMode=false; if(adminRefreshInterval) clearInterval(adminRefreshInterval); document.getElementById("adminDashboard").style.display="none"; document.getElementById("authContainer").style.display="block"; document.getElementById("adminUsername").value=""; document.getElementById("adminPassword").value=""; switchTab("pemilih"); }
+  function kembaliHome() { location.reload(); }
+  function escapeHtml(str) { if(!str) return ""; return str.replace(/[&<>]/g, function(m){ if(m==='&') return '&amp;'; if(m==='<') return '&lt;'; if(m==='>') return '&gt;'; return m;}); }
+</script>
+</body>
+</html>
