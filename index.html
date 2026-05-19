@@ -6,819 +6,450 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Poppins', 'Segoe UI', sans-serif;
+      font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #0a0f2a 0%, #0d1b5e 30%, #1a237e 60%, #1565c0 100%);
       min-height: 100vh;
       padding: 20px;
-      position: relative;
     }
+    .container { max-width: 1200px; margin: 0 auto; }
     
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.08) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 1;
-    }
-
     /* HEADER */
-    .header {
-      text-align: center;
-      color: white;
-      margin-bottom: 40px;
-      text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
-      animation: fadeInDown 0.8s ease;
-    }
-
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
+    .header { text-align: center; color: white; margin-bottom: 30px; }
     .logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.95);
-      margin-bottom: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      background: white;
-      object-fit: cover;
-      transition: transform 0.3s;
+      width: 110px; height: 110px; border-radius: 50%;
+      border: 4px solid white; margin-bottom: 15px;
+      background: white; object-fit: cover;
     }
-
-    .logo:hover {
-      transform: scale(1.05);
-    }
-
-    .header h1 {
-      font-size: 34px;
-      letter-spacing: 3px;
-      font-weight: 800;
-      margin-bottom: 5px;
-      background: linear-gradient(135deg, #fff, #e3f2fd);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .header h2 {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 5px;
-      opacity: 0.95;
-    }
-
-    .header p {
-      font-size: 16px;
-      opacity: 0.85;
-      letter-spacing: 1px;
-    }
-
-    /* REAL TIME CLOCK */
-    .datetime-container {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      border-radius: 50px;
-      padding: 10px 25px;
-      margin-top: 15px;
-      display: inline-block;
-      text-align: center;
-      font-weight: 500;
-    }
-
-    .date-text {
-      font-size: 14px;
-      opacity: 0.9;
-    }
-
-    .time-text {
-      font-size: 20px;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-
-    /* CARD LOGIN - BIRU */
-    .card {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-      border-radius: 30px;
-      padding: 40px 35px;
-      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-      max-width: 480px;
-      margin: 0 auto;
-      animation: fadeInUp 0.6s ease;
-      border: 1px solid rgba(21,101,192,0.2);
-    }
-
-    .card h3 {
-      text-align: center;
-      background: linear-gradient(135deg, #1a237e, #1565c0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .header h1 { font-size: 28px; letter-spacing: 2px; }
+    .header h2 { font-size: 20px; font-weight: 500; }
+    .header p { font-size: 14px; opacity: 0.9; }
+    
+    /* TAB STYLE */
+    .tab-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
       margin-bottom: 30px;
-      font-size: 28px;
-      font-weight: 700;
     }
-
-    /* INPUT BIRU */
+    .tab-btn {
+      padding: 12px 35px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      backdrop-filter: blur(5px);
+    }
+    .tab-btn.active {
+      background: white;
+      color: #1a237e;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .tab-btn:hover { transform: translateY(-2px); background: rgba(255,255,255,0.3); }
+    
+    /* CARD */
+    .card {
+      background: rgba(255,255,255,0.97);
+      border-radius: 30px;
+      padding: 35px;
+      max-width: 450px;
+      margin: 0 auto;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    .card h3 { text-align: center; color: #1a237e; margin-bottom: 25px; font-size: 24px; }
+    
     input {
       width: 100%;
-      padding: 16px 20px;
-      margin: 12px 0;
-      border: 2px solid #1a237e20;
+      padding: 14px 18px;
+      margin: 10px 0;
+      border: 2px solid #1a237e30;
       border-radius: 25px;
-      font-size: 16px;
-      transition: all 0.3s;
-      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
       background: #f0f4fc;
+      transition: all 0.3s;
     }
-
     input:focus {
       outline: none;
       border-color: #1565c0;
       background: white;
-      box-shadow: 0 0 0 4px rgba(21,101,192,0.2);
+      box-shadow: 0 0 0 3px rgba(21,101,192,0.2);
     }
-
-    input::placeholder {
-      color: #1a237e80;
-      font-weight: 400;
-    }
-
-    /* BUTTON BIRU */
+    
     button {
       width: 100%;
-      padding: 16px;
-      margin-top: 15px;
+      padding: 14px;
+      margin-top: 10px;
       border: none;
-      border-radius: 30px;
+      border-radius: 25px;
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 600;
       cursor: pointer;
-      transition: all 0.3s ease;
-      font-family: 'Poppins', sans-serif;
+      transition: all 0.3s;
     }
-
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-    }
-
-    button:active {
-      transform: translateY(0);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #1a237e, #1565c0);
-      color: white;
-    }
-
-    .btn-secondary {
-      background: linear-gradient(135deg, #e8eaf6, #c5cae9);
-      color: #1a237e;
-      border: 1px solid #1a237e30;
-    }
-
-    .btn-vote {
-      background: linear-gradient(135deg, #2e7d32, #43a047);
-      color: white;
-      margin-top: 15px;
-    }
-
-    .btn-danger {
-      background: linear-gradient(135deg, #c62828, #e53935);
-      color: white;
-    }
-
-    .btn-success {
-      background: linear-gradient(135deg, #2e7d32, #43a047);
-      color: white;
-    }
-
-    .btn-logout {
-      background: linear-gradient(135deg, #455a64, #37474f);
-      color: white;
-      width: auto;
-      padding: 10px 30px;
-      margin: 0;
-    }
-
+    button:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .btn-primary { background: linear-gradient(135deg, #1a237e, #1565c0); color: white; }
+    .btn-secondary { background: #eceff1; color: #1a237e; }
+    .btn-vote { background: linear-gradient(135deg, #2e7d32, #43a047); color: white; }
+    .btn-danger { background: linear-gradient(135deg, #c62828, #e53935); color: white; }
+    .btn-success { background: linear-gradient(135deg, #2e7d32, #43a047); color: white; }
+    
     .message {
       text-align: center;
-      margin-top: 20px;
-      padding: 12px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: 500;
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 15px;
+      font-size: 13px;
     }
-
-    .message.error {
-      background: linear-gradient(135deg, #ffebee, #ffcdd2);
-      color: #c62828;
+    .message.error { background: #ffebee; color: #c62828; }
+    .message.success { background: #e8f5e9; color: #2e7d32; }
+    .message.info { background: #e3f2fd; color: #1565c0; }
+    
+    /* LOADING SPINNER */
+    .loading-spinner {
+      text-align: center;
+      padding: 40px;
+      color: white;
     }
-
-    .message.success {
-      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-      color: #2e7d32;
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+      margin: 0 auto 15px;
     }
-
-    .message.info {
-      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
-      color: #1565c0;
-    }
-
-    /* CANDIDATES GRID */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    /* GRID CALON */
     .candidates-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 30px;
-      margin-top: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
     }
-
     .candidate-card {
       background: white;
-      border-radius: 25px;
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-      transition: all 0.4s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      transition: transform 0.3s;
     }
-
-    .candidate-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 25px 45px rgba(0,0,0,0.3);
-    }
-
+    .candidate-card:hover { transform: translateY(-5px); }
     .candidate-card img {
       width: 100%;
-      height: 280px;
+      height: 250px;
       object-fit: cover;
-      background: linear-gradient(135deg, #e0e0e0, #f5f5f5);
     }
-
     .candidate-card h4 {
-      padding: 18px 18px 8px 18px;
+      padding: 15px;
       background: linear-gradient(135deg, #1a237e, #283593);
       color: white;
-      font-size: 18px;
-      font-weight: 700;
-      margin: 0;
+      font-size: 16px;
     }
-
     .visi-misi {
-      padding: 18px;
-      font-size: 13px;
-      line-height: 1.7;
+      padding: 15px;
+      font-size: 12px;
+      line-height: 1.6;
       color: #424242;
-      min-height: 220px;
-      background: #fafafa;
+      max-height: 200px;
+      overflow-y: auto;
     }
-
-    .visi-misi strong {
-      color: #1a237e;
-      display: block;
-      margin-top: 12px;
-      margin-bottom: 5px;
-      font-size: 14px;
-    }
-
-    .visi-misi p {
-      margin-bottom: 10px;
-      text-align: justify;
-    }
-
+    .visi-misi strong { color: #1a237e; display: block; margin-top: 10px; }
+    .visi-misi p { margin-bottom: 8px; text-align: justify; }
+    
     .welcome-banner {
-      background: linear-gradient(135deg, rgba(255,255,255,0.98), rgba(255,255,255,0.95));
-      border-radius: 25px;
-      padding: 25px;
-      margin-bottom: 30px;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    }
-
-    .welcome-banner h3 {
-      background: linear-gradient(135deg, #1a237e, #1565c0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 8px;
-      font-size: 24px;
-    }
-
-    /* ADMIN PANEL */
-    .admin-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(255,255,255,0.96);
-      padding: 18px 28px;
-      border-radius: 25px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .admin-header h3 {
-      background: linear-gradient(135deg, #1a237e, #1565c0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      font-size: 24px;
-      font-weight: 700;
-    }
-
-    .voting-control {
-      display: flex;
-      gap: 18px;
-      margin-bottom: 35px;
-      flex-wrap: wrap;
-    }
-
-    .voting-control button {
-      flex: 1;
-      min-width: 160px;
-    }
-
-    .chart-container {
-      background: white;
-      border-radius: 25px;
-      padding: 25px;
-      margin-bottom: 35px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    canvas {
-      max-height: 400px;
-      width: 100%;
-    }
-
-    .rekap-container {
-      background: white;
-      border-radius: 25px;
-      padding: 25px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
-
-    .rekap-container h4 {
-      background: linear-gradient(135deg, #1a237e, #1565c0);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      padding: 20px;
       margin-bottom: 20px;
-      font-size: 20px;
-      font-weight: 700;
+      text-align: center;
     }
-
-    .rekap-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .rekap-table th,
-    .rekap-table td {
-      padding: 14px 12px;
-      text-align: left;
-      border-bottom: 1px solid #e8e8e8;
-    }
-
-    .rekap-table th {
-      background: linear-gradient(135deg, #1a237e, #283593);
-      color: white;
-      font-weight: 600;
-    }
-
-    .rekap-table tr:hover {
-      background: #f5f5f5;
-    }
-
-    .total-row {
-      background: linear-gradient(135deg, #e8eaf6, #c5cae9);
-      font-weight: bold;
-    }
-
-    .winner-row {
-      background: linear-gradient(135deg, #fff8e1, #ffecb3);
-    }
-
-    .vote-count {
-      font-weight: bold;
-      color: #1565c0;
-      font-size: 18px;
-    }
-
+    .welcome-banner h3 { color: #1a237e; }
+    
+    /* ADMIN PANEL */
     .stats-card {
       display: flex;
       justify-content: space-around;
       background: linear-gradient(135deg, #1a237e, #0d47a1);
-      border-radius: 25px;
-      padding: 25px;
-      margin-bottom: 25px;
+      border-radius: 20px;
+      padding: 20px;
+      margin-bottom: 20px;
       color: white;
       flex-wrap: wrap;
-      gap: 20px;
     }
-
-    .stat-item {
-      text-align: center;
-      flex: 1;
-      min-width: 110px;
-    }
-
-    .stat-label {
-      display: block;
-      font-size: 14px;
-      opacity: 0.9;
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-
-    .stat-value {
-      display: block;
-      font-size: 36px;
-      font-weight: 800;
-    }
-
+    .stat-item { text-align: center; flex: 1; }
+    .stat-value { font-size: 32px; font-weight: bold; }
+    .voting-control { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+    .voting-control button { flex: 1; }
+    .chart-container { background: white; border-radius: 20px; padding: 20px; margin-bottom: 25px; }
+    .rekap-container { background: white; border-radius: 20px; padding: 20px; }
+    .rekap-table { width: 100%; border-collapse: collapse; }
+    .rekap-table th, .rekap-table td { padding: 12px; text-align: left; border-bottom: 1px solid #eee; }
+    .rekap-table th { background: #1a237e; color: white; }
+    .total-row { background: #e8eaf6; font-weight: bold; }
+    
     @media (max-width: 768px) {
-      body { padding: 15px; }
-      .candidates-grid { grid-template-columns: 1fr; gap: 20px; }
-      .header h1 { font-size: 24px; }
-      .header h2 { font-size: 18px; }
-      .card { margin: 0 5px; padding: 30px 22px; }
-      .stat-value { font-size: 28px; }
-      .voting-control { flex-direction: column; }
-      .voting-control button { width: 100%; }
-      .admin-header { flex-direction: column; text-align: center; }
-      .time-text { font-size: 16px; }
+      .candidates-grid { grid-template-columns: 1fr; }
+      .stat-value { font-size: 24px; }
     }
   </style>
   <title>Voting Komite SMPN 2 Kawali</title>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://via.placeholder.com/120?text=Logo'">
-      <h1>PEMILIHAN KOMITE</h1>
-      <h2>SMP NEGERI 2 KAWALI</h2>
-      <p>TAHUN 2026</p>
-      <div class="datetime-container" id="datetimeDisplay">
-        <div class="date-text" id="dateText">Memuat...</div>
-        <div class="time-text" id="timeText">--:--:--</div>
-      </div>
-    </div>
+<div class="container">
+  <div class="header">
+    <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo" class="logo" onerror="this.src='https://placehold.co/110x110/1a237e/white?text=Logo'">
+    <h1>PEMILIHAN KOMITE SEKOLAH</h1>
+    <h2>SMPN 2 KAWALI</h2>
+    <p>Masa Bakti 2026–2031</p>
+  </div>
 
-    <!-- FORM LOGIN PEMILIH -->
+  <!-- TAB PEMILIH & ADMIN -->
+  <div class="tab-container">
+    <button class="tab-btn active" onclick="showTab('pemilih')">🗳️ Pemilih</button>
+    <button class="tab-btn" onclick="showTab('admin')">👑 Admin</button>
+  </div>
+
+  <!-- PANEL PEMILIH -->
+  <div id="panelPemilih">
     <div id="loginForm" class="card">
       <h3>🔐 LOGIN PEMILIH</h3>
-      <input type="text" id="nama" placeholder="Nama Lengkap" required>
-      <input type="text" id="alamat" placeholder="Alamat" required>
-      <input type="password" id="password" placeholder="Password (voting2026)" required>
+      <input type="text" id="nama" placeholder="Nama Lengkap">
+      <input type="text" id="alamat" placeholder="Alamat">
+      <input type="password" id="password" placeholder="Password">
       <button onclick="doLogin()" class="btn-primary">✅ MASUK & VOTING</button>
       <div id="loginMessage" class="message"></div>
-      <button onclick="showAdminLogin()" class="btn-secondary" style="margin-top: 15px;">👑 Login sebagai Admin</button>
     </div>
 
-    <!-- FORM LOGIN ADMIN -->
-    <div id="adminLoginForm" class="card" style="display:none;">
-      <h3>👑 LOGIN ADMIN</h3>
-      <input type="text" id="adminUser" placeholder="Username" required>
-      <input type="password" id="adminPass" placeholder="Password" required>
-      <button onclick="doAdminLogin()" class="btn-primary">MASUK</button>
-      <div id="adminMessage" class="message"></div>
-      <button onclick="showPemilihLogin()" class="btn-secondary">← Kembali ke Login Pemilih</button>
-    </div>
-
-    <!-- PANEL VOTING PEMILIH -->
     <div id="votingPanel" style="display:none;">
       <div class="welcome-banner">
         <h3>Selamat Datang, <span id="userName"></span>!</h3>
-        <p>Silakan pilih salah satu calon komite di bawah ini dengan bijak</p>
-        <div class="datetime-container" style="background:#1a237e20; margin-top:10px;">
-          <div class="time-text" id="votingTimeText" style="font-size:14px;">--:--:--</div>
-        </div>
+        <p>Silakan pilih calon komite favorit Anda</p>
       </div>
-      <div class="candidates-grid" id="candidatesGrid"></div>
-      <button onclick="logout()" class="btn-secondary" style="margin-top: 25px;">← Keluar</button>
-    </div>
-
-    <!-- PANEL ADMIN -->
-    <div id="adminPanel" style="display:none;">
-      <div class="admin-header">
-        <h3>📊 DASHBOARD ADMIN</h3>
-        <button onclick="adminLogout()" class="btn-logout">Keluar</button>
+      <div id="candidatesGrid" class="candidates-grid">
+        <div class="loading-spinner"><div class="spinner"></div><p>Memuat data calon...</p></div>
       </div>
-      
-      <div class="stats-card" id="statsCard">
-        <div class="stat-item">
-          <span class="stat-label">📋 Total Pemilih Terdaftar</span>
-          <span class="stat-value" id="totalPemilih">0</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">✅ Total Suara Masuk</span>
-          <span class="stat-value" id="totalSuara">0</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-label">📈 Partisipasi</span>
-          <span class="stat-value" id="persentase">0%</span>
-        </div>
-      </div>
-
-      <div class="voting-control">
-        <button id="toggleVotingBtn" class="btn-control" onclick="toggleVoting()">Loading...</button>
-        <button onclick="resetVoting()" class="btn-danger">🔄 Reset Semua Voting</button>
-      </div>
-
-      <div class="chart-container">
-        <canvas id="hasilChart"></canvas>
-      </div>
-
-      <div class="rekap-container">
-        <h4>🏆 HASIL REKAP SUARA</h4>
-        <div id="rekapSuara"></div>
-      </div>
+      <button onclick="logout()" class="btn-secondary" style="margin-top:20px;">← Keluar</button>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
-  <script>
-    let currentUser = null;
-    let calonData = [];
-    let hasilChart = null;
+  <!-- PANEL ADMIN -->
+  <div id="panelAdmin" style="display:none;">
+    <div id="adminLoginForm" class="card">
+      <h3>👑 LOGIN ADMIN</h3>
+      <input type="text" id="adminUser" placeholder="Username">
+      <input type="password" id="adminPass" placeholder="Password">
+      <button onclick="doAdminLogin()" class="btn-primary">MASUK</button>
+      <div id="adminMessage" class="message"></div>
+    </div>
 
-    // ==================== REAL TIME CLOCK ====================
-    function updateRealTimeClock() {
-      const now = new Date();
-      const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        timeZone: 'Asia/Jakarta'
-      };
-      const tanggal = now.toLocaleDateString('id-ID', options);
-      const jam = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'Asia/Jakarta' });
-      
-      document.getElementById('dateText').innerHTML = tanggal;
-      document.getElementById('timeText').innerHTML = jam;
-      if (document.getElementById('votingTimeText')) {
-        document.getElementById('votingTimeText').innerHTML = jam;
-      }
+    <div id="adminPanel" style="display:none;">
+      <div class="stats-card">
+        <div class="stat-item"><span class="stat-label">📋 Total Pemilih</span><span class="stat-value" id="totalPemilih">0</span></div>
+        <div class="stat-item"><span class="stat-label">✅ Suara Masuk</span><span class="stat-value" id="totalSuara">0</span></div>
+        <div class="stat-item"><span class="stat-label">📈 Partisipasi</span><span class="stat-value" id="persentase">0%</span></div>
+      </div>
+      <div class="voting-control">
+        <button id="toggleVotingBtn" onclick="toggleVoting()">Loading...</button>
+        <button onclick="resetVoting()" class="btn-danger">🔄 Reset Voting</button>
+      </div>
+      <div class="chart-container"><canvas id="hasilChart"></canvas></div>
+      <div class="rekap-container"><h4>🏆 HASIL REKAP SUARA</h4><div id="rekapSuara"></div></div>
+      <button onclick="adminLogout()" class="btn-secondary" style="margin-top:20px;">← Keluar dari Admin</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<script>
+  let currentUser = null;
+  let hasilChart = null;
+
+  function showTab(tab) {
+    if (tab === 'pemilih') {
+      document.getElementById('panelPemilih').style.display = 'block';
+      document.getElementById('panelAdmin').style.display = 'none';
+      document.querySelectorAll('.tab-btn')[0].classList.add('active');
+      document.querySelectorAll('.tab-btn')[1].classList.remove('active');
+    } else {
+      document.getElementById('panelPemilih').style.display = 'none';
+      document.getElementById('panelAdmin').style.display = 'block';
+      document.querySelectorAll('.tab-btn')[1].classList.add('active');
+      document.querySelectorAll('.tab-btn')[0].classList.remove('active');
     }
-    setInterval(updateRealTimeClock, 1000);
-    updateRealTimeClock();
+  }
 
-    // ==================== LOGIN PEMILIH ====================
-    async function doLogin() {
-      const nama = document.getElementById('nama').value.trim();
-      const alamat = document.getElementById('alamat').value.trim();
-      const password = document.getElementById('password').value;
+  // ==================== PEMILIH ====================
+  async function doLogin() {
+    const nama = document.getElementById('nama').value.trim();
+    const alamat = document.getElementById('alamat').value.trim();
+    const password = document.getElementById('password').value;
 
-      if (!nama) { showMessage('loginMessage', '⚠️ Nama lengkap harus diisi!', 'error'); return; }
-      if (!alamat) { showMessage('loginMessage', '⚠️ Alamat harus diisi!', 'error'); return; }
-      if (!password) { showMessage('loginMessage', '⚠️ Password harus diisi!', 'error'); return; }
+    if (!nama) { showMessage('loginMessage', 'Nama harus diisi!', 'error'); return; }
+    if (!alamat) { showMessage('loginMessage', 'Alamat harus diisi!', 'error'); return; }
+    if (!password) { showMessage('loginMessage', 'Password harus diisi!', 'error'); return; }
 
-      showMessage('loginMessage', '⏳ Memproses...', 'info');
-      
-      google.script.run
-        .withSuccessHandler((res) => {
-          if (res.success) {
-            currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
-            showVotingPanel();
-          } else {
-            showMessage('loginMessage', res.message, 'error');
-          }
-        })
-        .withFailureHandler(() => showMessage('loginMessage', 'Koneksi error. Coba lagi.', 'error'))
-        .loginPemilih(nama, alamat, password);
-    }
-
-    async function showVotingPanel() {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('adminLoginForm').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'none';
-      document.getElementById('votingPanel').style.display = 'block';
-      document.getElementById('userName').innerText = currentUser.nama;
-
-      const isOpen = await google.script.run.getVotingStatus();
-      if (!isOpen) {
-        alert('⚠️ Voting sedang ditutup oleh admin. Silakan coba lagi nanti.');
-        logout();
-        return;
-      }
-      loadCandidates();
-    }
-
-    async function loadCandidates() {
-      google.script.run
-        .withSuccessHandler((data) => {
-          calonData = data;
-          const grid = document.getElementById('candidatesGrid');
-          grid.innerHTML = '';
-          
-          if (calonData.length === 0) {
-            grid.innerHTML = '<p style="text-align:center;color:white;">Data calon belum tersedia</p>';
-            return;
-          }
-          
-          calonData.forEach(calon => {
-            const card = document.createElement('div');
-            card.className = 'candidate-card';
-            card.innerHTML = `
-              <img src="${calon.foto}" alt="${calon.nama}" onerror="this.src='https://via.placeholder.com/300x250?text=Gambar+Tidak+Tersedia'">
-              <h4>${calon.nama}</h4>
-              <div class="visi-misi">
-                <strong>🌟 VISI</strong>
-                <p>${calon.visi}</p>
-                <strong>📌 MISI</strong>
-                <p>${calon.misi}</p>
-              </div>
-              <button onclick="vote(${calon.id})" class="btn-vote">🗳️ PILIH CALON INI</button>
-            `;
-            grid.appendChild(card);
-          });
-        })
-        .getCalon();
-    }
-
-    async function vote(calonId) {
-      const confirmVote = confirm(`Anda yakin ingin memilih calon ini?\n\nSuara Anda tidak dapat diubah setelah dipilih.`);
-      if (!confirmVote) return;
-      
-      google.script.run
-        .withSuccessHandler((res) => {
-          if (res.success) {
-            alert('✅ ' + res.message);
-            logout();
-          } else {
-            alert('❌ ' + res.message);
-          }
-        })
-        .vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
-    }
-
-    // ==================== LOGIN ADMIN ====================
-    function showAdminLogin() {
-      document.getElementById('loginForm').style.display = 'none';
-      document.getElementById('adminLoginForm').style.display = 'block';
-      document.getElementById('adminUser').value = '';
-      document.getElementById('adminPass').value = '';
-    }
-
-    function showPemilihLogin() {
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('adminLoginForm').style.display = 'none';
-      document.getElementById('adminPanel').style.display = 'none';
-    }
-
-    async function doAdminLogin() {
-      const username = document.getElementById('adminUser').value;
-      const password = document.getElementById('adminPass').value;
-
-      if (!username || !password) {
-        showMessage('adminMessage', 'Isi username dan password!', 'error');
-        return;
-      }
-
-      google.script.run
-        .withSuccessHandler((res) => {
-          if (res.success) {
-            document.getElementById('adminLoginForm').style.display = 'none';
-            document.getElementById('adminPanel').style.display = 'block';
-            loadAdminData();
-          } else {
-            showMessage('adminMessage', 'Username atau password salah!', 'error');
-          }
-        })
-        .loginAdmin(username, password);
-    }
-
-    async function loadAdminData() {
-      const status = await google.script.run.getVotingStatus();
-      const toggleBtn = document.getElementById('toggleVotingBtn');
-      toggleBtn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
-      toggleBtn.className = status ? 'btn-danger' : 'btn-success';
-      
-      const stat = await google.script.run.getStatistik();
-      document.getElementById('totalPemilih').innerText = stat.totalPemilih;
-      document.getElementById('totalSuara').innerText = stat.totalSuara;
-      document.getElementById('persentase').innerText = stat.persentase + '%';
-      
-      const hasil = await google.script.run.getHasilVoting();
-      updateRekap(hasil);
-      updateChart(hasil);
-    }
-
-    function updateRekap(hasil) {
-      const container = document.getElementById('rekapSuara');
-      if (!hasil || hasil.length === 0) {
-        container.innerHTML = '<p style="text-align:center;">Belum ada suara masuk</p>';
-        return;
-      }
-      
-      let html = '<table class="rekap-table"><thead><tr><th>POSISI</th><th>NAMA CALON</th><th>SUARA</th><th>STATUS</th></tr></thead><tbody>';
-      hasil.forEach(calon => {
-        html += `<tr>
-          <td><strong>${calon.posisi || '−'}</strong></td>
-          <td>${calon.nama}</td>
-          <td><span class="vote-count">${calon.suara}</span> suara</td>
-          <td>${calon.suara > 0 ? '✓' : '−'}</td>
-        </tr>`;
-      });
-      const total = hasil.reduce((sum, c) => sum + c.suara, 0);
-      html += `<tr class="total-row"><td colspan="2"><strong>📊 TOTAL SUARA</strong></td><td colspan="2"><strong>${total} suara</strong></td></tr>`;
-      html += '</tbody></table>';
-      container.innerHTML = html;
-    }
-
-    function updateChart(hasil) {
-      const ctx = document.getElementById('hasilChart').getContext('2d');
-      if (hasilChart) hasilChart.destroy();
-      if (!hasil || hasil.length === 0) return;
-      
-      hasilChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels: hasil.map(c => c.nama.length > 20 ? c.nama.substring(0, 20) + '...' : c.nama),
-          datasets: [{
-            label: 'Jumlah Suara',
-            data: hasil.map(c => c.suara),
-            backgroundColor: ['#1a237e', '#283593', '#1565c0', '#1976d2', '#1e88e5'],
-            borderRadius: 10,
-            barPercentage: 0.7
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: true,
-          plugins: {
-            legend: { position: 'top' },
-            title: { display: true, text: '📊 GRAFIK HASIL VOTING', font: { size: 14, weight: 'bold' } }
-          },
-          scales: { y: { beginAtZero: true, ticks: { stepSize: 1, precision: 0 } } }
+    showMessage('loginMessage', '⏳ Memproses...', 'info');
+    
+    google.script.run
+      .withSuccessHandler((res) => {
+        if (res.success) {
+          currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
+          document.getElementById('loginForm').style.display = 'none';
+          document.getElementById('votingPanel').style.display = 'block';
+          document.getElementById('userName').innerText = currentUser.nama;
+          loadCandidates();
+        } else {
+          showMessage('loginMessage', res.message, 'error');
         }
-      });
-    }
+      })
+      .withFailureHandler(() => showMessage('loginMessage', 'Error koneksi!', 'error'))
+      .loginPemilih(nama, alamat, password);
+  }
 
-    async function toggleVoting() {
-      const currentStatus = await google.script.run.getVotingStatus();
-      const newStatus = await google.script.run.setVotingStatus(!currentStatus);
-      const toggleBtn = document.getElementById('toggleVotingBtn');
-      toggleBtn.innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
-      toggleBtn.className = newStatus ? 'btn-danger' : 'btn-success';
-      alert(newStatus ? '✅ Voting sekarang BUKA' : '❌ Voting sekarang TUTUP');
-    }
+  async function loadCandidates() {
+    const grid = document.getElementById('candidatesGrid');
+    grid.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><p>Memuat data calon...</p></div>';
+    
+    google.script.run
+      .withSuccessHandler((data) => {
+        if (!data || data.length === 0) {
+          grid.innerHTML = '<p style="text-align:center;">Data calon belum tersedia. Hubungi admin.</p>';
+          return;
+        }
+        grid.innerHTML = '';
+        data.forEach(calon => {
+          const card = document.createElement('div');
+          card.className = 'candidate-card';
+          card.innerHTML = `
+            <img src="${calon.foto}" alt="${calon.nama}" onerror="this.src='https://placehold.co/400x250/1a237e/white?text=${encodeURIComponent(calon.nama)}'">
+            <h4>${calon.nama}</h4>
+            <div class="visi-misi">
+              <strong>🌟 VISI</strong><p>${calon.visi.substring(0, 150)}${calon.visi.length > 150 ? '...' : ''}</p>
+              <strong>📌 MISI</strong><p>${calon.misi.substring(0, 150)}${calon.misi.length > 150 ? '...' : ''}</p>
+            </div>
+            <button onclick="vote(${calon.id})" class="btn-vote">🗳️ PILIH</button>
+          `;
+          grid.appendChild(card);
+        });
+      })
+      .withFailureHandler(() => {
+        grid.innerHTML = '<p style="text-align:center;color:red;">Gagal memuat data. Refresh halaman.</p>';
+      })
+      .getCalon();
+  }
 
-    async function resetVoting() {
-      const confirmReset = confirm('⚠️ PERINGATAN! ⚠️\n\nAnda yakin ingin mereset SEMUA data voting?\n\nSemua suara akan hilang dan tidak dapat dikembalikan!');
-      if (confirmReset) {
-        await google.script.run.resetVoting();
-        alert('✅ Voting berhasil direset!');
-        loadAdminData();
-      }
-    }
+  async function vote(calonId) {
+    if (!confirm('Yakin memilih calon ini? Suara tidak dapat diubah!')) return;
+    google.script.run
+      .withSuccessHandler((res) => {
+        alert(res.message);
+        if (res.success) logout();
+      })
+      .vote(currentUser.id, calonId, currentUser.nama, currentUser.alamat);
+  }
 
-    function logout() {
-      currentUser = null;
-      document.getElementById('votingPanel').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-      document.getElementById('nama').value = '';
-      document.getElementById('alamat').value = '';
-      document.getElementById('password').value = '';
-    }
+  function logout() {
+    currentUser = null;
+    document.getElementById('votingPanel').style.display = 'none';
+    document.getElementById('loginForm').style.display = 'block';
+    document.getElementById('nama').value = '';
+    document.getElementById('alamat').value = '';
+    document.getElementById('password').value = '';
+  }
 
-    function adminLogout() {
-      document.getElementById('adminPanel').style.display = 'none';
-      document.getElementById('loginForm').style.display = 'block';
-    }
+  // ==================== ADMIN ====================
+  async function doAdminLogin() {
+    const username = document.getElementById('adminUser').value;
+    const password = document.getElementById('adminPass').value;
+    google.script.run
+      .withSuccessHandler((res) => {
+        if (res.success) {
+          document.getElementById('adminLoginForm').style.display = 'none';
+          document.getElementById('adminPanel').style.display = 'block';
+          loadAdminData();
+        } else {
+          showMessage('adminMessage', 'Username/password salah!', 'error');
+        }
+      })
+      .loginAdmin(username, password);
+  }
 
-    function showMessage(elementId, message, type) {
-      const el = document.getElementById(elementId);
-      if (!el) return;
-      el.innerText = message;
-      el.className = `message ${type}`;
-      setTimeout(() => { if (el) { el.innerText = ''; el.className = 'message'; } }, 3000);
+  async function loadAdminData() {
+    const status = await google.script.run.getVotingStatus();
+    const toggleBtn = document.getElementById('toggleVotingBtn');
+    toggleBtn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+    toggleBtn.className = status ? 'btn-danger' : 'btn-success';
+    
+    const stat = await google.script.run.getStatistik();
+    document.getElementById('totalPemilih').innerText = stat.totalPemilih;
+    document.getElementById('totalSuara').innerText = stat.totalSuara;
+    document.getElementById('persentase').innerText = stat.persentase + '%';
+    
+    const hasil = await google.script.run.getHasilVoting();
+    updateRekap(hasil);
+    updateChart(hasil);
+  }
+
+  function updateRekap(hasil) {
+    const container = document.getElementById('rekapSuara');
+    if (!hasil || hasil.length === 0) { container.innerHTML = '<p>Belum ada suara</p>'; return; }
+    let html = '<table class="rekap-table"><tr><th>Posisi</th><th>Nama Calon</th><th>Suara</th></tr>';
+    hasil.forEach(c => { html += `<tr><td>${c.posisi || '-'}</td><td>${c.nama}</td><td>${c.suara}</td></tr>`; });
+    html += `<tr class="total-row"><td colspan="2">Total</td><td>${hasil.reduce((s,c)=>s+c.suara,0)}</td></tr></table>`;
+    container.innerHTML = html;
+  }
+
+  function updateChart(hasil) {
+    const ctx = document.getElementById('hasilChart').getContext('2d');
+    if (hasilChart) hasilChart.destroy();
+    if (!hasil || hasil.length === 0) return;
+    hasilChart = new Chart(ctx, {
+      type: 'bar',
+      data: { labels: hasil.map(c => c.nama.split(' ')[0]), datasets: [{ label: 'Suara', data: hasil.map(c => c.suara), backgroundColor: '#1a237e', borderRadius: 8 }] },
+      options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
+    });
+  }
+
+  async function toggleVoting() {
+    const status = await google.script.run.getVotingStatus();
+    const newStatus = await google.script.run.setVotingStatus(!status);
+    document.getElementById('toggleVotingBtn').innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+    alert(newStatus ? 'Voting DIBUKA' : 'Voting DITUTUP');
+  }
+
+  async function resetVoting() {
+    if (confirm('RESET semua data voting? TIDAK BISA DIURUNGKAN!')) {
+      await google.script.run.resetVoting();
+      alert('Voting telah direset!');
+      loadAdminData();
     }
-  </script>
+  }
+
+  function adminLogout() {
+    document.getElementById('adminPanel').style.display = 'none';
+    document.getElementById('adminLoginForm').style.display = 'block';
+    document.getElementById('adminUser').value = '';
+    document.getElementById('adminPass').value = '';
+    showTab('pemilih');
+  }
+
+  function showMessage(elId, msg, type) {
+    const el = document.getElementById(elId);
+    if (el) { el.innerText = msg; el.className = `message ${type}`; setTimeout(() => { el.innerText = ''; el.className = 'message'; }, 3000); }
+  }
+
+  // Cek status voting saat load
+  (async function() {
+    const status = await google.script.run.getVotingStatus();
+    console.log('Status voting:', status ? 'BUKA' : 'TUTUP');
+  })();
+</script>
 </body>
 </html>
