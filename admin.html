@@ -1,310 +1,541 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Admin Dashboard | E-Voting Komite SMPN 2 Kawali</title>
+  <!-- Bootstrap 5 + Font Awesome + Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-<title>Admin Voting Komite</title>
+    body {
+      background: linear-gradient(135deg, #eef2f9 0%, #e2e8f2 100%);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+    }
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    /* Login Admin Panel */
+    .admin-login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 10% 30%, #1a1a2e, #16213e);
+      position: relative;
+    }
+    .admin-login-card {
+      background: rgba(255,255,255,0.98);
+      backdrop-filter: blur(10px);
+      border-radius: 48px;
+      padding: 45px 40px;
+      max-width: 460px;
+      width: 90%;
+      box-shadow: 0 35px 60px rgba(0,0,0,0.3);
+      text-align: center;
+      animation: fadeInUp 0.4s ease;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .admin-login-icon {
+      background: #b91c1c20;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: #b91c1c;
+      font-size: 40px;
+    }
+    .admin-login-card h3 {
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 25px;
+    }
+    .admin-input {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 44px;
+      border: 1.5px solid #e2e8f0;
+      margin-bottom: 18px;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .admin-input:focus {
+      border-color: #b91c1c;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(185,28,28,0.2);
+    }
+    .btn-admin-login {
+      background: linear-gradient(105deg, #b91c1c, #dc3c3c);
+      border: none;
+      border-radius: 44px;
+      padding: 14px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      width: 100%;
+      transition: 0.25s;
+    }
+    .btn-admin-login:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.03);
+    }
+    .error-msg {
+      color: #dc2626;
+      font-size: 0.85rem;
+      margin-top: 12px;
+    }
 
-<style>
-
-body{
-    background:#f2f5f9;
-    font-family:Arial;
-}
-
-.header{
-    background:linear-gradient(135deg,#8b0000,#ff3b3b);
-    color:white;
-    padding:25px;
-    text-align:center;
-    border-radius:0 0 20px 20px;
-}
-
-.card-box{
-    background:white;
-    padding:20px;
-    border-radius:20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    margin-bottom:20px;
-}
-
-.big-number{
-    font-size:35px;
-    font-weight:bold;
-}
-
-.table{
-    background:white;
-}
-
-</style>
+    /* MAIN DASHBOARD (setelah login) */
+    .dashboard-wrapper {
+      display: none;
+    }
+    .admin-header {
+      background: linear-gradient(135deg, #8b0000, #b91c1c);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+    }
+    .admin-header h2 {
+      font-weight: 800;
+      font-size: 1.9rem;
+    }
+    .logout-btn {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      background: rgba(255,255,255,0.2);
+      border: none;
+      border-radius: 40px;
+      padding: 8px 18px;
+      color: white;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+    .logout-btn:hover {
+      background: rgba(255,255,255,0.35);
+    }
+    .card-dashboard {
+      background: white;
+      border-radius: 32px;
+      padding: 20px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+      height: 100%;
+    }
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #b91c1c;
+    }
+    .stat-label {
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #475569;
+    }
+    .btn-action {
+      border-radius: 40px;
+      padding: 10px 20px;
+      font-weight: 600;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .table-custom {
+      border-radius: 24px;
+      overflow: hidden;
+    }
+    .table-custom th {
+      background: #f1f5f9;
+      font-weight: 700;
+    }
+    .ranking-badge {
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      background: #b91c1c;
+      color: white;
+      border-radius: 30px;
+      text-align: center;
+      line-height: 32px;
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    .chart-container {
+      max-height: 300px;
+      margin-top: 15px;
+    }
+    .refresh-timer {
+      font-size: 0.7rem;
+      color: #64748b;
+    }
+    @media (max-width: 768px) {
+      .stat-number { font-size: 2rem; }
+      .admin-header h2 { font-size: 1.3rem; }
+      .logout-btn { top: 15px; right: 15px; padding: 6px 12px; font-size: 0.8rem; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="header">
-
-    <h2>ADMIN PANEL</h2>
-    <h4>PEMILIHAN KOMITE SMPN 2 KAWALI</h4>
-
+<!-- LOGIN ADMIN -->
+<div id="adminLoginContainer" class="admin-login-container">
+  <div class="admin-login-card">
+    <div class="admin-login-icon">
+      <i class="fas fa-user-shield"></i>
+    </div>
+    <h3>🔐 Admin Panel</h3>
+    <input type="text" id="adminUsername" class="admin-input" placeholder="Username" autocomplete="off">
+    <input type="password" id="adminPassword" class="admin-input" placeholder="Password">
+    <button class="btn-admin-login" onclick="adminLogin()">
+      <i class="fas fa-sign-in-alt"></i> Masuk Dashboard
+    </button>
+    <div id="loginError" class="error-msg"></div>
+  </div>
 </div>
 
-<div class="container mt-4">
+<!-- DASHBOARD UTAMA (setelah login) -->
+<div id="dashboardWrapper" class="dashboard-wrapper">
+  <div class="admin-header position-relative">
+    <button class="logout-btn" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Keluar</button>
+    <h2><i class="fas fa-chalkboard-user"></i> ADMIN PANEL | KOMITE SMPN 2 KAWALI</h2>
+    <p class="mb-0 mt-2"><i class="fas fa-chart-line"></i> Real-time monitoring & statistik suara</p>
+  </div>
 
-    <div class="row">
-
-        <div class="col-md-4">
-
-            <div class="card-box text-center">
-
-                <h5>Total Suara</h5>
-
-                <div class="big-number" id="totalSuara">0</div>
-
-            </div>
-
+  <div class="container mt-4 mb-5">
+    <!-- Statistik card -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="card-dashboard text-center">
+          <i class="fas fa-vote-yea fa-2x" style="color:#b91c1c;"></i>
+          <div class="stat-number" id="totalSuaraAdmin">0</div>
+          <div class="stat-label">Total Suara Masuk</div>
         </div>
-
-        <div class="col-md-4">
-
-            <div class="card-box text-center">
-
-                <h5>Status Voting</h5>
-
-                <div class="big-number" id="statusVoting">
-                    OPEN
-                </div>
-
-            </div>
-
+      </div>
+      <div class="col-md-4">
+        <div class="card-dashboard text-center">
+          <i class="fas fa-toggle-on fa-2x" style="color:#b91c1c;"></i>
+          <div class="stat-number" id="statusVotingAdmin" style="font-size:1.8rem; margin-top:10px;">--</div>
+          <div class="stat-label">Status Voting</div>
         </div>
-
-        <div class="col-md-4">
-
-            <div class="card-box text-center">
-
-                <button class="btn btn-danger w-100 mb-2"
-                onclick="tutupVoting()">
-                TUTUP VOTING
-                </button>
-
-                <button class="btn btn-success w-100"
-                onclick="bukaVoting()">
-                BUKA VOTING
-                </button>
-
-            </div>
-
+      </div>
+      <div class="col-md-4">
+        <div class="card-dashboard">
+          <button class="btn btn-danger btn-action" onclick="tutupVotingAdmin()">
+            <i class="fas fa-lock"></i> TUTUP VOTING
+          </button>
+          <button class="btn btn-success btn-action" onclick="bukaVotingAdmin()">
+            <i class="fas fa-lock-open"></i> BUKA VOTING
+          </button>
         </div>
-
+      </div>
     </div>
 
-    <div class="card-box">
-
-        <h4>HASIL REALTIME</h4>
-
-        <table class="table table-bordered">
-
-            <thead>
-
-                <tr>
-                    <th>Ranking</th>
-                    <th>Nama</th>
-                    <th>Suara</th>
-                    <th>Jabatan</th>
+    <!-- Grafik & Tabel Hasil -->
+    <div class="row g-4">
+      <div class="col-lg-5">
+        <div class="card-dashboard">
+          <h5 class="fw-bold"><i class="fas fa-chart-pie"></i> Grafik Perolehan Suara</h5>
+          <canvas id="voteChart" width="400" height="300" class="chart-container"></canvas>
+          <div class="refresh-timer text-end mt-2">Auto refresh setiap 5 detik</div>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="card-dashboard">
+          <h5 class="fw-bold"><i class="fas fa-trophy"></i> Hasil Realtime & Ranking</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered table-custom mt-2">
+              <thead>
+                <tr style="background:#f8fafc;">
+                  <th>Rank</th>
+                  <th>Nama Kandidat</th>
+                  <th>Perolehan Suara</th>
+                  <th>Jabatan</th>
                 </tr>
-
-            </thead>
-
-            <tbody id="hasilTable"></tbody>
-
-        </table>
-
+              </thead>
+              <tbody id="hasilTableAdmin"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="card-box">
-
-        <button class="btn btn-primary"
-        onclick="downloadExcel()">
-        DOWNLOAD EXCEL
-        </button>
-
-        <button class="btn btn-secondary"
-        onclick="window.print()">
-        PRINT
-        </button>
-
+    <!-- Export tools -->
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="card-dashboard d-flex gap-3 flex-wrap justify-content-between align-items-center">
+          <div>
+            <button class="btn btn-primary" onclick="downloadExcelAdmin()">
+              <i class="fas fa-file-excel"></i> Download Excel
+            </button>
+            <button class="btn btn-secondary ms-2" onclick="window.print()">
+              <i class="fas fa-print"></i> Print
+            </button>
+          </div>
+          <span class="text-muted small"><i class="fas fa-sync-alt"></i> Data otomatis diperbarui</span>
+        </div>
+      </div>
     </div>
-
+  </div>
 </div>
 
 <script>
+  // Konfigurasi API (sama dengan index)
+  const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
+  
+  // Credential admin (bisa diubah sesuai keinginan)
+  const ADMIN_CRED = { username: "admin", password: "admin123" };
+  
+  let voteChartInstance = null;
+  let autoRefreshInterval = null;
+  let isAdminLogged = false;
 
-const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
-
-// ==========================
-// LOAD HASIL
-// ==========================
-async function loadHasil(){
-
-    const response = await fetch(API_URL + "?action=getHasil");
-
-    const data = await response.json();
-
-    let arr = [];
-
-    for(let nama in data){
-
-        arr.push({
-            nama:nama,
-            suara:data[nama]
-        });
-
+  // -------------------- LOGIN ADMIN --------------------
+  function adminLogin() {
+    const user = document.getElementById("adminUsername").value.trim();
+    const pass = document.getElementById("adminPassword").value.trim();
+    const errorDiv = document.getElementById("loginError");
+    
+    if (user === ADMIN_CRED.username && pass === ADMIN_CRED.password) {
+      errorDiv.innerText = "";
+      isAdminLogged = true;
+      // Tampilkan dashboard
+      document.getElementById("adminLoginContainer").style.display = "none";
+      document.getElementById("dashboardWrapper").style.display = "block";
+      // Load data pertama kali
+      loadAdminHasil();
+      loadAdminStatus();
+      // Set auto refresh tiap 5 detik
+      if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+      autoRefreshInterval = setInterval(() => {
+        if (isAdminLogged) {
+          loadAdminHasil();
+          loadAdminStatus();
+        }
+      }, 5000);
+    } else {
+      errorDiv.innerText = "Username atau password salah!";
     }
-
-    arr.sort((a,b)=> b.suara - a.suara);
-
-    let total = 0;
-
-    let html = "";
-
-    arr.forEach((item,index)=>{
-
+  }
+  
+  function adminLogout() {
+    isAdminLogged = false;
+    if (autoRefreshInterval) clearInterval(autoRefreshInterval);
+    document.getElementById("dashboardWrapper").style.display = "none";
+    document.getElementById("adminLoginContainer").style.display = "flex";
+    document.getElementById("adminUsername").value = "";
+    document.getElementById("adminPassword").value = "";
+    document.getElementById("loginError").innerText = "";
+  }
+  
+  // -------------------- LOAD HASIL & GRAFIK --------------------
+  async function loadAdminHasil() {
+    if (!isAdminLogged) return;
+    try {
+      const response = await fetch(API_URL + "?action=getHasil");
+      const data = await response.json();
+      // data berbentuk { "Nama calon": jumlah_suara, ... }
+      let arr = [];
+      for (let nama in data) {
+        arr.push({ nama: nama, suara: data[nama] });
+      }
+      arr.sort((a,b) => b.suara - a.suara);
+      let total = 0;
+      let html = "";
+      arr.forEach((item, idx) => {
         total += item.suara;
-
         let jabatan = "";
-
-        if(index == 0) jabatan = "Ketua";
-        else if(index == 1) jabatan = "Sekretaris";
-        else if(index == 2) jabatan = "Bendahara";
+        if (idx === 0) jabatan = "Ketua Komite";
+        else if (idx === 1) jabatan = "Sekretaris";
+        else if (idx === 2) jabatan = "Bendahara";
         else jabatan = "Anggota";
-
         html += `
-        <tr>
-            <td>${index+1}</td>
-            <td>${item.nama}</td>
-            <td>${item.suara}</td>
+          <tr>
+            <td><span class="ranking-badge">${idx+1}</span></td>
+            <td class="fw-semibold">${escapeHtml(item.nama)}</td>
+            <td><strong>${item.suara}</strong> suara</td>
             <td>${jabatan}</td>
-        </tr>
+          </tr>
         `;
-
+      });
+      document.getElementById("hasilTableAdmin").innerHTML = html;
+      document.getElementById("totalSuaraAdmin").innerText = total;
+      
+      // Update Chart
+      updateChart(arr);
+    } catch (err) {
+      console.error("Gagal load hasil admin", err);
+    }
+  }
+  
+  // Update grafik dengan chart.js
+  function updateChart(dataArray) {
+    const ctx = document.getElementById('voteChart').getContext('2d');
+    const labels = dataArray.map(item => item.nama.length > 20 ? item.nama.substring(0,18)+'..' : item.nama);
+    const votes = dataArray.map(item => item.suara);
+    
+    if (voteChartInstance) {
+      voteChartInstance.destroy();
+    }
+    voteChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Jumlah Suara',
+          data: votes,
+          backgroundColor: 'rgba(185, 28, 28, 0.7)',
+          borderColor: '#b91c1c',
+          borderWidth: 2,
+          borderRadius: 12,
+          barPercentage: 0.65
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: true,
+        plugins: {
+          legend: { position: 'top', labels: { font: { size: 12, weight: 'bold' } } },
+          tooltip: { callbacks: { label: (ctx) => `${ctx.raw} suara` } }
+        },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#e2e8f0' }, title: { display: true, text: 'Jumlah Suara', font: { weight: 'bold' } } },
+          x: { ticks: { font: { size: 11 } }, title: { display: true, text: 'Kandidat', font: { weight: 'bold' } } }
+        }
+      }
     });
-
-    document.getElementById("hasilTable").innerHTML = html;
-
-    document.getElementById("totalSuara").innerHTML = total;
-
-}
-
-// ==========================
-// STATUS
-// ==========================
-async function loadStatus(){
-
-    const response = await fetch(API_URL + "?action=getStatus");
-
-    const data = await response.json();
-
-    document.getElementById("statusVoting").innerHTML =
-    data.statusVoting;
-
-}
-
-// ==========================
-// TUTUP
-// ==========================
-async function tutupVoting(){
-
-    const konfirmasi = confirm(
-        "Yakin ingin menutup voting?"
-    );
-
-    if(!konfirmasi) return;
-
-    const response = await fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({
-            action:"closeVoting"
-        })
-    });
-
-    const result = await response.json();
-
-    alert(result.message);
-
-    loadStatus();
-
-}
-
-// ==========================
-// BUKA
-// ==========================
-async function bukaVoting(){
-
-    const response = await fetch(API_URL,{
-        method:"POST",
-        body:JSON.stringify({
-            action:"openVoting"
-        })
-    });
-
-    const result = await response.json();
-
-    alert(result.message);
-
-    loadStatus();
-
-}
-
-// ==========================
-// DOWNLOAD
-// ==========================
-function downloadExcel(){
-
-    let table = document.querySelector("table").outerHTML;
-
-    let data = `
-    <html>
-    <head>
-    <meta charset="UTF-8">
-    </head>
-    <body>
-    ${table}
-    </body>
-    </html>
+  }
+  
+  // -------------------- LOAD STATUS VOTING --------------------
+  async function loadAdminStatus() {
+    if (!isAdminLogged) return;
+    try {
+      const response = await fetch(API_URL + "?action=getStatus");
+      const data = await response.json();
+      const statusElem = document.getElementById("statusVotingAdmin");
+      if (data.statusVoting === "OPEN") {
+        statusElem.innerHTML = '<span class="badge bg-success fs-5 p-2"><i class="fas fa-check-circle"></i> VOTING DIBUKA</span>';
+      } else {
+        statusElem.innerHTML = '<span class="badge bg-danger fs-5 p-2"><i class="fas fa-ban"></i> VOTING DITUTUP</span>';
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  
+  // -------------------- TUTUP / BUKA VOTING (dengan loading & notifikasi) --------------------
+  async function tutupVotingAdmin() {
+    if (!confirm("Yakin ingin MENUTUP voting? Peserta tidak dapat memilih lagi.")) return;
+    showNotifAdmin("Memproses penutupan voting...", "info");
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({ action: "closeVoting" })
+      });
+      const result = await response.json();
+      alert(result.message || "Voting ditutup.");
+      await loadAdminStatus();
+      showNotifAdmin("Status voting diperbarui: TERTUTUP", "success");
+    } catch (err) {
+      alert("Gagal menutup voting, cek koneksi.");
+    }
+  }
+  
+  async function bukaVotingAdmin() {
+    if (!confirm("Buka voting kembali? Peserta dapat memilih.")) return;
+    showNotifAdmin("Membuka voting...", "info");
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        body: JSON.stringify({ action: "openVoting" })
+      });
+      const result = await response.json();
+      alert(result.message || "Voting dibuka.");
+      await loadAdminStatus();
+      showNotifAdmin("Status voting: DIBUKA", "success");
+    } catch (err) {
+      alert("Gagal membuka voting.");
+    }
+  }
+  
+  // notif kecil untuk admin (floating)
+  function showNotifAdmin(msg, type = "success") {
+    const notifDiv = document.createElement("div");
+    notifDiv.className = "alert alert-dismissible fade show position-fixed top-0 end-0 m-3 shadow-lg";
+    notifDiv.style.zIndex = "9999";
+    notifDiv.style.borderRadius = "60px";
+    notifDiv.style.padding = "12px 22px";
+    if (type === "success") notifDiv.classList.add("alert-success");
+    else if (type === "error") notifDiv.classList.add("alert-danger");
+    else notifDiv.classList.add("alert-info");
+    notifDiv.innerHTML = `<i class="fas fa-bell me-2"></i> ${msg} <button type="button" class="btn-close" data-bs-dismiss="alert"></button>`;
+    document.body.appendChild(notifDiv);
+    setTimeout(() => { if(notifDiv) notifDiv.remove(); }, 3000);
+  }
+  
+  // -------------------- DOWNLOAD EXCEL --------------------
+  function downloadExcelAdmin() {
+    const table = document.querySelector("#hasilTableAdmin").closest("table");
+    if (!table) return;
+    const cloneTable = table.cloneNode(true);
+    const htmlContent = `
+      <html>
+        <head>
+          <meta charset="UTF-8">
+          <title>Hasil Voting Komite SMPN 2 Kawali</title>
+          <style>th, td { border: 1px solid #ccc; padding: 8px; text-align:left; }</style>
+        </head>
+        <body>
+          <h2>Laporan Hasil Voting Komite Sekolah</h2>
+          <p>Tanggal: ${new Date().toLocaleString()}</p>
+          ${cloneTable.outerHTML}
+          <p><em>Total Suara: ${document.getElementById("totalSuaraAdmin").innerText}</em></p>
+        </body>
+      </html>
     `;
-
-    let blob = new Blob(
-        [data],
-        {type:"application/vnd.ms-excel"}
-    );
-
-    let a = document.createElement("a");
-
-    a.href = URL.createObjectURL(blob);
-
-    a.download = "HASIL_VOTING_KOMITE.xls";
-
-    a.click();
-
-}
-
-// ==========================
-// AUTO REFRESH
-// ==========================
-loadHasil();
-loadStatus();
-
-setInterval(()=>{
-
-    loadHasil();
-    loadStatus();
-
-},5000);
-
+    const blob = new Blob([htmlContent], { type: "application/vnd.ms-excel" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `HASIL_VOTING_KOMITE_${new Date().toISOString().slice(0,19)}.xls`;
+    link.click();
+    URL.revokeObjectURL(link.href);
+    showNotifAdmin("File Excel berhasil diunduh", "success");
+  }
+  
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+  
+  // Inisialisasi Bootstrap tooltips (optional)
+  // Jika tombol logout double safety
+  window.onload = () => {
+    // pastikan state awal
+    document.getElementById("adminLoginContainer").style.display = "flex";
+    document.getElementById("dashboardWrapper").style.display = "none";
+    isAdminLogged = false;
+  };
 </script>
-
+<!-- Bootstrap JS untuk alert close -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
