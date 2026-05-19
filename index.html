@@ -6,22 +6,22 @@
   <title>E-Voting Komite | SMPN 2 Kawali</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       background: linear-gradient(135deg, #0a1628 0%, #0f1a2f 100%);
-      font-family: 'Inter', sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       min-height: 100vh;
     }
     .hero-header {
       background: linear-gradient(135deg, #0a2b5e, #021a4a);
       color: white;
-      padding: 30px;
+      padding: 30px 20px;
       text-align: center;
       border-bottom-left-radius: 30px;
       border-bottom-right-radius: 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
     .logo-wrapper {
       width: 100px;
@@ -30,77 +30,181 @@
       border-radius: 50%;
       margin: 0 auto 15px;
       padding: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     }
     .logo { width: 80px; height: 80px; object-fit: contain; border-radius: 50%; }
+    .hero-header h2 { font-size: 1.5rem; font-weight: bold; }
+    .hero-header h4 { font-size: 1.2rem; margin-top: 5px; }
+    .hero-header p { font-size: 0.9rem; margin-top: 8px; opacity: 0.9; }
+    
     .glass-card {
       background: rgba(15, 25, 45, 0.95);
+      backdrop-filter: blur(10px);
       border-radius: 30px;
-      padding: 30px;
+      padding: 25px;
       max-width: 500px;
       margin: 40px auto;
+      border: 1px solid rgba(56,189,248,0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
-    .custom-input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border-radius: 25px;
-      border: 1px solid #1e3a5f;
-      background: #0f172a;
-      color: white;
-    }
-    .btn-login {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 12px;
-      border-radius: 25px;
-      width: 100%;
-      font-weight: bold;
-      cursor: pointer;
+    .auth-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
     }
     .auth-tab-btn {
       background: transparent;
       border: none;
-      padding: 10px 20px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 50px;
       color: #94a3b8;
       cursor: pointer;
-      font-size: 16px;
+      transition: all 0.3s;
     }
     .auth-tab-btn.active {
-      background: #2563eb;
+      background: linear-gradient(105deg, #1e4b8f, #2563eb);
       color: white;
-      border-radius: 25px;
+      box-shadow: 0 4px 12px rgba(37,99,235,0.3);
     }
+    .login-icon {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .login-icon i {
+      font-size: 50px;
+      color: #3b82f6;
+      background: rgba(37,99,235,0.2);
+      padding: 15px;
+      border-radius: 50%;
+    }
+    .custom-input {
+      width: 100%;
+      padding: 12px 18px;
+      margin-bottom: 15px;
+      border-radius: 50px;
+      border: 1.5px solid #1e3a5f;
+      background: #0f172a;
+      color: white;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s;
+    }
+    .custom-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    }
+    .custom-input::placeholder { color: #64748b; }
+    
+    .btn-login {
+      background: linear-gradient(105deg, #1e4b8f, #2563eb);
+      border: none;
+      border-radius: 50px;
+      padding: 12px;
+      font-weight: bold;
+      font-size: 1rem;
+      width: 100%;
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .btn-login:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    
     .candidate-card {
       background: rgba(15, 25, 45, 0.95);
       border-radius: 20px;
       padding: 15px;
       margin-bottom: 20px;
+      border: 1px solid rgba(59,130,246,0.3);
+      transition: all 0.3s;
       height: 100%;
     }
-    .btn-pilih {
-      background: #2563eb;
+    .candidate-card:hover { transform: translateY(-5px); border-color: #3b82f6; }
+    .candidate-img {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    .candidate-img img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #3b82f6;
+    }
+    .candidate-name {
       color: white;
-      border: none;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .visi-misi-box {
+      background: rgba(10,20,40,0.6);
+      border-radius: 15px;
       padding: 10px;
-      border-radius: 20px;
+      margin-bottom: 10px;
+    }
+    .visi-misi-box small { color: #60a5fa; font-weight: bold; }
+    .visi-misi-box p { color: #cbd5e1; font-size: 0.8rem; margin-top: 5px; }
+    .btn-pilih {
+      background: linear-gradient(115deg, #1e4b8f, #3b82f6);
+      border: none;
+      border-radius: 50px;
+      padding: 10px;
+      font-weight: bold;
+      color: white;
       width: 100%;
       cursor: pointer;
+      transition: all 0.3s;
     }
+    .btn-pilih:hover { transform: scale(0.98); filter: brightness(1.05); }
+    
     .stat-card {
       background: rgba(15, 25, 45, 0.95);
       border-radius: 20px;
       padding: 20px;
       text-align: center;
       color: white;
+      border: 1px solid rgba(59,130,246,0.3);
+      margin-bottom: 20px;
     }
+    .stat-number { font-size: 2.5rem; font-weight: bold; color: #60a5fa; }
+    .btn-action, .btn-reset {
+      border: none;
+      padding: 10px;
+      border-radius: 50px;
+      width: 100%;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .btn-danger { background: #dc2626; color: white; }
+    .btn-success { background: #16a34a; color: white; }
+    .btn-reset { background: #dc2626; color: white; }
+    
+    .dark-table {
+      width: 100%;
+      border-collapse: collapse;
+      color: white;
+    }
+    .dark-table th, .dark-table td {
+      border: 1px solid #2d4a7c;
+      padding: 8px;
+      text-align: left;
+    }
+    .dark-table th { background: #1e3a5f; }
+    
     .modal-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -111,44 +215,39 @@
       border-radius: 30px;
       padding: 30px;
       max-width: 400px;
+      width: 90%;
       text-align: center;
       color: white;
+      border: 1px solid #3b82f6;
     }
     .loading-toast {
       position: fixed;
-      bottom: 20px;
+      bottom: 30px;
       left: 50%;
       transform: translateX(-50%);
       background: #0f172a;
-      border: 1px solid #2563eb;
+      border: 1px solid #3b82f6;
       color: white;
       padding: 12px 24px;
-      border-radius: 30px;
+      border-radius: 50px;
       z-index: 1100;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
-    .btn-action, .btn-reset {
-      border: none;
-      padding: 10px;
-      border-radius: 20px;
-      width: 100%;
-      margin-bottom: 10px;
-      cursor: pointer;
-      font-weight: bold;
+    .success-panel {
+      text-align: center;
+      padding: 60px 20px;
+      color: white;
     }
-    .btn-danger { background: #dc2626; color: white; }
-    .btn-success { background: #16a34a; color: white; }
-    .btn-reset { background: #dc2626; color: white; }
-    .dark-table { width: 100%; border-collapse: collapse; }
-    .dark-table th, .dark-table td { border: 1px solid #2d4a7c; padding: 8px; color: white; }
-    .dark-table th { background: #1e3a5f; }
-    .hasil-table { margin-top: 20px; }
     .logout-btn {
       background: #2563eb;
       color: white;
       border: none;
-      padding: 8px 16px;
-      border-radius: 20px;
+      padding: 8px 20px;
+      border-radius: 50px;
       cursor: pointer;
+      margin-bottom: 15px;
     }
     @media (max-width: 768px) {
       .hero-header h2 { font-size: 1.2rem; }
@@ -164,81 +263,88 @@
   </div>
   <h2>PEMILIHAN KOMITE SEKOLAH</h2>
   <h4>SMPN 2 KAWALI</h4>
-  <p>Masa Bakti 2026–2031</p>
+  <p>Masa Bakti 2026–2031 • Suara Berintegritas</p>
 </div>
 
-<!-- LOGIN AREA -->
+<!-- AREA LOGIN -->
 <div id="authContainer" class="glass-card">
-  <div style="text-align: center; margin-bottom: 20px;">
-    <button class="auth-tab-btn active" onclick="switchTab('pemilih')">Pemilih</button>
-    <button class="auth-tab-btn" onclick="switchTab('admin')">Admin</button>
+  <div class="login-icon">
+    <i class="fas fa-fingerprint"></i>
+  </div>
+  <div class="auth-tabs">
+    <button class="auth-tab-btn active" onclick="switchTab('pemilih')"><i class="fas fa-user-check"></i> Pemilih</button>
+    <button class="auth-tab-btn" onclick="switchTab('admin')"><i class="fas fa-user-shield"></i> Admin</button>
   </div>
   
   <div id="pemilihForm">
     <input type="text" id="nama" class="custom-input" placeholder="Nama Lengkap">
-    <input type="text" id="alamat" class="custom-input" placeholder="Alamat">
+    <input type="text" id="alamat" class="custom-input" placeholder="Alamat / Tempat Tinggal">
     <input type="password" id="password" class="custom-input" placeholder="Password">
-    <button class="btn-login" onclick="handlePemilihLogin()">MASUK & VOTING</button>
+    <button class="btn-login" onclick="handlePemilihLogin()"><i class="fas fa-arrow-right-to-bracket"></i> Masuk & Voting</button>
   </div>
   
   <div id="adminForm" style="display:none;">
     <input type="text" id="adminUsername" class="custom-input" placeholder="Username Admin">
     <input type="password" id="adminPassword" class="custom-input" placeholder="Password Admin">
-    <button class="btn-login" onclick="handleAdminLogin()">MASUK DASHBOARD</button>
+    <button class="btn-login" onclick="handleAdminLogin()"><i class="fas fa-chart-line"></i> Masuk Dashboard</button>
   </div>
 </div>
 
-<!-- PEMILIH AREA (setelah login) -->
+<!-- AREA PEMILIH -->
 <div id="calonContainer" style="display:none; padding: 20px;">
-  <h3 style="color:white; text-align:center;">Pilih Ketua Komite</h3>
+  <h3 style="color:white; text-align:center; margin-bottom: 30px;">Pilih Ketua Komite</h3>
   <div class="row" id="listCalon"></div>
 </div>
 
-<!-- ADMIN DASHBOARD -->
+<!-- AREA ADMIN -->
 <div id="adminDashboard" style="display:none; padding: 20px;">
-  <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
-    <h3 style="color:white;">Dashboard Admin</h3>
-    <button class="logout-btn" onclick="adminLogout()">Keluar</button>
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap;">
+    <h3 style="color:white;"><i class="fas fa-chart-line"></i> Dashboard Admin</h3>
+    <button class="logout-btn" onclick="adminLogout()"><i class="fas fa-sign-out-alt"></i> Keluar</button>
   </div>
   <div class="row">
     <div class="col-md-4">
       <div class="stat-card">
-        <h3>Total Suara</h3>
-        <h2 id="totalSuaraAdmin">0</h2>
+        <i class="fas fa-vote-yea fa-2x" style="color:#60a5fa;"></i>
+        <div class="stat-number" id="totalSuaraAdmin">0</div>
+        <p>Total Suara</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="stat-card">
-        <h3>Status</h3>
-        <h2 id="statusVotingAdmin">--</h2>
+        <i class="fas fa-toggle-on fa-2x" style="color:#60a5fa;"></i>
+        <div id="statusVotingAdmin" class="stat-number" style="font-size:1.2rem;">--</div>
+        <p>Status Voting</p>
       </div>
     </div>
     <div class="col-md-4">
       <div class="stat-card">
-        <button class="btn-danger btn-action" onclick="tutupVoting()">TUTUP VOTING</button>
-        <button class="btn-success btn-action" onclick="bukaVoting()">BUKA VOTING</button>
-        <button class="btn-reset" onclick="resetData()">RESET PEMILIH</button>
+        <button class="btn-danger btn-action" onclick="tutupVoting()"><i class="fas fa-lock"></i> TUTUP VOTING</button>
+        <button class="btn-success btn-action" onclick="bukaVoting()"><i class="fas fa-lock-open"></i> BUKA VOTING</button>
+        <button class="btn-reset" onclick="resetData()"><i class="fas fa-trash-alt"></i> RESET PEMILIH</button>
       </div>
     </div>
   </div>
-  <div class="stat-card hasil-table">
-    <h4>Hasil Voting</h4>
+  <div class="stat-card" style="margin-top: 20px;">
+    <h4><i class="fas fa-trophy"></i> Hasil Realtime</h4>
     <div class="table-responsive">
       <table class="dark-table">
-        <thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead>
+        <thead>
+          <tr><th>Rank</th><th>Nama Kandidat</th><th>Perolehan Suara</th><th>Jabatan</th></tr>
+        </thead>
         <tbody id="hasilTableAdmin"></tbody>
       </table>
     </div>
-    <button onclick="downloadExcel()" style="margin-top:15px; background:#2563eb; color:white; border:none; padding:8px 16px; border-radius:20px; cursor:pointer;">Download Excel</button>
+    <button onclick="downloadExcel()" style="margin-top:15px; background:#2563eb; color:white; border:none; padding:8px 20px; border-radius:50px; cursor:pointer;"><i class="fas fa-file-excel"></i> Download Excel</button>
   </div>
 </div>
 
 <!-- SUKSES VOTE -->
-<div id="sukses" style="display:none; text-align:center; padding:50px; color:white;">
+<div id="sukses" style="display:none;" class="success-panel">
   <i class="fas fa-check-circle" style="font-size:70px; color:#22c55e;"></i>
-  <h2>TERIMA KASIH</h2>
+  <h2 style="margin-top: 20px;">TERIMA KASIH</h2>
   <p>Suara Anda berhasil disimpan</p>
-  <button onclick="location.reload()" style="background:#2563eb; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;">Kembali</button>
+  <button onclick="location.reload()" class="btn-login" style="width: auto; padding: 10px 30px; margin-top: 20px;">Kembali ke Awal</button>
 </div>
 
 <div id="loadingToast" style="display:none;" class="loading-toast">
@@ -246,7 +352,7 @@
 </div>
 
 <script>
-// ==================== URL APPS SCRIPT (UPDATE DENGAN URL ANDA) ====================
+// ==================== URL APPS SCRIPT ANDA ====================
 const API_URL = "https://script.google.com/macros/s/AKfycbwlSgpfOKI5WhPR0f9ePd7G5veuxvFJY_ZHgHrbH37tVugNYr7BGCtEGx2vwtkqTTu2/exec";
 
 let currentUser = null;
@@ -267,8 +373,8 @@ function showModal(title, message, isError = false) {
       <div class="modal-card">
         <i class="fas ${isError ? 'fa-times-circle' : 'fa-check-circle'}" style="font-size:50px; color:${isError ? '#ef4444' : '#22c55e'}; margin-bottom:15px;"></i>
         <h3>${title}</h3>
-        <p>${message}</p>
-        <button onclick="document.getElementById('customModal').remove()" style="background:#2563eb; color:white; border:none; padding:8px 20px; border-radius:20px; margin-top:15px; cursor:pointer;">OK</button>
+        <p style="margin: 15px 0;">${message}</p>
+        <button onclick="document.getElementById('customModal').remove()" style="background:#2563eb; color:white; border:none; padding:10px 30px; border-radius:50px; cursor:pointer; margin-top:10px;">OK</button>
       </div>
     </div>
   `;
@@ -291,6 +397,25 @@ function switchTab(tab) {
   }
 }
 
+// TEST KONEKSI SAAT PERTAMA KALI
+async function testConnection() {
+  showLoading("Menguji koneksi ke server...");
+  try {
+    const response = await fetch(API_URL + "?action=getStatus");
+    const data = await response.json();
+    hideLoading();
+    if (data.statusVoting) {
+      console.log("Koneksi berhasil!");
+    } else {
+      showModal("Info", "Koneksi berhasil, silakan login.", false);
+    }
+  } catch(e) {
+    hideLoading();
+    console.error("Koneksi gagal:", e);
+    showModal("Perhatian", "Gagal terhubung ke server.\n\nPastikan:\n1. URL Apps Script sudah benar\n2. Apps Script sudah di-deploy dengan akses 'Anyone'\n3. Fungsi initData() sudah dijalankan\n\nRefresh halaman jika sudah diperbaiki.", true);
+  }
+}
+
 // PEMILIH LOGIN
 async function handlePemilihLogin() {
   const nama = document.getElementById("nama").value.trim().toUpperCase();
@@ -298,7 +423,7 @@ async function handlePemilihLogin() {
   const password = document.getElementById("password").value.trim();
   
   if (!nama || !alamat || !password) {
-    showModal("Perhatian", "Lengkapi semua data!", true);
+    showModal("Perhatian", "Lengkapi semua data login!", true);
     return;
   }
   
@@ -323,18 +448,22 @@ async function handlePemilihLogin() {
     }
   } catch(e) {
     hideLoading();
-    console.error("Login error:", e);
-    showModal("Error Koneksi", "Gagal terhubung ke server. Pastikan:\n1. Koneksi internet stabil\n2. URL Apps Script benar\n3. Apps Script sudah di-deploy", true);
+    showModal("Error", "Gagal terhubung ke server. Periksa koneksi internet Anda.", true);
   }
 }
 
 // LOAD CALON
 async function loadCalon() {
-  showLoading("Memuat kandidat...");
+  showLoading("Memuat daftar kandidat...");
   try {
     const response = await fetch(API_URL + "?action=getCalon");
     const data = await response.json();
     hideLoading();
+    
+    if (!data.length) {
+      showModal("Info", "Belum ada data calon. Hubungi admin.", true);
+      return;
+    }
     
     let html = "";
     data.forEach(calon => {
@@ -342,15 +471,19 @@ async function loadCalon() {
       html += `
         <div class="col-md-4 col-sm-6 mb-3">
           <div class="candidate-card">
-            <img src="${foto}" style="width:100px; height:100px; border-radius:50%; display:block; margin:0 auto 10px;">
-            <h4 style="color:white; text-align:center;">${escapeHtml(calon.nama)}</h4>
-            <div style="background:rgba(255,255,255,0.1); border-radius:15px; padding:10px; margin:10px 0;">
-              <small style="color:#60a5fa;">Visi</small>
-              <p style="color:#cbd5e1; font-size:12px;">${escapeHtml(calon.visi)}</p>
-              <small style="color:#60a5fa;">Misi</small>
-              <p style="color:#cbd5e1; font-size:12px;">${escapeHtml(calon.misi)}</p>
+            <div class="candidate-img">
+              <img src="${foto}" alt="${calon.nama}">
             </div>
-            <button class="btn-pilih" onclick="confirmVote('${escapeHtml(calon.nama)}')">PILIH</button>
+            <div class="candidate-name">${escapeHtml(calon.nama)}</div>
+            <div class="visi-misi-box">
+              <small><i class="fas fa-eye"></i> Visi</small>
+              <p>${escapeHtml(calon.visi)}</p>
+            </div>
+            <div class="visi-misi-box">
+              <small><i class="fas fa-bullhorn"></i> Misi</small>
+              <p>${escapeHtml(calon.misi)}</p>
+            </div>
+            <button class="btn-pilih" onclick="confirmVote('${escapeHtml(calon.nama)}')"><i class="fas fa-vote-yea"></i> Pilih</button>
           </div>
         </div>
       `;
@@ -371,10 +504,10 @@ function confirmVote(nama) {
         <i class="fas fa-question-circle" style="font-size:50px; color:#60a5fa; margin-bottom:15px;"></i>
         <h3>Konfirmasi Pilihan</h3>
         <p>Yakin memilih <strong>${nama}</strong> sebagai Ketua Komite?</p>
-        <p style="color:#f87171; font-size:12px;">Suara tidak dapat diubah!</p>
+        <p style="color:#f87171; font-size:12px;"><i class="fas fa-lock"></i> Suara tidak dapat diubah!</p>
         <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
-          <button onclick="document.getElementById('voteModal').remove()" style="background:#334155; color:white; border:none; padding:8px 20px; border-radius:20px; cursor:pointer;">Batal</button>
-          <button onclick="processVote('${nama}')" style="background:#2563eb; color:white; border:none; padding:8px 20px; border-radius:20px; cursor:pointer;">Ya, Pilih</button>
+          <button onclick="document.getElementById('voteModal').remove()" style="background:#334155; color:white; border:none; padding:10px 25px; border-radius:50px; cursor:pointer;">Batal</button>
+          <button onclick="processVote('${nama}')" style="background:#2563eb; color:white; border:none; padding:10px 25px; border-radius:50px; cursor:pointer;">Ya, Pilih</button>
         </div>
       </div>
     </div>
@@ -402,7 +535,7 @@ async function processVote(nama) {
     
     if (result.status) {
       hasVoted = true;
-      showModal("Berhasil!", "Suara Anda telah tersimpan. Terima kasih!");
+      showModal("Berhasil!", "Suara Anda telah tersimpan. Terima kasih telah berpartisipasi!");
       document.getElementById("calonContainer").style.display = "none";
       document.getElementById("sukses").style.display = "block";
     } else {
@@ -410,7 +543,7 @@ async function processVote(nama) {
     }
   } catch(e) {
     hideLoading();
-    showModal("Error", "Gagal menyimpan suara", true);
+    showModal("Error", "Gagal menyimpan suara. Periksa koneksi.", true);
   }
 }
 
@@ -451,7 +584,7 @@ async function loadAdminData() {
     let html = "";
     arr.forEach((item, idx) => {
       let jabatan = idx === 0 ? "Ketua" : idx === 1 ? "Sekretaris" : idx === 2 ? "Bendahara" : "Anggota";
-      html += `<tr><td style="border:1px solid #2d4a7c;padding:8px;">${idx+1}</td><td style="border:1px solid #2d4a7c;padding:8px;">${escapeHtml(item.nama)}</td><td style="border:1px solid #2d4a7c;padding:8px;">${item.suara}</td><td style="border:1px solid #2d4a7c;padding:8px;">${jabatan}</td></tr>`;
+      html += `<tr><td style="border:1px solid #2d4a7c;padding:8px;">${idx+1}</td><td style="border:1px solid #2d4a7c;padding:8px;">${escapeHtml(item.nama)}</td><td style="border:1px solid #2d4a7c;padding:8px;"><strong>${item.suara}</strong></td><td style="border:1px solid #2d4a7c;padding:8px;">${jabatan}</td></tr>`;
     });
     document.getElementById("hasilTableAdmin").innerHTML = html;
   } catch(e) { console.error(e); }
@@ -473,6 +606,7 @@ async function bukaVoting() {
   loadAdminData();
 }
 async function resetData() {
+  if (!confirm("Yakin ingin mereset semua data pemilih dan suara?")) return;
   showLoading("Meriset data...");
   await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "resetPemilih" }) });
   hideLoading();
@@ -485,12 +619,13 @@ function downloadExcel() {
     let cells = row.querySelectorAll("td");
     if (cells.length) rows.push([cells[0]?.innerText, cells[1]?.innerText, cells[2]?.innerText, cells[3]?.innerText]);
   });
-  let html = `<html><head><meta charset="UTF-8"><title>Hasil Voting</title><style>th,td{border:1px solid black;padding:8px;}</style></head><body><h2>Hasil Voting Komite</h2><table border="1"><thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody></table></body></html>`;
+  let html = `<html><head><meta charset="UTF-8"><title>Hasil Voting</title><style>th,td{border:1px solid black;padding:8px;}</style></head><body><h2>Hasil Voting Komite SMPN 2 Kawali</h2><table border="1"><thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead><tbody>${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</tbody></table><p>Total Suara: ${document.getElementById("totalSuaraAdmin").innerText}</p><p>Dicetak: ${new Date().toLocaleString()}</p></body></html>`;
   let blob = new Blob([html], { type: "application/vnd.ms-excel" });
   let a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
   a.download = `Hasil_Voting_${new Date().toISOString().slice(0,19)}.xls`;
   a.click();
+  showModal("Berhasil", "File Excel berhasil diunduh", false);
 }
 function adminLogout() { 
   isAdmin = false; 
@@ -503,6 +638,11 @@ function escapeHtml(str) {
   if (!str) return ""; 
   return str.replace(/[&<>]/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[m])); 
 }
+
+// JALANKAN TEST KONEKSI SAAT HALAMAN DIMUAT
+window.onload = function() {
+  testConnection();
+};
 </script>
 </body>
 </html>
