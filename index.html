@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>E-Voting Komite | SMPN 2 Kawali - Elegant Choice</title>
-  <!-- Bootstrap 5 + Font Awesome + Google Font -->
+  <title>E-Voting Komite | SMPN 2 Kawali - Elegan & Modern</title>
+  <!-- Bootstrap + Font Awesome + Google Fonts (Inter & Plus Jakarta) -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -16,429 +16,417 @@
     }
 
     body {
-      background: linear-gradient(135deg, #f0f4fa 0%, #e9eef5 100%);
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: linear-gradient(145deg, #f4f8fe 0%, #eef2f9 100%);
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
       scroll-behavior: smooth;
     }
 
     /* custom scroll */
     ::-webkit-scrollbar {
-      width: 8px;
+      width: 7px;
     }
     ::-webkit-scrollbar-track {
-      background: #dce3ec;
-      border-radius: 10px;
+      background: #dfe6ef;
+      border-radius: 12px;
     }
     ::-webkit-scrollbar-thumb {
-      background: #b22222;
-      border-radius: 10px;
+      background: #b91c1c;
+      border-radius: 12px;
     }
 
     /* HEADER ELEGAN */
     .hero-header {
-      background: radial-gradient(circle at 30% 10%, #ac2c2c, #6b0f0f);
+      background: radial-gradient(circle at 20% 30%, #b02a2a, #631111);
       color: white;
-      padding: 42px 20px 48px;
+      padding: 44px 20px 50px;
       text-align: center;
-      border-bottom-left-radius: 55px;
-      border-bottom-right-radius: 55px;
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.3);
+      border-bottom-left-radius: 58px;
+      border-bottom-right-radius: 58px;
+      box-shadow: 0 20px 35px -10px rgba(0,0,0,0.3);
       position: relative;
       overflow: hidden;
     }
     .hero-header::after {
       content: "🗳️";
-      font-size: 180px;
-      opacity: 0.08;
+      font-size: 190px;
+      opacity: 0.07;
       position: absolute;
-      bottom: -30px;
-      left: -20px;
+      bottom: -40px;
+      right: -20px;
       pointer-events: none;
-      transform: rotate(10deg);
+      transform: rotate(8deg);
     }
     .logo-wrapper {
-      width: 125px;
-      height: 125px;
+      width: 128px;
+      height: 128px;
       background: white;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 18px;
-      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+      margin: 0 auto 20px;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.25);
       transition: transform 0.2s;
     }
     .logo-wrapper:hover {
       transform: scale(1.02);
     }
     .logo {
-      width: 105px;
-      height: 105px;
+      width: 108px;
+      height: 108px;
       object-fit: contain;
       border-radius: 50%;
     }
     .hero-header h2 {
-      font-size: 2.4rem;
+      font-size: 2.5rem;
       font-weight: 800;
-      letter-spacing: -0.3px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      letter-spacing: -0.5px;
+      text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
     }
     .hero-header h4 {
-      font-size: 1.7rem;
+      font-size: 1.8rem;
       font-weight: 600;
       margin-top: 5px;
     }
-    .hero-header p {
-      opacity: 0.95;
-      font-weight: 400;
-      margin-top: 8px;
-    }
 
-    /* LOGIN BOX MODERN */
+    /* LOGIN CARD */
     .glass-card {
       background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(1px);
-      border-radius: 48px;
-      box-shadow: 0 28px 45px -16px rgba(0,0,0,0.2);
-      border: 1px solid rgba(255,255,255,0.6);
+      backdrop-filter: blur(2px);
+      border-radius: 52px;
+      box-shadow: 0 30px 50px -20px rgba(0,0,0,0.25);
     }
     .login-box {
-      max-width: 470px;
+      max-width: 480px;
       margin: 48px auto;
       padding: 38px 32px;
     }
     .login-icon {
-      background: #b91c1c18;
-      width: 75px;
-      height: 75px;
+      background: #b2222218;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 20px;
+      margin: 0 auto 18px;
       color: #b22222;
-      font-size: 34px;
-    }
-    .login-box h4 {
-      font-weight: 800;
-      color: #0a1929;
-      text-align: center;
-      margin-bottom: 24px;
+      font-size: 38px;
     }
     .custom-input {
       width: 100%;
-      padding: 14px 20px;
-      border-radius: 34px;
+      padding: 14px 22px;
+      border-radius: 44px;
       border: 1.8px solid #e2edf7;
       background: #ffffff;
       font-size: 1rem;
-      transition: all 0.2s;
+      transition: 0.2s;
       outline: none;
-      margin-bottom: 18px;
+      margin-bottom: 20px;
     }
     .custom-input:focus {
       border-color: #b22222;
-      box-shadow: 0 0 0 3px rgba(178,34,34,0.2);
+      box-shadow: 0 0 0 4px rgba(178,34,34,0.15);
     }
     .btn-login {
-      background: linear-gradient(105deg, #b22222, #d13a3a);
+      background: linear-gradient(105deg, #b22222, #dc3c3c);
       border: none;
-      border-radius: 44px;
+      border-radius: 48px;
       padding: 14px;
       font-weight: 700;
       font-size: 1rem;
-      color: white;
       width: 100%;
       transition: 0.25s;
-      box-shadow: 0 6px 14px rgba(178,34,34,0.3);
     }
     .btn-login:hover {
       transform: translateY(-3px);
-      background: linear-gradient(105deg, #961b1b, #bc2e2e);
+      filter: brightness(1.02);
+      box-shadow: 0 12px 22px rgba(178,34,34,0.35);
     }
 
-    /* CARD CALON PREMIUM */
+    /* CARD CALON */
     .calon-container {
       padding: 45px 20px 70px;
     }
     .section-title {
       text-align: center;
-      margin-bottom: 50px;
+      margin-bottom: 45px;
     }
     .section-title span {
       background: #b2222215;
-      padding: 7px 24px;
-      border-radius: 60px;
+      padding: 8px 28px;
+      border-radius: 80px;
       font-weight: 600;
       color: #b22222;
       font-size: 0.85rem;
-      letter-spacing: 0.5px;
-    }
-    .section-title h2 {
-      font-size: 2.3rem;
-      font-weight: 800;
-      color: #0f2b3d;
-      margin-top: 12px;
     }
     .candidate-card {
       border: none;
-      border-radius: 38px;
+      border-radius: 42px;
       background: #ffffff;
       transition: all 0.35s cubic-bezier(0.2,0.9,0.4,1.1);
       overflow: hidden;
-      box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+      box-shadow: 0 18px 32px -12px rgba(0,0,0,0.1);
       height: 100%;
       display: flex;
       flex-direction: column;
     }
     .candidate-card:hover {
       transform: translateY(-10px);
-      box-shadow: 0 32px 40px -15px rgba(0,0,0,0.2);
+      box-shadow: 0 28px 38px -12px rgba(0,0,0,0.2);
     }
     .candidate-img {
-      background: linear-gradient(145deg, #fafcff, #ffffff);
-      padding: 32px 20px 20px;
+      background: #fafdff;
+      padding: 28px 20px 18px;
       text-align: center;
-      border-bottom: 1px solid #f0f2f8;
     }
     .candidate-img img {
-      width: 160px;
-      height: 160px;
+      width: 150px;
+      height: 150px;
       object-fit: cover;
       border-radius: 50%;
       border: 4px solid white;
-      box-shadow: 0 12px 18px rgba(0,0,0,0.15);
-      background: #f8f9fc;
+      box-shadow: 0 10px 18px rgba(0,0,0,0.12);
     }
     .card-body-custom {
-      padding: 25px 24px 30px;
+      padding: 24px 24px 30px;
       flex: 1;
-      display: flex;
-      flex-direction: column;
     }
     .candidate-name {
-      font-size: 1.65rem;
+      font-size: 1.7rem;
       font-weight: 800;
       text-align: center;
-      color: #121826;
+      color: #0f1a2a;
       margin-bottom: 20px;
-      letter-spacing: -0.2px;
     }
     .visi-misi-box {
       background: #f8fafd;
       border-radius: 28px;
-      padding: 16px 20px;
-      margin-bottom: 18px;
-      transition: 0.1s;
+      padding: 14px 18px;
+      margin-bottom: 16px;
     }
     .visi-misi-box h6 {
       font-weight: 800;
       color: #b91c1c;
-      font-size: 1rem;
       margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 0.95rem;
     }
     .visi-misi-box p {
       font-size: 0.9rem;
       line-height: 1.5;
-      color: #1e2a3e;
       text-align: justify;
-      margin-bottom: 0;
-      white-space: pre-line;
+      color: #1f2a41;
     }
     .btn-pilih-modern {
-      background: linear-gradient(115deg, #b22222, #dc3c3c);
+      background: linear-gradient(115deg, #b22222, #e04545);
       border: none;
-      border-radius: 46px;
-      padding: 14px 10px;
+      border-radius: 48px;
+      padding: 14px 12px;
       font-weight: 700;
       font-size: 1rem;
       color: white;
-      margin-top: 18px;
-      transition: all 0.25s;
       width: 100%;
+      margin-top: 16px;
+      transition: 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      box-shadow: 0 5px 12px rgba(178,34,34,0.3);
     }
     .btn-pilih-modern:hover {
-      background: linear-gradient(115deg, #971c1c, #c12f2f);
-      transform: scale(0.97);
-      letter-spacing: 0.3px;
+      background: #971c1c;
+      transform: scale(0.98);
     }
 
-    /* ========= MODAL KONFIRMASI KUSTOM SUPER BAGUS ========= */
-    .custom-modal {
+    /* ========= MODAL KONFIRMASI TENGAH - SUPER ELEGAN ========= */
+    .custom-modal-overlay {
       display: none;
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(8px);
-      z-index: 1050;
+      background-color: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
       align-items: center;
       justify-content: center;
-      font-family: 'Plus Jakarta Sans', sans-serif;
       animation: fadeInModal 0.2s ease;
     }
     @keyframes fadeInModal {
-      from { opacity: 0; backdrop-filter: blur(0px);}
-      to { opacity: 1; backdrop-filter: blur(8px);}
+      from { opacity: 0; backdrop-filter: blur(0px); }
+      to { opacity: 1; backdrop-filter: blur(12px); }
     }
-    .modal-confirm-card {
+    .modal-confirm-card-elegant {
       background: #ffffff;
-      max-width: 460px;
+      max-width: 520px;
       width: 90%;
-      border-radius: 48px;
-      padding: 32px 28px 38px;
+      border-radius: 56px;
+      padding: 36px 30px 42px;
       text-align: center;
-      box-shadow: 0 40px 55px -20px rgba(0,0,0,0.5);
-      animation: slideUpModal 0.25s cubic-bezier(0.2,0.9,0.4,1.1);
-      transition: all 0.2s;
+      box-shadow: 0 40px 65px rgba(0,0,0,0.4);
+      animation: slideUpElegant 0.3s cubic-bezier(0.2,0.9,0.4,1.2);
+      font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
     }
-    @keyframes slideUpModal {
-      from { transform: translateY(40px); opacity: 0; }
+    @keyframes slideUpElegant {
+      from { transform: translateY(50px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-    .modal-icon {
-      background: #fff0e6;
-      width: 85px;
-      height: 85px;
-      border-radius: 60px;
+    .modal-icon-circle {
+      background: #fff4ef;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       margin: 0 auto 18px;
-      font-size: 44px;
+      font-size: 48px;
       color: #b22222;
-      box-shadow: 0 6px 14px rgba(178,34,34,0.1);
+      box-shadow: 0 8px 18px rgba(178,34,34,0.1);
     }
-    .modal-confirm-card h3 {
+    .modal-confirm-card-elegant h3 {
       font-weight: 800;
-      font-size: 1.8rem;
-      color: #0f172a;
-      margin-bottom: 12px;
+      font-size: 2rem;
+      color: #0b1f33;
+      margin-bottom: 8px;
+      letter-spacing: -0.3px;
     }
-    .modal-confirm-card .candidate-name-modal {
-      background: #f1f5f9;
-      padding: 8px 16px;
+    .candidate-name-highlight {
+      background: linear-gradient(125deg, #fff0e6, #ffe6db);
+      padding: 10px 20px;
       border-radius: 60px;
       display: inline-block;
-      font-weight: 700;
+      font-weight: 800;
       color: #b22222;
-      margin: 12px 0 8px;
-      font-size: 1.2rem;
+      font-size: 1.35rem;
+      margin: 16px 0 10px;
     }
-    .modal-confirm-card p {
-      color: #334155;
+    .modal-message {
       font-size: 1rem;
-      margin-bottom: 28px;
+      color: #2c3f5c;
       line-height: 1.5;
+      margin: 12px 0 10px;
     }
-    .modal-actions {
+    .warning-text {
+      font-size: 0.85rem;
+      color: #a03e1c;
+      background: #fff0e6;
+      display: inline-block;
+      padding: 5px 16px;
+      border-radius: 60px;
+      font-weight: 500;
+    }
+    .modal-actions-row {
       display: flex;
-      gap: 15px;
+      gap: 18px;
       justify-content: center;
-      margin-top: 10px;
+      margin-top: 28px;
+      flex-wrap: wrap;
     }
-    .btn-modal-cancel {
-      background: #eef2ff;
+    .btn-cancel-elegant {
+      background: #f1f5f9;
       border: none;
-      padding: 12px 24px;
-      border-radius: 42px;
-      font-weight: 600;
+      padding: 14px 30px;
+      border-radius: 60px;
+      font-weight: 700;
+      font-size: 1rem;
       color: #1e293b;
       transition: 0.2s;
-      width: 130px;
+      min-width: 130px;
     }
-    .btn-modal-cancel:hover {
+    .btn-cancel-elegant:hover {
       background: #e2e8f0;
       transform: translateY(-2px);
     }
-    .btn-modal-confirm {
-      background: linear-gradient(95deg, #b91c1c, #e03a3a);
+    .btn-confirm-elegant {
+      background: linear-gradient(105deg, #b22222, #dd4040);
       border: none;
-      padding: 12px 24px;
-      border-radius: 42px;
-      font-weight: 700;
-      color: white;
-      width: 130px;
-      transition: 0.2s;
-      box-shadow: 0 4px 10px rgba(185,28,28,0.3);
-    }
-    .btn-modal-confirm:hover {
-      background: #9f1a1a;
-      transform: translateY(-2px);
-    }
-
-    /* TOAST notifikasi */
-    .toast-notif {
-      position: fixed;
-      top: 25px;
-      right: 25px;
-      background: white;
-      backdrop-filter: blur(12px);
-      padding: 15px 24px;
+      padding: 14px 30px;
       border-radius: 60px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-      z-index: 1100;
-      display: none;
-      align-items: center;
-      gap: 12px;
-      font-weight: 500;
-      border-left: 5px solid;
-      animation: slideRight 0.3s ease;
+      font-weight: 700;
+      font-size: 1rem;
+      color: white;
+      box-shadow: 0 8px 18px rgba(178,34,34,0.3);
+      transition: 0.2s;
+      min-width: 130px;
     }
-    @keyframes slideRight {
-      from { transform: translateX(70px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+    .btn-confirm-elegant:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.02);
     }
 
+    /* LOADING PROCESS NOTIFICATION (sedang proses) */
+    .loading-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      backdrop-filter: blur(16px);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 80px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 600;
+      font-size: 1rem;
+      z-index: 2100;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+      font-family: monospace;
+      letter-spacing: 0.3px;
+      border: 1px solid rgba(255,255,255,0.2);
+      animation: fadeUpLoad 0.2s ease;
+    }
+    @keyframes fadeUpLoad {
+      from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+      to { opacity: 1; transform: translateX(-50%) translateY(0); }
+    }
+
+    /* SUCCESS PANEL */
     .success-panel {
-      max-width: 620px;
+      max-width: 600px;
       margin: 80px auto;
       background: white;
-      border-radius: 60px;
+      border-radius: 68px;
       padding: 55px 30px;
       text-align: center;
-      box-shadow: 0 30px 45px -12px rgba(0,0,0,0.2);
     }
     .btn-home-return {
       background: #0f172a;
-      border: none;
-      border-radius: 44px;
+      border-radius: 60px;
       padding: 14px 32px;
       font-weight: 600;
-      transition: 0.2s;
     }
     .btn-home-return:hover {
       background: #b22222;
-      transform: translateY(-3px);
     }
     .footer-mini {
       text-align: center;
       padding: 22px;
       font-size: 0.8rem;
-      color: #4b5563;
+      color: #556b86;
     }
-    @media (max-width: 560px) {
-      .hero-header h2 { font-size: 1.7rem; }
+
+    @media (max-width: 550px) {
+      .hero-header h2 { font-size: 1.6rem; }
       .candidate-name { font-size: 1.3rem; }
-      .modal-actions { flex-direction: column; align-items: center; gap: 12px; }
-      .btn-modal-cancel, .btn-modal-confirm { width: 100%; }
+      .modal-confirm-card-elegant { padding: 28px 18px; }
+      .modal-actions-row { gap: 12px; }
+      .btn-cancel-elegant, .btn-confirm-elegant { padding: 10px 20px; min-width: 110px; }
     }
   </style>
 </head>
 <body>
 
-<!-- TOAST NOTIFICATION -->
-<div id="toastNotif" class="toast-notif"></div>
+<!-- TOAST NOTIF (biasa) -->
+<div id="toastNotif" style="position:fixed; top:20px; right:20px; background:white; border-radius:60px; padding:12px 24px; display:none; align-items:center; gap:12px; z-index:2200; box-shadow:0 12px 28px rgba(0,0,0,0.2); border-left:5px solid; font-weight:500;"></div>
+
+<!-- LOADING PROSES -->
+<div id="loadingProcess" style="display:none;" class="loading-toast">
+  <i class="fas fa-spinner fa-pulse"></i> <span id="loadingMessage">Sedang memproses...</span>
+</div>
 
 <!-- HEADER -->
 <div class="hero-header">
@@ -447,79 +435,90 @@
   </div>
   <h2>PEMILIHAN KOMITE SEKOLAH</h2>
   <h4>SMPN 2 KAWALI</h4>
-  <p><i class="fas fa-gavel"></i> Masa Bakti 2026–2031 • Suara Digital Terpercaya</p>
+  <p><i class="fas fa-gavel"></i> Masa Bakti 2026–2031 • Suara Berintegritas</p>
 </div>
 
-<!-- LOGIN SECTION -->
+<!-- LOGIN -->
 <div id="loginBox" class="glass-card login-box">
-  <div class="login-icon"><i class="fas fa-fingerprint"></i></div>
-  <h4>🔐 AKSES PEMILIH</h4>
+  <div class="login-icon"><i class="fas fa-user-graduate"></i></div>
+  <h4 class="text-center fw-bold">Login Pemilih</h4>
   <input type="text" id="nama" class="custom-input" placeholder="Nama Lengkap" autocomplete="off">
-  <input type="text" id="alamat" class="custom-input" placeholder="Alamat / Tempat Tinggal" autocomplete="off">
+  <input type="text" id="alamat" class="custom-input" placeholder="Alamat / Tempat Tinggal">
   <input type="password" id="password" class="custom-input" placeholder="Kata Sandi">
-  <button class="btn-login" onclick="login()"><i class="fas fa-arrow-right-to-bracket"></i> MASUK & LANJUTKAN</button>
-  <p class="text-center text-muted mt-3 small"><i class="fas fa-shield-heart"></i> Data dienkripsi & rahasia</p>
+  <button class="btn-login" onclick="handleLogin()"><i class="fas fa-arrow-right-to-bracket"></i> MASUK KE VOTING</button>
 </div>
 
-<!-- DAFTAR CALON -->
+<!-- CALON CONTAINER -->
 <div class="container calon-container" id="calonContainer" style="display: none;">
   <div class="section-title">
-    <span><i class="fas fa-medal"></i> Kandidat Komite</span>
-    <h2>Pilih Ketua Komite Terbaik</h2>
-    <p class="text-secondary">Satu pilihan, satu masa depan lebih cerah</p>
+    <span><i class="fas fa-users"></i> Kandidat Ketua Komite</span>
+    <h2 class="mt-2">Pilih Pemimpin Terbaik</h2>
   </div>
   <div class="row g-4" id="listCalon"></div>
 </div>
 
-<!-- HALAMAN SUKSES -->
+<!-- SUKSES -->
 <div id="sukses" style="display: none;">
-  <div class="success-panel">
-    <i class="fas fa-check-circle" style="font-size: 80px; color: #2b6e3c; background: #e3f7eb; padding: 20px; border-radius: 80px;"></i>
-    <h2 class="mt-4" style="font-weight: 800; color: #b22222;">TERIMA KASIH</h2>
-    <p class="fs-4">✅ Suara Anda tersimpan dengan aman</p>
-    <p class="text-muted">Partisipasi Anda membangun komite yang berkualitas</p>
-    <button class="btn-home-return" onclick="kembaliHome()"><i class="fas fa-home"></i> Kembali ke Awal</button>
+  <div class="success-panel text-center">
+    <i class="fas fa-check-circle" style="font-size: 85px; color: #2b6e3c;"></i>
+    <h2 class="fw-bold mt-3" style="color:#b22222;">TERIMA KASIH</h2>
+    <p class="fs-4">✅ Suara Anda berhasil disimpan</p>
+    <button class="btn-home-return mt-3 text-white border-0" onclick="kembaliHome()"><i class="fas fa-home"></i> Kembali ke Halaman Awal</button>
   </div>
 </div>
 
 <div class="footer-mini">
-  <i class="fas fa-lock"></i> Voting System • Panitia Pemilihan SMPN 2 Kawali
+  <i class="fas fa-shield-alt"></i> Sistem Voting Transparan • Panitia Pemilihan SMPN 2 Kawali
 </div>
 
-<!-- MODAL KONFIRMASI KUSTOM -->
-<div id="confirmModal" class="custom-modal">
-  <div class="modal-confirm-card">
-    <div class="modal-icon">
-      <i class="fas fa-ballot"></i>
+<!-- MODAL KONFIRMASI TENGAH (ELEGAN) -->
+<div id="confirmModal" class="custom-modal-overlay">
+  <div class="modal-confirm-card-elegant">
+    <div class="modal-icon-circle">
+      <i class="fas fa-ballot-check"></i>
     </div>
-    <h3>Konfirmasi Suara</h3>
-    <div id="modalCandidateName" class="candidate-name-modal">Calon</div>
-    <p>Apakah Anda yakin memilih <strong id="modalCandidateDisplay"></strong> sebagai Ketua Komite?<br>Suara bersifat final & tidak dapat diubah.</p>
-    <div class="modal-actions">
-      <button class="btn-modal-cancel" id="modalCancelBtn"><i class="fas fa-times"></i> Batal</button>
-      <button class="btn-modal-confirm" id="modalConfirmBtn"><i class="fas fa-check"></i> Ya, Pilih</button>
+    <h3>Konfirmasi Pilihan</h3>
+    <div id="modalCandidateDisplay" class="candidate-name-highlight">Calon</div>
+    <p class="modal-message">Yakin ingin memilih <strong id="modalCandidateNameBold"></strong> sebagai Ketua Komite?</p>
+    <div class="warning-text"><i class="fas fa-lock"></i> Suara bersifat final & tidak dapat diubah</div>
+    <div class="modal-actions-row">
+      <button id="modalCancelBtn" class="btn-cancel-elegant"><i class="fas fa-times"></i> Batal</button>
+      <button id="modalConfirmBtn" class="btn-confirm-elegant"><i class="fas fa-check"></i> Ya, Pilih</button>
     </div>
   </div>
 </div>
 
 <script>
-  // API URL (tetap sama seperti asli)
+  // API URL
   const API_URL = "https://script.google.com/macros/s/AKfycbz--tv1s4lU-eUMJTlmskNoMtC4u_ndjez--EULA489xYwvKTQqg3QBTEP0OBL-3Cd0/exec";
   let currentUser = null;
-  let pendingVoteCandidate = null;   // menyimpan nama calon yang akan dipilih
+  let pendingCandidate = null;
 
-  // notifikasi modern
+  // Fungsi loading toast (sedang proses)
+  function showLoading(message = "Sedang memproses...") {
+    const loadEl = document.getElementById("loadingProcess");
+    const spanMsg = document.getElementById("loadingMessage");
+    if (spanMsg) spanMsg.innerText = message;
+    if (loadEl) loadEl.style.display = "flex";
+  }
+
+  function hideLoading() {
+    const loadEl = document.getElementById("loadingProcess");
+    if (loadEl) loadEl.style.display = "none";
+  }
+
+  // Notif kecil (kanan atas)
   function showNotif(message, type = "success") {
     const toast = document.getElementById("toastNotif");
-    const icon = type === "success" ? '<i class="fas fa-circle-check" style="color:#15803d;"></i>' : '<i class="fas fa-triangle-exclamation" style="color:#dc2626;"></i>';
+    const icon = type === "success" ? '<i class="fas fa-circle-check" style="color:#15803d;"></i>' : '<i class="fas fa-circle-exclamation" style="color:#dc2626;"></i>';
     toast.innerHTML = `${icon} <span>${message}</span>`;
     toast.style.display = "flex";
     toast.style.borderLeftColor = type === "success" ? "#15803d" : "#dc2626";
-    setTimeout(() => { toast.style.display = "none"; }, 3200);
+    setTimeout(() => { toast.style.display = "none"; }, 3000);
   }
 
-  // fungsi login
-  async function login() {
+  // Login handler dengan loading proses
+  async function handleLogin() {
     const nama = document.getElementById("nama").value.trim().toUpperCase();
     const alamat = document.getElementById("alamat").value.trim().toUpperCase();
     const password = document.getElementById("password").value.trim();
@@ -527,48 +526,53 @@
       showNotif("Lengkapi Nama, Alamat & Password!", "error");
       return;
     }
+    showLoading("Memeriksa data login...");
     try {
       const response = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify({ action: "login", nama, alamat, password })
       });
       const result = await response.json();
+      hideLoading();
       if (result.status) {
         currentUser = result;
-        showNotif(`Selamat datang, ${nama.split(" ")[0]} ✨`, "success");
+        showNotif(`Selamat datang, ${nama.split(" ")[0]}!`, "success");
         document.getElementById("loginBox").style.display = "none";
         await loadCalon();
       } else {
-        showNotif(result.message || "Login gagal, cek kembali data Anda.", "error");
+        showNotif(result.message || "Login gagal, periksa kembali.", "error");
       }
     } catch (err) {
+      hideLoading();
       showNotif("Gagal terhubung ke server.", "error");
     }
   }
 
-  // load calon
+  // Load calon dan inject tombol pilih
   async function loadCalon() {
+    showLoading("Mengambil data kandidat...");
     try {
       const response = await fetch(API_URL + "?action=getCalon");
       const data = await response.json();
+      hideLoading();
       let html = "";
       data.forEach(calon => {
-        let fotoUrl = (calon.foto && calon.foto.trim() !== "") ? calon.foto : "https://ui-avatars.com/api/?background=b22222&color=fff&rounded=true&size=130&bold=true&name=" + encodeURIComponent(calon.nama);
+        let fotoUrl = (calon.foto && calon.foto.trim() !== "") ? calon.foto : `https://ui-avatars.com/api/?background=b91c1c&color=fff&rounded=true&size=140&bold=true&name=${encodeURIComponent(calon.nama)}`;
         html += `
           <div class="col-md-6 col-lg-4 d-flex">
             <div class="candidate-card">
               <div class="candidate-img">
-                <img src="${fotoUrl}" alt="foto ${calon.nama}" onerror="this.src='https://ui-avatars.com/api/?background=9f2a2a&color=fff&rounded=true&size=130&bold=true&name=${encodeURIComponent(calon.nama)}'">
+                <img src="${fotoUrl}" alt="${calon.nama}" onerror="this.src='https://ui-avatars.com/api/?background=9f2a2a&color=fff&rounded=true&size=140&bold=true&name=${encodeURIComponent(calon.nama)}'">
               </div>
               <div class="card-body-custom">
                 <div class="candidate-name">${escapeHtml(calon.nama)}</div>
                 <div class="visi-misi-box">
                   <h6><i class="fas fa-eye"></i> Visi</h6>
-                  <p>${escapeHtml(calon.visi) || "Membangun komite sekolah yang solid, terbuka, dan mendukung terciptanya generasi berprestasi"}</p>
+                  <p>${escapeHtml(calon.visi) || "Membangun sinergi yang kuat antara masyarakat dan sekolah demi terciptanya pendidikan yang unggul"}</p>
                 </div>
                 <div class="visi-misi-box">
-                  <h6><i class="fas fa-flag-checkered"></i> Misi</h6>
-                  <p>${escapeHtml(calon.misi) || "Meningkatkan hubungan baik antara sekolah dan wali murid; Mendukung kegiatan pendidikan secara positif; Membantu mewujudkan lingkungan sekolah yang kondusif; Mendorong keterlibatan masyarakat dalam kemajuan sekolah"}</p>
+                  <h6><i class="fas fa-bullhorn"></i> Misi</h6>
+                  <p>${escapeHtml(calon.misi) || "Meningkatkan partisipasi wali murid; mendukung program sekolah; transparansi dan akuntabilitas."}</p>
                 </div>
                 <button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama).replace(/"/g, '&quot;')}">
                   <i class="fas fa-vote-yea"></i> Pilih
@@ -580,75 +584,76 @@
       });
       document.getElementById("listCalon").innerHTML = html;
       document.getElementById("calonContainer").style.display = "block";
-
-      // Attach event listener ke setiap tombol "Pilih" secara dinamis
-      const btns = document.querySelectorAll('.btn-pilih-modern');
-      btns.forEach(btn => {
+      // Attach event ke semua tombol pilih
+      document.querySelectorAll('.btn-pilih-modern').forEach(btn => {
         btn.addEventListener('click', (e) => {
-          e.preventDefault();
           const namaCalon = btn.getAttribute('data-nama');
-          if (!namaCalon) return;
-          openConfirmModal(namaCalon);
+          if (namaCalon) openConfirmModal(namaCalon);
         });
       });
     } catch (err) {
-      showNotif("Gagal mengambil data calon", "error");
+      hideLoading();
+      showNotif("Gagal memuat data calon", "error");
     }
   }
 
-  // membuka modal konfirmasi super elegan
+  // Buka modal konfirmasi (tengah, elegan)
   function openConfirmModal(candidateName) {
-    pendingVoteCandidate = candidateName;
+    pendingCandidate = candidateName;
     const modal = document.getElementById("confirmModal");
-    const modalCandidateSpan = document.getElementById("modalCandidateDisplay");
-    const modalNameTag = document.getElementById("modalCandidateName");
-    if (modalCandidateSpan) modalCandidateSpan.innerText = candidateName;
-    if (modalNameTag) modalNameTag.innerText = candidateName;
+    const displaySpan = document.getElementById("modalCandidateDisplay");
+    const boldSpan = document.getElementById("modalCandidateNameBold");
+    if (displaySpan) displaySpan.innerText = candidateName;
+    if (boldSpan) boldSpan.innerText = candidateName;
     modal.style.display = "flex";
-    // Hapus listener lama jika ada, lalu pasang ulang
+    // Hapus event listener lama dengan clone + replace (biar clean)
     const confirmBtn = document.getElementById("modalConfirmBtn");
     const cancelBtn = document.getElementById("modalCancelBtn");
     const newConfirm = confirmBtn.cloneNode(true);
     const newCancel = cancelBtn.cloneNode(true);
     confirmBtn.parentNode.replaceChild(newConfirm, confirmBtn);
     cancelBtn.parentNode.replaceChild(newCancel, cancelBtn);
-    
+
     newConfirm.addEventListener('click', async () => {
       closeModal();
-      await executeVote(pendingVoteCandidate);
+      await executeVote(pendingCandidate);
     });
     newCancel.addEventListener('click', () => {
       closeModal();
       showNotif("Vote dibatalkan", "success");
     });
-    // klik background menutup
-    modal.onclick = (e) => { if (e.target === modal) closeModal(); };
+    // Klik overlay bisa menutup
+    modal.onclick = (e) => {
+      if (e.target === modal) closeModal();
+    };
   }
 
   function closeModal() {
     document.getElementById("confirmModal").style.display = "none";
-    pendingVoteCandidate = null;
+    pendingCandidate = null;
   }
 
-  // eksekusi vote
-  async function executeVote(namaCalon) {
+  // Eksekusi vote dengan loading proses
+  async function executeVote(candidateName) {
     if (!currentUser || !currentUser.id) {
-      showNotif("Sesi kadaluarsa, silakan login ulang.", "error");
+      showNotif("Sesi login habis, silakan refresh.", "error");
       location.reload();
       return;
     }
+    showLoading(`Menyimpan suara untuk ${candidateName}...`);
     try {
       const response = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify({
           action: "vote",
           idPemilih: currentUser.id,
-          pilihan: namaCalon
+          pilihan: candidateName
         })
       });
       const result = await response.json();
+      hideLoading();
       if (result.status) {
-        showNotif(`✅ Suara untuk ${namaCalon} berhasil disimpan! Terima kasih.`, "success");
+        showNotif(`✅ Suara untuk ${candidateName} berhasil disimpan! Terima kasih.`, "success");
         document.getElementById("calonContainer").style.display = "none";
         document.getElementById("sukses").style.display = "block";
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -656,7 +661,8 @@
         showNotif(result.message || "Gagal menyimpan suara, mungkin Anda sudah memilih.", "error");
       }
     } catch (err) {
-      showNotif("Kesalahan jaringan, gagal vote.", "error");
+      hideLoading();
+      showNotif("Kesalahan jaringan, gagal memproses vote.", "error");
     }
   }
 
@@ -671,7 +677,7 @@
       if (m === '<') return '&lt;';
       if (m === '>') return '&gt;';
       return m;
-    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) { return c; });
+    });
   }
 </script>
 </body>
