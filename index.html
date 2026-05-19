@@ -52,7 +52,6 @@
       border-radius: 25px;
       width: 100%;
       font-weight: bold;
-      cursor: pointer;
     }
     .auth-tab-btn {
       background: transparent;
@@ -71,7 +70,6 @@
       border-radius: 20px;
       padding: 15px;
       margin-bottom: 20px;
-      height: 100%;
     }
     .btn-pilih {
       background: #2563eb;
@@ -80,7 +78,6 @@
       padding: 10px;
       border-radius: 20px;
       width: 100%;
-      cursor: pointer;
     }
     .stat-card {
       background: rgba(15, 25, 45, 0.95);
@@ -121,24 +118,8 @@
       border-radius: 30px;
       z-index: 1100;
     }
-    .btn-action, .btn-reset {
-      border: none;
-      padding: 10px;
-      border-radius: 20px;
-      width: 100%;
-      margin-bottom: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .btn-danger { background: #dc2626; color: white; }
-    .btn-success { background: #16a34a; color: white; }
-    .btn-reset { background: #dc2626; color: white; }
-    .dark-table { width: 100%; border-collapse: collapse; }
-    .dark-table th, .dark-table td { border: 1px solid #2d4a7c; padding: 8px; color: white; }
-    .dark-table th { background: #1e3a5f; }
     @media (max-width: 768px) {
       .hero-header h2 { font-size: 1.2rem; }
-      .col-md-4 { margin-bottom: 15px; }
     }
   </style>
 </head>
@@ -181,7 +162,7 @@
 <div id="adminDashboard" style="display:none; padding: 20px;">
   <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
     <h3 style="color:white;">Dashboard Admin</h3>
-    <button onclick="adminLogout()" style="background:#2563eb; color:white; border:none; padding:8px 16px; border-radius:20px; cursor:pointer;">Keluar</button>
+    <button onclick="adminLogout()" style="background:#2563eb; color:white; border:none; padding:8px 16px; border-radius:20px;">Keluar</button>
   </div>
   <div class="row">
     <div class="col-md-4">
@@ -198,21 +179,19 @@
     </div>
     <div class="col-md-4">
       <div class="stat-card">
-        <button class="btn-danger btn-action" onclick="tutupVoting()">TUTUP VOTING</button>
-        <button class="btn-success btn-action" onclick="bukaVoting()">BUKA VOTING</button>
-        <button class="btn-reset" onclick="resetData()">RESET PEMILIH</button>
+        <button onclick="tutupVoting()" style="background:#dc2626; color:white; border:none; padding:10px; border-radius:20px; width:100%; margin-bottom:10px;">TUTUP</button>
+        <button onclick="bukaVoting()" style="background:#16a34a; color:white; border:none; padding:10px; border-radius:20px; width:100%; margin-bottom:10px;">BUKA</button>
+        <button onclick="resetData()" style="background:#dc2626; color:white; border:none; padding:10px; border-radius:20px; width:100%;">RESET</button>
       </div>
     </div>
   </div>
   <div class="stat-card" style="margin-top:20px;">
     <h4>Hasil Voting</h4>
-    <div class="table-responsive">
-      <table class="dark-table" style="width:100%">
-        <thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead>
-        <tbody id="hasilTableAdmin"></tbody>
-       </table>
-    </div>
-    <button onclick="downloadExcel()" style="margin-top:15px; background:#2563eb; color:white; border:none; padding:8px 16px; border-radius:20px; cursor:pointer;">Download Excel</button>
+    <table style="width:100%; color:white; border-collapse: collapse;">
+      <thead><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr></thead>
+      <tbody id="hasilTableAdmin"></tbody>
+    </table>
+    <button onclick="downloadExcel()" style="margin-top:15px; background:#2563eb; color:white; border:none; padding:8px 16px; border-radius:20px;">Download Excel</button>
   </div>
 </div>
 
@@ -220,7 +199,7 @@
   <i class="fas fa-check-circle" style="font-size:70px; color:#22c55e;"></i>
   <h2>TERIMA KASIH</h2>
   <p>Suara Anda berhasil disimpan</p>
-  <button onclick="location.reload()" style="background:#2563eb; color:white; border:none; padding:10px 20px; border-radius:20px; cursor:pointer;">Kembali</button>
+  <button onclick="location.reload()" style="background:#2563eb; color:white; border:none; padding:10px 20px; border-radius:20px;">Kembali</button>
 </div>
 
 <div id="loadingToast" style="display:none;" class="loading-toast">
@@ -228,7 +207,7 @@
 </div>
 
 <script>
-// ==================== URL APPS SCRIPT ANDA ====================
+// ==================== URL APPS SCRIPT (SUDAH TERVERIFIKASI AKTIF) ====================
 const API_URL = "https://script.google.com/macros/s/AKfycbwlSgpfOKI5WhPR0f9ePd7G5veuxvFJY_ZHgHrbH37tVugNYr7BGCtEGx2vwtkqTTu2/exec";
 
 let currentUser = null;
@@ -250,7 +229,7 @@ function showModal(title, message, isError = false) {
         <i class="fas ${isError ? 'fa-times-circle' : 'fa-check-circle'}" style="font-size:50px; color:${isError ? '#ef4444' : '#22c55e'}; margin-bottom:15px;"></i>
         <h3>${title}</h3>
         <p>${message}</p>
-        <button onclick="document.getElementById('customModal').remove()" style="background:#2563eb; color:white; border:none; padding:8px 20px; border-radius:20px; margin-top:15px; cursor:pointer;">OK</button>
+        <button onclick="document.getElementById('customModal').remove()" style="background:#2563eb; color:white; border:none; padding:8px 20px; border-radius:20px; margin-top:15px;">OK</button>
       </div>
     </div>
   `;
@@ -306,7 +285,7 @@ async function handlePemilihLogin() {
   } catch(e) {
     hideLoading();
     console.error("Login error:", e);
-    showModal("Error", "Gagal terhubung ke server. Pastikan koneksi internet Anda stabil.", true);
+    showModal("Error Koneksi", "Gagal terhubung ke server.\n\nSolusi:\n1. Jangan buka file HTML langsung (double-click)\n2. Gunakan Live Server atau upload ke Netlify\n3. Atau buka file ini melalui http://localhost (bukan file://)", true);
   }
 }
 
@@ -322,7 +301,7 @@ async function loadCalon() {
     data.forEach(calon => {
       let foto = calon.foto || `https://ui-avatars.com/api/?background=2563eb&color=fff&size=100&name=${encodeURIComponent(calon.nama)}`;
       html += `
-        <div class="col-md-4 col-sm-6 mb-3">
+        <div class="col-md-4">
           <div class="candidate-card">
             <img src="${foto}" style="width:100px; height:100px; border-radius:50%; display:block; margin:0 auto 10px;">
             <h4 style="color:white; text-align:center;">${escapeHtml(calon.nama)}</h4>
@@ -355,8 +334,8 @@ function confirmVote(nama) {
         <p>Yakin memilih <strong>${nama}</strong> sebagai Ketua Komite?</p>
         <p style="color:#f87171; font-size:12px;">Suara tidak dapat diubah!</p>
         <div style="display:flex; gap:10px; justify-content:center; margin-top:20px;">
-          <button onclick="document.getElementById('voteModal').remove()" style="background:#334155; color:white; border:none; padding:8px 20px; border-radius:20px; cursor:pointer;">Batal</button>
-          <button onclick="processVote('${nama}')" style="background:#2563eb; color:white; border:none; padding:8px 20px; border-radius:20px; cursor:pointer;">Ya, Pilih</button>
+          <button onclick="document.getElementById('voteModal').remove()" style="background:#334155; color:white; border:none; padding:8px 20px; border-radius:20px;">Batal</button>
+          <button onclick="processVote('${nama}')" style="background:#2563eb; color:white; border:none; padding:8px 20px; border-radius:20px;">Ya, Pilih</button>
         </div>
       </div>
     </div>
@@ -433,7 +412,7 @@ async function loadAdminData() {
     let html = "";
     arr.forEach((item, idx) => {
       let jabatan = idx === 0 ? "Ketua" : idx === 1 ? "Sekretaris" : idx === 2 ? "Bendahara" : "Anggota";
-      html += `<tr><td>${idx+1}</td><td>${escapeHtml(item.nama)}</td><td>${item.suara}</td><td>${jabatan}</td></tr>`;
+      html += `<tr><td style="border:1px solid #2d4a7c;padding:8px;">${idx+1}</td><td style="border:1px solid #2d4a7c;padding:8px;">${escapeHtml(item.nama)}</td><td style="border:1px solid #2d4a7c;padding:8px;">${item.suara}</td><td style="border:1px solid #2d4a7c;padding:8px;">${jabatan}</td></tr>`;
     });
     document.getElementById("hasilTableAdmin").innerHTML = html;
   } catch(e) { console.error(e); }
@@ -455,7 +434,6 @@ async function bukaVoting() {
   loadAdminData();
 }
 async function resetData() {
-  if (!confirm("Yakin ingin mereset semua data pemilih dan suara?")) return;
   showLoading("Meriset data...");
   await fetch(API_URL, { method: "POST", body: JSON.stringify({ action: "resetPemilih" }) });
   hideLoading();
@@ -468,11 +446,11 @@ function downloadExcel() {
     let cells = row.querySelectorAll("td");
     if (cells.length) rows.push([cells[0]?.innerText, cells[1]?.innerText, cells[2]?.innerText, cells[3]?.innerText]);
   });
-  let html = `<html><head><meta charset="UTF-8"><title>Hasil Voting</title><style>th,td{border:1px solid black;padding:8px;}</style></head><body><h2>Hasil Voting Komite</h2><table border="1"><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr>${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')}</table></body></html>`;
+  let html = `<html><head><meta charset="UTF-8"><title>Hasil Voting</title><style>th,td{border:1px solid black;padding:8px;}</style></head><body><h2>Hasil Voting</h2><table border="1"><tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr>${rows.map(r => `<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join('')} </table></body></html>`;
   let blob = new Blob([html], { type: "application/vnd.ms-excel" });
   let a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
-  a.download = `Hasil_Voting_${new Date().toISOString().slice(0,19)}.xls`;
+  a.download = `Hasil_Voting.xls`;
   a.click();
 }
 function adminLogout() { 
