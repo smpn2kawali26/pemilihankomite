@@ -6,357 +6,149 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(135deg, #0a0f2a 0%, #0d1b5e 30%, #1a237e 60%, #1565c0 100%);
       min-height: 100vh;
       padding: 20px;
     }
-
-    .container {
-      max-width: 500px;
-      margin: 0 auto;
-    }
-
-    /* HEADER dengan Logo Besar */
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
+    .container { max-width: 500px; margin: 0 auto; }
+    
+    /* HEADER */
+    .header { text-align: center; margin-bottom: 25px; }
     .logo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background: white;
-      padding: 8px;
-      margin-bottom: 15px;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: white; padding: 5px;
+      margin-bottom: 12px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.2);
     }
-
-    .header h1 {
-      color: white;
-      font-size: 20px;
-      font-weight: 600;
-      letter-spacing: 1px;
+    .header h1 { color: white; font-size: 20px; font-weight: 700; }
+    .header h2 { color: rgba(255,255,255,0.9); font-size: 14px; font-weight: 500; }
+    .header p { color: rgba(255,255,255,0.7); font-size: 11px; margin-top: 5px; }
+    
+    /* REAL TIME CLOCK */
+    .clock {
+      background: rgba(0,0,0,0.3);
+      border-radius: 50px;
+      padding: 8px 15px;
+      margin-top: 10px;
+      display: inline-block;
     }
-
-    .header h2 {
-      color: rgba(255,255,255,0.9);
-      font-size: 16px;
-      font-weight: 500;
-    }
-
-    .header p {
-      color: rgba(255,255,255,0.7);
-      font-size: 12px;
-      margin-top: 5px;
-    }
-
-    /* TAB STYLE - SEPERTI PHOTO 1 */
-    .tab-container {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 25px;
-    }
-
+    .time { font-size: 16px; font-weight: 600; color: white; }
+    .date { font-size: 11px; color: rgba(255,255,255,0.8); }
+    
+    /* TAB */
+    .tab-container { display: flex; gap: 10px; margin-bottom: 25px; }
     .tab-btn {
-      flex: 1;
-      padding: 12px;
-      border: none;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
-      background: rgba(255,255,255,0.2);
-      color: white;
-      backdrop-filter: blur(5px);
+      flex: 1; padding: 12px; border: none; border-radius: 30px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      background: rgba(255,255,255,0.2); color: white;
     }
-
-    .tab-btn.active {
-      background: white;
-      color: #1a237e;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
-    /* CARD LOGIN */
+    .tab-btn.active { background: white; color: #1a237e; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    
+    /* CARD */
     .card {
-      background: white;
-      border-radius: 25px;
-      padding: 30px 25px;
+      background: white; border-radius: 25px; padding: 30px 25px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.2);
     }
-
-    .card h3 {
-      color: #1a237e;
-      font-size: 22px;
-      font-weight: 700;
-      margin-bottom: 25px;
-      text-align: center;
-    }
-
-    /* INPUT FIELD */
-    .input-group {
-      margin-bottom: 15px;
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 13px;
-      font-weight: 500;
-      color: #1a237e;
-      margin-bottom: 5px;
-    }
-
+    .card h3 { color: #1a237e; font-size: 22px; font-weight: 700; margin-bottom: 25px; text-align: center; }
+    
+    /* INPUT */
+    .input-group { margin-bottom: 15px; }
+    .input-group label { display: block; font-size: 13px; font-weight: 500; color: #1a237e; margin-bottom: 5px; }
     input {
-      width: 100%;
-      padding: 14px 16px;
-      border: 2px solid #e0e0e0;
-      border-radius: 20px;
-      font-size: 15px;
-      font-family: 'Poppins', sans-serif;
-      transition: all 0.3s;
+      width: 100%; padding: 14px 16px;
+      border: 2px solid #e0e0e0; border-radius: 20px;
+      font-size: 15px; font-family: 'Poppins', sans-serif;
       background: #f8f9fa;
     }
-
-    input:focus {
-      outline: none;
-      border-color: #1565c0;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(21,101,192,0.1);
-    }
-
+    input:focus { outline: none; border-color: #1565c0; background: white; }
+    
     /* BUTTON */
     .btn-primary {
-      width: 100%;
-      padding: 14px;
+      width: 100%; padding: 14px;
       background: linear-gradient(135deg, #1a237e, #1565c0);
-      color: white;
-      border: none;
-      border-radius: 25px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s;
+      color: white; border: none; border-radius: 25px;
+      font-size: 16px; font-weight: 600; cursor: pointer;
       margin-top: 10px;
     }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
     .btn-secondary {
-      width: 100%;
-      padding: 12px;
-      background: #eceff1;
-      color: #1a237e;
-      border: none;
-      border-radius: 25px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      margin-top: 10px;
+      width: 100%; padding: 12px;
+      background: #eceff1; color: #1a237e;
+      border: none; border-radius: 25px; font-size: 14px;
+      cursor: pointer; margin-top: 10px;
     }
-
     .btn-vote {
-      width: 100%;
-      padding: 12px;
+      width: 100%; padding: 12px;
       background: linear-gradient(135deg, #2e7d32, #43a047);
-      color: white;
-      border: none;
-      border-radius: 20px;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 10px;
+      color: white; border: none; border-radius: 20px;
+      font-weight: 600; cursor: pointer; margin-top: 10px;
     }
-
-    .btn-danger {
-      background: linear-gradient(135deg, #c62828, #e53935);
-      color: white;
-    }
-
-    .btn-success {
-      background: linear-gradient(135deg, #2e7d32, #43a047);
-      color: white;
-    }
-
+    .btn-danger { background: linear-gradient(135deg, #c62828, #e53935); color: white; }
+    .btn-success { background: linear-gradient(135deg, #2e7d32, #43a047); color: white; }
+    
     /* MESSAGE */
-    .message {
-      text-align: center;
-      margin-top: 15px;
-      padding: 10px;
-      border-radius: 15px;
-      font-size: 13px;
-    }
-
-    .message.error {
-      background: #ffebee;
-      color: #c62828;
-    }
-
-    .message.success {
-      background: #e8f5e9;
-      color: #2e7d32;
-    }
-
-    /* WELCOME BANNER */
-    .welcome-banner {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
-      text-align: center;
-    }
-
-    .welcome-banner h3 {
-      color: #1a237e;
-      margin-bottom: 5px;
-    }
-
-    /* CANDIDATES GRID */
-    .candidates-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-
+    .message { text-align: center; margin-top: 15px; padding: 10px; border-radius: 15px; font-size: 13px; }
+    .message.error { background: #ffebee; color: #c62828; }
+    .message.success { background: #e8f5e9; color: #2e7d32; }
+    
+    /* CANDIDATES */
+    .candidates-grid { display: flex; flex-direction: column; gap: 20px; }
     .candidate-card {
-      background: white;
-      border-radius: 20px;
-      overflow: hidden;
+      background: white; border-radius: 20px; overflow: hidden;
       box-shadow: 0 10px 20px rgba(0,0,0,0.1);
     }
-
-    .candidate-card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .candidate-card h4 {
-      padding: 15px;
-      background: linear-gradient(135deg, #1a237e, #283593);
-      color: white;
-      font-size: 16px;
-    }
-
-    .visi-misi {
-      padding: 15px;
-      font-size: 12px;
-      line-height: 1.6;
-      color: #424242;
-    }
-
-    .visi-misi strong {
-      color: #1a237e;
-      display: block;
-      margin-top: 10px;
-    }
-
+    .candidate-card img { width: 100%; height: 200px; object-fit: cover; }
+    .candidate-card h4 { padding: 15px; background: linear-gradient(135deg, #1a237e, #283593); color: white; font-size: 16px; }
+    .visi-misi { padding: 15px; font-size: 12px; line-height: 1.6; color: #424242; }
+    .visi-misi strong { color: #1a237e; display: block; margin-top: 10px; }
+    
     /* LOADING */
-    .loading-spinner {
-      text-align: center;
-      padding: 40px;
-      background: white;
-      border-radius: 20px;
-    }
-
+    .loading-spinner { text-align: center; padding: 40px; background: white; border-radius: 20px; }
     .spinner {
-      width: 40px;
-      height: 40px;
-      border: 3px solid #e0e0e0;
-      border-top-color: #1a237e;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+      width: 40px; height: 40px;
+      border: 3px solid #e0e0e0; border-top-color: #1a237e;
+      border-radius: 50%; animation: spin 1s linear infinite;
       margin: 0 auto 15px;
     }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* ADMIN PANEL */
+    @keyframes spin { to { transform: rotate(360deg); } }
+    
+    /* ADMIN */
     .stats-card {
-      display: flex;
-      justify-content: space-around;
+      display: flex; justify-content: space-around;
       background: linear-gradient(135deg, #1a237e, #0d47a1);
-      border-radius: 20px;
-      padding: 20px;
-      margin-bottom: 20px;
-      color: white;
-      text-align: center;
+      border-radius: 20px; padding: 20px; margin-bottom: 20px;
+      color: white; text-align: center;
     }
-
-    .stat-value {
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .voting-control {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .voting-control button {
-      flex: 1;
-    }
-
-    .chart-container {
-      background: white;
-      border-radius: 20px;
-      padding: 15px;
-      margin-bottom: 20px;
-    }
-
-    .rekap-container {
-      background: white;
-      border-radius: 20px;
-      padding: 20px;
-    }
-
-    .rekap-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-
-    .rekap-table th, .rekap-table td {
-      padding: 10px;
-      text-align: left;
-      border-bottom: 1px solid #eee;
-    }
-
-    .rekap-table th {
-      background: #1a237e;
-      color: white;
-    }
-
-    .total-row {
-      background: #e8eaf6;
-      font-weight: bold;
-    }
+    .stat-value { font-size: 28px; font-weight: bold; }
+    .voting-control { display: flex; gap: 10px; margin-bottom: 20px; }
+    .voting-control button { flex: 1; }
+    .chart-container { background: white; border-radius: 20px; padding: 15px; margin-bottom: 20px; }
+    .rekap-container { background: white; border-radius: 20px; padding: 20px; }
+    .rekap-table { width: 100%; border-collapse: collapse; }
+    .rekap-table th, .rekap-table td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+    .rekap-table th { background: #1a237e; color: white; }
+    .total-row { background: #e8eaf6; font-weight: bold; }
   </style>
   <title>Voting Komite SMPN 2 Kawali</title>
 </head>
 <body>
 <div class="container">
-  <!-- HEADER dengan Logo -->
+  <!-- HEADER dengan Logo dan Jam -->
   <div class="header">
-    <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://placehold.co/100x100/1a237e/white?text=Logo'">
+    <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo" class="logo" onerror="this.src='https://placehold.co/100x100/1a237e/white?text=Logo'">
     <h1>PEMILIHAN KOMITE SEKOLAH</h1>
     <h2>SMPN 2 KAWALI</h2>
     <p>Masa Bakti 2026–2031</p>
+    <div class="clock">
+      <div class="time" id="timeText">--:--:--</div>
+      <div class="date" id="dateText">Memuat...</div>
+    </div>
   </div>
 
-  <!-- TAB Pemilih & Admin -->
+  <!-- TAB -->
   <div class="tab-container">
     <button class="tab-btn active" onclick="showTab('pemilih')">🗳️ Pemilih</button>
     <button class="tab-btn" onclick="showTab('admin')">👑 Admin</button>
@@ -376,16 +168,16 @@
       </div>
       <div class="input-group">
         <label>Password</label>
-        <input type="password" id="password" placeholder="Password">
+        <input type="password" id="password" placeholder="Password: voting2026">
       </div>
       <button onclick="doLogin()" class="btn-primary">✅ MASUK & VOTING</button>
       <div id="loginMessage" class="message"></div>
     </div>
 
     <div id="votingPanel" style="display:none;">
-      <div class="welcome-banner">
+      <div class="card" style="margin-bottom:20px;">
         <h3>Selamat Datang, <span id="userName"></span>!</h3>
-        <p>Silakan pilih calon komite favorit Anda</p>
+        <p style="text-align:center;">Silakan pilih calon komite favorit Anda</p>
       </div>
       <div id="candidatesGrid" class="candidates-grid">
         <div class="loading-spinner"><div class="spinner"></div><p>Memuat data calon...</p></div>
@@ -400,11 +192,11 @@
       <h3>👑 LOGIN ADMIN</h3>
       <div class="input-group">
         <label>Username</label>
-        <input type="text" id="adminUser" placeholder="Username">
+        <input type="text" id="adminUser" placeholder="Username: admin">
       </div>
       <div class="input-group">
         <label>Password</label>
-        <input type="password" id="adminPass" placeholder="Password">
+        <input type="password" id="adminPass" placeholder="Password: admmin123">
       </div>
       <button onclick="doAdminLogin()" class="btn-primary">MASUK</button>
       <div id="adminMessage" class="message"></div>
@@ -412,9 +204,9 @@
 
     <div id="adminPanel" style="display:none;">
       <div class="stats-card">
-        <div><span class="stat-label">📋 Pemilih</span><div class="stat-value" id="totalPemilih">0</div></div>
-        <div><span class="stat-label">✅ Suara</span><div class="stat-value" id="totalSuara">0</div></div>
-        <div><span class="stat-label">📈 Partisipasi</span><div class="stat-value" id="persentase">0%</div></div>
+        <div><span>📋 Pemilih</span><div class="stat-value" id="totalPemilih">0</div></div>
+        <div><span>✅ Suara</span><div class="stat-value" id="totalSuara">0</div></div>
+        <div><span>📈 Partisipasi</span><div class="stat-value" id="persentase">0%</div></div>
       </div>
       <div class="voting-control">
         <button id="toggleVotingBtn" onclick="toggleVoting()" class="btn-primary">Loading...</button>
@@ -437,6 +229,17 @@
   let currentUser = null;
   let hasilChart = null;
 
+  // REAL TIME CLOCK
+  function updateClock() {
+    var now = new Date();
+    var jam = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    var tanggal = now.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+    document.getElementById('timeText').innerHTML = jam;
+    document.getElementById('dateText').innerHTML = tanggal;
+  }
+  setInterval(updateClock, 1000);
+  updateClock();
+
   function showTab(tab) {
     if (tab === 'pemilih') {
       document.getElementById('panelPemilih').style.display = 'block';
@@ -451,11 +254,11 @@
     }
   }
 
-  // ==================== PEMILIH ====================
+  // PEMILIH
   function doLogin() {
-    const nama = document.getElementById('nama').value.trim();
-    const alamat = document.getElementById('alamat').value.trim();
-    const password = document.getElementById('password').value;
+    var nama = document.getElementById('nama').value.trim();
+    var alamat = document.getElementById('alamat').value.trim();
+    var password = document.getElementById('password').value;
 
     if (!nama) { showMessage('loginMessage', 'Nama harus diisi!', 'error'); return; }
     if (!alamat) { showMessage('loginMessage', 'Alamat harus diisi!', 'error'); return; }
@@ -480,30 +283,34 @@
   }
 
   function loadCandidates() {
-    const grid = document.getElementById('candidatesGrid');
+    var grid = document.getElementById('candidatesGrid');
     grid.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><p>Memuat data calon...</p></div>';
     
     google.script.run
       .withSuccessHandler(function(data) {
         if (!data || data.length === 0) {
-          grid.innerHTML = '<p style="text-align:center;padding:40px;">Data calon belum tersedia</p>';
+          grid.innerHTML = '<p style="text-align:center;padding:40px;">Data calon belum tersedia. Hubungi admin untuk mengisi sheet calon.</p>';
           return;
         }
         grid.innerHTML = '';
-        data.forEach(function(calon) {
+        for (var i = 0; i < data.length; i++) {
+          var calon = data[i];
           var card = document.createElement('div');
           card.className = 'candidate-card';
-          card.innerHTML = '<img src="' + calon.foto + '" alt="' + calon.nama + '" onerror="this.src=\'https://placehold.co/400x200/1a237e/white?text=Calon\'">' +
+          card.innerHTML = '<img src="' + calon.foto + '" alt="' + calon.nama + '" onerror="this.src=\'https://placehold.co/400x200/1a237e/white?text=' + encodeURIComponent(calon.nama) + '\'">' +
             '<h4>' + calon.nama + '</h4>' +
             '<div class="visi-misi">' +
-            '<strong>🌟 VISI</strong><p>' + calon.visi.substring(0, 100) + (calon.visi.length > 100 ? '...' : '') + '</p>' +
-            '<strong>📌 MISI</strong><p>' + calon.misi.substring(0, 100) + (calon.misi.length > 100 ? '...' : '') + '</p>' +
+            '<strong>🌟 VISI</strong><p>' + (calon.visi.length > 150 ? calon.visi.substring(0,150)+'...' : calon.visi) + '</p>' +
+            '<strong>📌 MISI</strong><p>' + (calon.misi.length > 150 ? calon.misi.substring(0,150)+'...' : calon.misi) + '</p>' +
             '</div>' +
             '<button onclick="vote(' + calon.id + ')" class="btn-vote">🗳️ PILIH</button>';
           grid.appendChild(card);
-        });
+        }
       })
-      .withFailureHandler(function() { grid.innerHTML = '<p style="text-align:center;color:red;">Gagal memuat data</p>'; })
+      .withFailureHandler(function(err) { 
+        grid.innerHTML = '<p style="text-align:center;color:red;padding:40px;">Gagal memuat data calon. Periksa sheet calon.</p>';
+        console.error(err);
+      })
       .getCalon();
   }
 
@@ -526,7 +333,7 @@
     document.getElementById('password').value = '';
   }
 
-  // ==================== ADMIN ====================
+  // ADMIN
   function doAdminLogin() {
     var username = document.getElementById('adminUser').value;
     var password = document.getElementById('adminPass').value;
@@ -545,9 +352,9 @@
 
   function loadAdminData() {
     google.script.run.withSuccessHandler(function(status) {
-      var toggleBtn = document.getElementById('toggleVotingBtn');
-      toggleBtn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
-      toggleBtn.className = status ? 'btn-danger' : 'btn-success';
+      var btn = document.getElementById('toggleVotingBtn');
+      btn.innerText = status ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
+      btn.className = status ? 'btn-danger' : 'btn-success';
     }).getVotingStatus();
     
     google.script.run.withSuccessHandler(function(stat) {
@@ -567,10 +374,11 @@
     if (!hasil || hasil.length === 0) { container.innerHTML = '<p>Belum ada suara</p>'; return; }
     var html = '<table class="rekap-table"><tr><th>Posisi</th><th>Nama Calon</th><th>Suara</th></tr>';
     for (var i = 0; i < hasil.length; i++) {
-      html += '<tr><td>' + (hasil[i].posisi || '-') + '</td><td>' + hasil[i].nama + '</td><td>' + hasil[i].suara + '</td></tr>';
+      html += '<tr><td><strong>' + (hasil[i].posisi || '-') + '</strong></td><td>' + hasil[i].nama + '</td><td>' + hasil[i].suara + '</td></tr>';
     }
-    var total = hasil.reduce(function(s,c) { return s + c.suara; }, 0);
-    html += '<tr class="total-row"><td colspan="2">Total</td><td>' + total + '</td></tr></table>';
+    var total = 0;
+    for (var i = 0; i < hasil.length; i++) total += hasil[i].suara;
+    html += '<tr class="total-row"><td colspan="2">📊 TOTAL SUARA</td><td><strong>' + total + '</strong></td></tr></table>';
     container.innerHTML = html;
   }
 
@@ -578,9 +386,15 @@
     var ctx = document.getElementById('hasilChart').getContext('2d');
     if (hasilChart) hasilChart.destroy();
     if (!hasil || hasil.length === 0) return;
+    var labels = [];
+    var data = [];
+    for (var i = 0; i < hasil.length; i++) {
+      labels.push(hasil[i].nama.split(' ')[0]);
+      data.push(hasil[i].suara);
+    }
     hasilChart = new Chart(ctx, {
       type: 'bar',
-      data: { labels: hasil.map(function(c) { return c.nama.split(' ')[0]; }), datasets: [{ label: 'Suara', data: hasil.map(function(c) { return c.suara; }), backgroundColor: '#1a237e', borderRadius: 8 }] },
+      data: { labels: labels, datasets: [{ label: 'Jumlah Suara', data: data, backgroundColor: '#1a237e', borderRadius: 8 }] },
       options: { responsive: true, scales: { y: { beginAtZero: true, ticks: { stepSize: 1 } } } }
     });
   }
@@ -591,15 +405,15 @@
         var btn = document.getElementById('toggleVotingBtn');
         btn.innerText = newStatus ? '🔒 TUTUP VOTING' : '🔓 BUKA VOTING';
         btn.className = newStatus ? 'btn-danger' : 'btn-success';
-        alert(newStatus ? 'Voting DIBUKA' : 'Voting DITUTUP');
+        alert(newStatus ? '✅ Voting DIBUKA' : '❌ Voting DITUTUP');
       }).setVotingStatus(!status);
     }).getVotingStatus();
   }
 
   function resetVoting() {
-    if (confirm('RESET semua data voting? TIDAK BISA DIURUNGKAN!')) {
+    if (confirm('⚠️ PERINGATAN! ⚠️\n\nReset semua data voting?\n\nTINDAKAN INI TIDAK DAPAT DIURUNGKAN!')) {
       google.script.run.withSuccessHandler(function() {
-        alert('Voting telah direset!');
+        alert('✅ Voting telah direset!');
         loadAdminData();
       }).resetVoting();
     }
@@ -615,7 +429,11 @@
 
   function showMessage(elId, msg, type) {
     var el = document.getElementById(elId);
-    if (el) { el.innerText = msg; el.className = 'message ' + type; setTimeout(function() { el.innerText = ''; el.className = 'message'; }, 3000); }
+    if (el) {
+      el.innerText = msg;
+      el.className = 'message ' + type;
+      setTimeout(function() { if(el) { el.innerText = ''; el.className = 'message'; } }, 3000);
+    }
   }
 </script>
 </body>
