@@ -219,29 +219,54 @@
       padding: 25px 20px 15px;
       text-align: center;
     }
+    .candidate-img img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #3b82f6;
+    }
     .candidate-name {
       color: white;
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 16px;
     }
     .visi-misi-box {
       background: rgba(10, 20, 40, 0.6);
+      border-radius: 24px;
+      padding: 12px 16px;
+      margin-bottom: 14px;
+    }
+    .visi-misi-box h6 {
+      color: #60a5fa;
+      font-weight: 800;
+      margin-bottom: 6px;
     }
     .visi-misi-box p {
       color: #cbd5e1;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      text-align: justify;
     }
     .btn-pilih-modern {
       background: linear-gradient(115deg, #1e4b8f, #3b82f6);
-    }
-
-    /* MODAL */
-    .modal-confirm-card {
-      background: #0f172a;
-      border: 1px solid #3b82f6;
-    }
-    .modal-confirm-card h3, .modal-confirm-card p {
+      border: none;
+      border-radius: 44px;
+      padding: 12px;
+      font-weight: 700;
       color: white;
+      width: 100%;
+      margin-top: 12px;
+      transition: 0.2s;
+    }
+    .btn-pilih-modern:hover {
+      transform: scale(0.98);
+      filter: brightness(1.05);
     }
 
-    /* ADMIN DASHBOARD - Blue Theme */
+    /* ADMIN DASHBOARD - Blue Theme (Tabel Tidak Putih) */
     .admin-dashboard {
       display: none;
       padding: 25px 20px 50px;
@@ -268,6 +293,20 @@
       width: 100%;
       margin-bottom: 8px;
     }
+    .btn-reset {
+      background: linear-gradient(105deg, #dc2626, #ef4444);
+      border: none;
+      border-radius: 40px;
+      padding: 10px;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 10px;
+      color: white;
+    }
+    .btn-reset:hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
     .hasil-table {
       background: rgba(15, 25, 45, 0.95);
       backdrop-filter: blur(5px);
@@ -275,18 +314,35 @@
       padding: 20px;
       margin-top: 20px;
       border: 1px solid rgba(59, 130, 246, 0.3);
-      color: white;
     }
     .hasil-table h5 {
       color: #60a5fa;
+      margin-bottom: 15px;
     }
-    .hasil-table table {
-      color: white;
-      background: transparent;
+    /* Tabel dengan tema gelap - Tidak Putih */
+    .dark-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 16px;
+      overflow: hidden;
     }
-    .hasil-table table th, .hasil-table table td {
-      border-color: #1e3a5f;
+    .dark-table th,
+    .dark-table td {
+      border: 1px solid #2d4a7c;
+      padding: 12px 10px;
+      text-align: left;
       color: #e2e8f0;
+    }
+    .dark-table th {
+      background: linear-gradient(105deg, #1e3a5f, #1e4b8f);
+      color: white;
+      font-weight: 700;
+    }
+    .dark-table td {
+      background: rgba(10, 20, 35, 0.8);
+    }
+    .dark-table tr:hover td {
+      background: rgba(59, 130, 246, 0.1);
     }
     .logout-btn {
       background: linear-gradient(105deg, #1e4b8f, #3b82f6);
@@ -318,23 +374,116 @@
       padding: 60px 20px;
       color: white;
     }
-    .btn-reset {
+
+    /* MODAL KONFIRMASI ELEGAN DI TENGAH */
+    .elegant-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(12px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeInModal 0.25s ease;
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; backdrop-filter: blur(0px); }
+      to { opacity: 1; backdrop-filter: blur(12px); }
+    }
+    .elegant-modal-card {
+      background: linear-gradient(145deg, #0f172a, #0a0f1f);
+      border-radius: 56px;
+      max-width: 480px;
+      width: 90%;
+      padding: 40px 32px;
+      text-align: center;
+      border: 1px solid rgba(59, 130, 246, 0.5);
+      box-shadow: 0 40px 60px rgba(0, 0, 0, 0.5);
+      animation: slideUpModal 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    @keyframes slideUpModal {
+      from { transform: translateY(50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .elegant-modal-icon {
+      width: 80px;
+      height: 80px;
+      background: rgba(220, 38, 38, 0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+    }
+    .elegant-modal-icon i {
+      font-size: 42px;
+      color: #ef4444;
+    }
+    .elegant-modal-card h3 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .elegant-modal-message {
+      color: #cbd5e1;
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .elegant-modal-warning {
+      background: rgba(239, 68, 68, 0.15);
+      padding: 10px 16px;
+      border-radius: 60px;
+      display: inline-block;
+      font-size: 0.85rem;
+      color: #f87171;
+      margin-bottom: 28px;
+    }
+    .elegant-modal-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-modal-elegant-cancel {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 12px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      color: #cbd5e1;
+      transition: 0.2s;
+    }
+    .btn-modal-elegant-cancel:hover {
+      background: #334155;
+      transform: translateY(-2px);
+    }
+    .btn-modal-elegant-confirm {
       background: linear-gradient(105deg, #dc2626, #ef4444);
       border: none;
-      border-radius: 40px;
-      padding: 10px;
-      font-weight: 600;
-      width: 100%;
-      margin-top: 10px;
+      padding: 12px 32px;
+      border-radius: 60px;
+      font-weight: 700;
       color: white;
+      transition: 0.2s;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.3);
     }
-    .btn-reset:hover {
+    .btn-modal-elegant-confirm:hover {
+      transform: translateY(-2px);
       filter: brightness(1.05);
-      transform: translateY(-1px);
     }
+
     @media (max-width: 768px) {
       .hero-header h2 { font-size: 1.5rem; }
       .candidate-name { font-size: 1.2rem; }
+      .elegant-modal-card { padding: 30px 20px; }
+      .elegant-modal-actions { gap: 12px; }
+      .btn-modal-elegant-cancel, .btn-modal-elegant-confirm { padding: 10px 24px; }
     }
   </style>
 </head>
@@ -417,7 +566,7 @@
       <div class="stat-card">
         <button class="btn btn-danger btn-action" onclick="tutupVotingAdmin()"><i class="fas fa-lock"></i> TUTUP VOTING</button>
         <button class="btn btn-success btn-action" onclick="bukaVotingAdmin()"><i class="fas fa-lock-open"></i> BUKA VOTING</button>
-        <button class="btn-reset" onclick="resetPemilih()"><i class="fas fa-trash-alt"></i> RESET PEMILIH</button>
+        <button class="btn-reset" onclick="showResetConfirmModal()"><i class="fas fa-trash-alt"></i> RESET PEMILIH</button>
       </div>
     </div>
   </div>
@@ -432,12 +581,12 @@
       <div class="hasil-table">
         <h5><i class="fas fa-trophy"></i> Hasil Realtime</h5>
         <div class="table-responsive">
-          <table class="table table-bordered" id="excelTable" style="border-collapse: collapse; width: 100%;">
+          <table class="dark-table" id="excelTable">
             <thead>
-              <tr><th style="border: 1px solid #3b82f6; padding: 10px;">Rank</th><th style="border: 1px solid #3b82f6; padding: 10px;">Nama</th><th style="border: 1px solid #3b82f6; padding: 10px;">Suara</th><th style="border: 1px solid #3b82f6; padding: 10px;">Jabatan</th></tr>
+              <tr><th>Rank</th><th>Nama</th><th>Suara</th><th>Jabatan</th></tr>
             </thead>
             <tbody id="hasilTableAdmin"></tbody>
-          </table>
+           </table>
         </div>
         <div class="d-flex gap-2 mt-3 flex-wrap">
           <button class="btn btn-primary" onclick="downloadExcelAdmin()"><i class="fas fa-file-excel"></i> Download Excel</button>
@@ -473,10 +622,6 @@
     el.style.display = "flex";
   }
   function hideLoading() { document.getElementById("loadingToast").style.display = "none"; }
-  
-  function showNotif(msg, isError) { 
-    alert(msg); 
-  }
 
   function switchTab(tab) {
     const pemilihForm = document.getElementById("pemilihForm");
@@ -523,7 +668,7 @@
       let html = "";
       data.forEach(calon => {
         let foto = calon.foto || `https://ui-avatars.com/api/?background=2563eb&color=fff&rounded=true&size=120&name=${encodeURIComponent(calon.nama)}`;
-        html += `<div class="col-md-6 col-lg-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}" style="width:120px;height:120px;object-fit:cover;border-radius:50%;"></div><div class="card-body-custom"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6 style="color:#60a5fa;"><i class="fas fa-eye"></i> Visi</h6><p>${escapeHtml(calon.visi || "-")}</p></div><div class="visi-misi-box"><h6 style="color:#60a5fa;"><i class="fas fa-bullhorn"></i> Misi</h6><p>${escapeHtml(calon.misi || "-")}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}"><i class="fas fa-vote-yea"></i> Pilih</button></div></div></div>`;
+        html += `<div class="col-md-6 col-lg-4"><div class="candidate-card"><div class="candidate-img"><img src="${foto}"></div><div class="card-body-custom"><div class="candidate-name">${escapeHtml(calon.nama)}</div><div class="visi-misi-box"><h6><i class="fas fa-eye"></i> Visi</h6><p>${escapeHtml(calon.visi || "-")}</p></div><div class="visi-misi-box"><h6><i class="fas fa-bullhorn"></i> Misi</h6><p>${escapeHtml(calon.misi || "-")}</p></div><button class="btn-pilih-modern" data-nama="${escapeHtml(calon.nama)}"><i class="fas fa-vote-yea"></i> Pilih</button></div></div></div>`;
       });
       document.getElementById("listCalon").innerHTML = html;
       document.getElementById("calonContainer").style.display = "block";
@@ -535,7 +680,7 @@
 
   function openConfirmModal(nama) {
     pendingCandidate = nama;
-    let modalHtml = `<div class="custom-modal-overlay" id="confirmModal" style="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.7);backdrop-filter:blur(8px);z-index:2000;display:flex;align-items:center;justify-content:center;"><div class="modal-confirm-card" style="background:#0f172a;border-radius:48px;padding:32px;max-width:450px;width:90%;text-align:center;border:1px solid #3b82f6;"><div class="modal-icon" style="background:rgba(59,130,246,0.2);width:75px;height:75px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;"><i class="fas fa-ballot" style="font-size:38px;color:#60a5fa;"></i></div><h3 style="color:white;">Konfirmasi Pilihan</h3><div style="background:#1e293b;padding:8px 18px;border-radius:60px;display:inline-block;margin:12px 0;color:#60a5fa;font-weight:800;">${nama}</div><p style="color:#cbd5e1;">Yakin memilih sebagai Ketua Komite?<br>Suara tidak dapat diubah.</p><div class="modal-actions" style="display:flex;gap:15px;justify-content:center;margin-top:20px;"><button class="btn-cancel" id="modalCancelBtn" style="background:#334155;border:none;padding:12px 28px;border-radius:44px;font-weight:600;color:white;">Batal</button><button class="btn-confirm" id="modalConfirmBtn" style="background:linear-gradient(105deg,#1e4b8f,#3b82f6);border:none;padding:12px 28px;border-radius:44px;font-weight:700;color:white;">Ya, Pilih</button></div></div></div>`;
+    let modalHtml = `<div class="elegant-modal-overlay" id="confirmModal"><div class="elegant-modal-card"><div class="elegant-modal-icon"><i class="fas fa-question-circle"></i></div><h3>Konfirmasi Pilihan</h3><div class="elegant-modal-message">Yakin memilih <strong style="color:#60a5fa;">${nama}</strong> sebagai Ketua Komite?</div><div class="elegant-modal-warning"><i class="fas fa-lock"></i> Suara tidak dapat diubah</div><div class="elegant-modal-actions"><button class="btn-modal-elegant-cancel" id="modalCancelBtn">Batal</button><button class="btn-modal-elegant-confirm" id="modalConfirmBtn">Ya, Pilih</button></div></div></div>`;
     document.body.insertAdjacentHTML("beforeend", modalHtml);
     const modal = document.getElementById("confirmModal");
     document.getElementById("modalCancelBtn").onclick = () => { modal.remove(); };
@@ -587,7 +732,7 @@
       let html = "";
       arr.forEach((item, idx) => {
         let jabatan = idx===0?"Ketua":idx===1?"Sekretaris":idx===2?"Bendahara":"Anggota";
-        html += `<tr><td style="border: 1px solid #3b82f6; padding: 8px;">${idx+1}</td><td style="border: 1px solid #3b82f6; padding: 8px;">${escapeHtml(item.nama)}</td><td style="border: 1px solid #3b82f6; padding: 8px;"><strong>${item.suara}</strong></td><td style="border: 1px solid #3b82f6; padding: 8px;">${jabatan}</td></tr>`;
+        html += `<tr><td>${idx+1}</td><td>${escapeHtml(item.nama)}</td><td><strong>${item.suara}</strong></td><td>${jabatan}</td></tr>`;
       });
       document.getElementById("hasilTableAdmin").innerHTML = html;
       updateChartAdmin(arr);
@@ -607,44 +752,57 @@
   async function tutupVotingAdmin() { if(confirm("Tutup voting?")){ await fetch(API_URL,{method:"POST",body:JSON.stringify({action:"closeVoting"})}); loadAdminData(); alert("Voting ditutup"); } }
   async function bukaVotingAdmin() { if(confirm("Buka voting?")){ await fetch(API_URL,{method:"POST",body:JSON.stringify({action:"openVoting"})}); loadAdminData(); alert("Voting dibuka"); } }
   
-  // RESET PEMILIH - menghapus semua data pemilih dan hasil voting
-  async function resetPemilih() {
-    if(confirm("⚠️ PERINGATAN! Ini akan menghapus SEMUA data pemilih dan hasil voting.\nApakah Anda yakin?")) {
-      if(confirm("Konfirmasi akhir: Tekan OK untuk mereset semua data pemilih dan suara")) {
-        showLoading("Meriset data pemilih...");
-        try {
-          const resp = await fetch(API_URL, {
-            method: "POST", 
-            body: JSON.stringify({ action: "resetPemilih" })
-          });
-          const result = await resp.json();
-          hideLoading();
-          alert(result.message || "Data pemilih telah direset");
-          loadAdminData();
-        } catch(e) {
-          hideLoading();
-          alert("Fungsi reset memerlukan tambahan endpoint di Google Apps Script. Pastikan fungsi resetPemilih() tersedia di server.");
-        }
-      }
+  // SHOW ELEGANT MODAL UNTUK RESET PEMILIH
+  function showResetConfirmModal() {
+    let modalHtml = `<div class="elegant-modal-overlay" id="resetModal"><div class="elegant-modal-card"><div class="elegant-modal-icon"><i class="fas fa-exclamation-triangle"></i></div><h3>Reset Semua Data</h3><div class="elegant-modal-message">Tindakan ini akan menghapus <strong>SEMUA data pemilih</strong> dan <strong>hasil voting</strong> secara permanen.</div><div class="elegant-modal-warning"><i class="fas fa-trash-alt"></i> Data yang dihapus tidak dapat dikembalikan</div><div class="elegant-modal-actions"><button class="btn-modal-elegant-cancel" id="resetCancelBtn">Batal</button><button class="btn-modal-elegant-confirm" id="resetConfirmBtn">Ya, Reset Semua</button></div></div></div>`;
+    document.body.insertAdjacentHTML("beforeend", modalHtml);
+    const modal = document.getElementById("resetModal");
+    document.getElementById("resetCancelBtn").onclick = () => { modal.remove(); };
+    document.getElementById("resetConfirmBtn").onclick = async () => { modal.remove(); await executeResetPemilih(); };
+  }
+  
+  async function executeResetPemilih() {
+    showLoading("Meriset data pemilih...");
+    try {
+      const resp = await fetch(API_URL, {
+        method: "POST", 
+        body: JSON.stringify({ action: "resetPemilih" })
+      });
+      const result = await resp.json();
+      hideLoading();
+      alert(result.message || "Data pemilih telah direset");
+      loadAdminData();
+    } catch(e) {
+      hideLoading();
+      alert("Fungsi reset memerlukan tambahan endpoint di Google Apps Script.\n\nTambahkan fungsi resetPemilih() di server.");
     }
   }
   
-  // DOWNLOAD EXCEL DENGAN GARIS TABEL
+  // DOWNLOAD EXCEL DENGAN GARIS TABEL (format gelap)
   function downloadExcelAdmin() {
-    // Ambil tabel dengan border yang sudah ada
-    let table = document.getElementById("excelTable");
+    let rows = [];
+    let tableRows = document.querySelectorAll("#hasilTableAdmin tr");
+    tableRows.forEach(row => {
+      let cells = row.querySelectorAll("td");
+      if (cells.length) {
+        rows.push([cells[0]?.innerText || "", cells[1]?.innerText || "", cells[2]?.innerText || "", cells[3]?.innerText || ""]);
+      }
+    });
+    let totalSuara = document.getElementById("totalSuaraAdmin").innerText;
+    let statusText = document.getElementById("statusVotingAdmin").innerText.replace(/[^A-Z]/g, '');
     let currentDate = new Date().toLocaleString('id-ID');
+    
     let htmlContent = `
       <html>
         <head>
           <meta charset="UTF-8">
           <title>Hasil Voting Komite SMPN 2 Kawali</title>
           <style>
-            body { font-family: Arial, sans-serif; margin: 20px; }
+            body { font-family: 'Segoe UI', Arial, sans-serif; margin: 30px; background: white; }
             h2 { color: #1e4b8f; }
-            .header { margin-bottom: 20px; }
+            .header { margin-bottom: 25px; }
             table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-            th, td { border: 1px solid #000000; padding: 8px; text-align: left; }
+            th, td { border: 1px solid #000000; padding: 10px; text-align: left; }
             th { background-color: #2563eb; color: white; }
             .total { margin-top: 20px; font-weight: bold; }
           </style>
@@ -656,21 +814,14 @@
             <p>Tanggal: ${currentDate}</p>
           </div>
           <table>
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th>Nama Kandidat</th>
-                <th>Perolehan Suara</th>
-                <th>Jabatan</th>
-              </tr>
-            </thead>
+            <thead><tr><th>Rank</th><th>Nama Kandidat</th><th>Perolehan Suara</th><th>Jabatan</th></tr></thead>
             <tbody>
-              ${document.getElementById("hasilTableAdmin").innerHTML}
+              ${rows.map(row => `<tr><td>${row[0]}</td><td>${row[1]}</td><td>${row[2]}</td><td>${row[3]}</td></tr>`).join('')}
             </tbody>
           </table>
           <div class="total">
-            <p>Total Suara Masuk: ${document.getElementById("totalSuaraAdmin").innerText}</p>
-            <p>Status Voting: ${document.getElementById("statusVotingAdmin").innerText.replace(/<[^>]*>/g, '')}</p>
+            <p>Total Suara Masuk: ${totalSuara}</p>
+            <p>Status Voting: ${statusText}</p>
           </div>
           <p style="margin-top: 30px; font-size: 12px; color: gray;">Dicetak dari Sistem E-Voting SMPN 2 Kawali</p>
         </body>
