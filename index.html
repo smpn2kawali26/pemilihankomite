@@ -154,9 +154,9 @@
 </head>
 <body>
 <div class="container">
-  <!-- HEADER -->
+  <!-- HEADER dengan LOGO BARU -->
   <div class="header">
-    <img src="https://drive.google.com/uc?export=view&id=1nlVZtT1OQJKcX61ylMOkufbIE9x2MK6k" alt="Logo Sekolah" class="logo" onerror="this.src='https://placehold.co/100x100/1a237e/white?text=SMPN2'">
+    <img src="https://drive.google.com/uc?export=view&id=14MOrGVFoEKwDkd66Mg8rv4f4bCIaMALG" alt="Logo SMPN 2 Kawali" class="logo" onerror="this.src='https://placehold.co/100x100/1a237e/white?text=SMPN2'">
     <h1>PEMILIHAN KOMITE SEKOLAH</h1>
     <h2>SMPN 2 KAWALI</h2>
     <p>Masa Bakti 2026–2031</p>
@@ -287,6 +287,7 @@
     
     google.script.run
       .withSuccessHandler(function(res) {
+        console.log('Login response:', res);
         if (res.success) {
           currentUser = { id: res.pemilihId, nama: res.nama, alamat: res.alamat };
           document.getElementById('loginForm').style.display = 'none';
@@ -298,7 +299,7 @@
         }
       })
       .withFailureHandler(function(err) { 
-        console.error(err);
+        console.error('Login error:', err);
         showMessage('loginMessage', 'Koneksi error. Coba lagi.', 'error'); 
       })
       .loginPemilih(nama, alamat, password);
@@ -310,6 +311,7 @@
     
     google.script.run
       .withSuccessHandler(function(data) {
+        console.log('Calon data:', data);
         if (!data || data.length === 0) {
           grid.innerHTML = '<div class="card" style="text-align:center;padding:30px;"><p>⚠️ Data calon belum tersedia.</p><p>Hubungi admin untuk mengisi sheet "calon"</p></div>';
           return;
@@ -330,7 +332,7 @@
         }
       })
       .withFailureHandler(function(err) { 
-        console.error(err);
+        console.error('Load candidates error:', err);
         grid.innerHTML = '<div class="card" style="text-align:center;padding:30px;"><p>❌ Gagal memuat data calon.</p><p>Periksa sheet "calon" di spreadsheet</p></div>';
       })
       .getCalon();
