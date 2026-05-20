@@ -20,7 +20,7 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-background:linear-gradient(135deg,#003566,#0077b6);
+background:linear-gradient(135deg,#001d3d,#003566,#0a2472);
 min-height:100vh;
 display:flex;
 justify-content:center;
@@ -33,7 +33,7 @@ position:relative;
 body::before{
 content:"🗳️";
 position:fixed;
-font-size:300px;
+font-size:320px;
 opacity:0.05;
 top:50%;
 left:50%;
@@ -119,11 +119,11 @@ color:#000;
 
 .btn-admin{
 background:white;
-color:#003566;
+color:#001d3d;
 }
 
 .btn-control{
-background:#00b4d8;
+background:#0a2472;
 color:white;
 }
 
@@ -164,14 +164,14 @@ padding:5px;
 }
 
 .calon-card h3{
-color:#003566;
+color:#001d3d;
 margin-bottom:10px;
 }
 
 .vote-btn{
 width:100%;
 padding:12px;
-background:#0077b6;
+background:#0a2472;
 border:none;
 border-radius:10px;
 color:white;
@@ -183,7 +183,7 @@ transition:0.3s;
 }
 
 .vote-btn:hover{
-background:#003566;
+background:#001d3d;
 }
 
 .summary{
@@ -254,7 +254,7 @@ box-shadow:0 10px 30px rgba(0,0,0,0.3);
 width:50px;
 height:50px;
 border:5px solid #eee;
-border-top:5px solid #0077b6;
+border-top:5px solid #0a2472;
 border-radius:50%;
 animation:spin 1s linear infinite;
 margin:0 auto 20px;
@@ -332,6 +332,10 @@ LOGIN ADMIN
 
 <div class="calon-container" id="calonList"></div>
 
+<button class="btn btn-admin" onclick="kembaliDashboard()">
+KEMBALI KE DASHBOARD
+</button>
+
 </div>
 
 </div>
@@ -359,12 +363,20 @@ TUTUP VOTING
 RESET VOTING
 </button>
 
+<button class="btn btn-danger" onclick="resetTotal()">
+RESET TOTAL
+</button>
+
 <button class="btn btn-control" onclick="downloadExcel()">
 EXPORT EXCEL
 </button>
 
 <button class="btn btn-control" onclick="window.print()">
 EXPORT PDF
+</button>
+
+<button class="btn btn-admin" onclick="kembaliDashboard()">
+KEMBALI DASHBOARD
 </button>
 
 </div>
@@ -468,319 +480,11 @@ hideLoading();
 
 }
 
-async function loginPemilih(){
+function kembaliDashboard(){
 
-const nama=document.getElementById("nama").value.trim();
-const alamat=document.getElementById("alamat").value.trim();
-
-if(!nama || !alamat){
-
-showNotif("Lengkapi data terlebih dahulu");
-return;
-
-}
-
-currentUser = nama;
-currentAlamat = alamat;
-
-showLoading("Sedang login pemilih...");
-
-const res = await fetch(
-`${WEB_APP_URL}?action=login&nama=${encodeURIComponent(nama)}&alamat=${encodeURIComponent(alamat)}`
-);
-
-const data = await res.json();
-
-hideLoading();
-
-if(data.status=="success"){
-
-document.getElementById("loginPage").style.display="none";
-
+document.getElementById("votingPage").style.display="none";
 document.getElementById("adminPage").style.display="none";
-
-document.getElementById("votingPage").style.display="block";
-
-loadCalon();
-
-}else{
-
-showNotif(data.message);
-
-}
-
-}
-
-async function loadCalon(){
-
-showLoading("Memuat data calon...");
-
-const res = await fetch(
-`${WEB_APP_URL}?action=getCalon`
-);
-
-const data = await res.json();
-
-let html="";
-
-data.forEach(c=>{
-
-html += `
-
-<div class="calon-card">
-
-<img src="${convertDrive(c.foto)}">
-
-<h3>${c.nama}</h3>
-
-<p>
-<b>Visi:</b><br>
-${c.visi}
-</p>
-
-<p style="margin-top:10px;">
-<b>Misi:</b><br>
-${c.misi}
-</p>
-
-<button class="vote-btn"
-onclick="vote('${c.id}')">
-PILIH CALON
-</button>
-
-</div>
-
-`;
-
-});
-
-document.getElementById("calonList").innerHTML=html;
-
-hideLoading();
-
-}
-
-async function vote(id){
-
-if(!confirm("Yakin memilih calon ini?")){
-return;
-}
-
-showLoading("Mengirim suara...");
-
-const res = await fetch(
-`${WEB_APP_URL}?action=vote&nama=${encodeURIComponent(currentUser)}&alamat=${encodeURIComponent(currentAlamat)}&id=${id}`
-);
-
-const data = await res.json();
-
-hideLoading();
-
-if(data.status=="success"){
-
-showNotif("Terima kasih sudah memilih");
-
-setTimeout(()=>{
-
-document.getElementById("votingPage").style.display="none";
-
 document.getElementById("loginPage").style.display="block";
-
-document.getElementById("nama").value="";
-document.getElementById("alamat").value="";
-
-},2000);
-
-}else{
-
-showNotif(data.message);
-
-}
-
-}
-
-async function loginAdmin(){
-
-const username = prompt("Masukkan Username Admin");
-const password = prompt("Masukkan Password Admin");
-
-if(!username || !password) return;
-
-showLoading("Login admin...");
-
-const res = await fetch(
-`${WEB_APP_URL}?action=adminLogin&username=${username}&password=${password}`
-);
-
-const data = await res.json();
-
-hideLoading();
-
-if(data.status=="success"){
-
-document.getElementById("loginPage").style.display="none";
-
-document.getElementById("votingPage").style.display="none";
-
-document.getElementById("adminPage").style.display="block";
-
-loadSummary();
-loadHasil();
-
-setInterval(loadSummary,3000);
-setInterval(loadHasil,3000);
-
-}else{
-
-showNotif(data.message);
-
-}
-
-}
-
-async function loadSummary(){
-
-const res = await fetch(
-`${WEB_APP_URL}?action=summary`
-);
-
-const data = await res.json();
-
-document.getElementById("summaryBox").innerHTML=`
-
-<div class="summary-card">
-Total Pemilih
-<br><br>
-${data.totalPemilih}
-</div>
-
-<div class="summary-card">
-Sudah Voting
-<br><br>
-${data.sudahVoting}
-</div>
-
-<div class="summary-card">
-Belum Voting
-<br><br>
-${data.belumVoting}
-</div>
-
-<div class="summary-card">
-Status Voting
-<br><br>
-${data.statusVoting}
-</div>
-
-`;
-
-}
-
-async function loadHasil(){
-
-const res = await fetch(
-`${WEB_APP_URL}?action=hasil`
-);
-
-const data = await res.json();
-
-let html=`<h2>HASIL PEMILIHAN</h2>`;
-
-let labels=[];
-let votes=[];
-
-data.forEach(d=>{
-
-labels.push(d.nama);
-votes.push(d.suara);
-
-html+=`
-<div class="rank">
-${d.jabatan} : ${d.nama}
-<br>
-Jumlah Suara : ${d.suara}
-</div>
-`;
-
-});
-
-document.getElementById("hasilBox").innerHTML=html;
-
-renderChart(labels,votes);
-
-}
-
-function renderChart(labels,votes){
-
-const ctx=document.getElementById('voteChart');
-
-if(chart){
-chart.destroy();
-}
-
-chart=new Chart(ctx,{
-type:'bar',
-data:{
-labels:labels,
-datasets:[{
-label:'Jumlah Suara',
-data:votes
-}]
-},
-options:{
-responsive:true
-}
-});
-
-}
-
-async function toggleVoting(status){
-
-showLoading("Mengubah status voting...");
-
-const res = await fetch(
-`${WEB_APP_URL}?action=toggleVoting&status=${status}`
-);
-
-const data = await res.json();
-
-hideLoading();
-
-showNotif(data.message);
-
-}
-
-async function resetVoting(){
-
-if(!confirm("Yakin reset semua voting?")){
-return;
-}
-
-showLoading("Mereset voting...");
-
-const res = await fetch(
-`${WEB_APP_URL}?action=resetVoting`
-);
-
-const data = await res.json();
-
-hideLoading();
-
-showNotif(data.message);
-
-}
-
-function downloadExcel(){
-
-window.open(WEB_APP_URL + "?action=exportExcel");
-
-}
-
-function convertDrive(url){
-
-const id = url.match(/[-\w]{25,}/);
-
-return `https://drive.google.com/thumbnail?id=${id}`;
 
 }
 
