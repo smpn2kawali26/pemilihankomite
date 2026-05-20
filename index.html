@@ -323,7 +323,7 @@ LOGIN ADMIN
 
 </div>
 
-<!-- PEMILIH -->
+<!-- VOTING -->
 <div id="votingPage" style="display:none;">
 
 <div class="card">
@@ -333,7 +333,7 @@ LOGIN ADMIN
 <div class="calon-container" id="calonList"></div>
 
 <button class="btn btn-admin" onclick="kembaliDashboard()">
-KEMBALI KE DASHBOARD
+KEMBALI DASHBOARD
 </button>
 
 </div>
@@ -485,6 +485,337 @@ function kembaliDashboard(){
 document.getElementById("votingPage").style.display="none";
 document.getElementById("adminPage").style.display="none";
 document.getElementById("loginPage").style.display="block";
+
+}
+
+async function loginPemilih(){
+
+const nama=document.getElementById("nama").value.trim();
+const alamat=document.getElementById("alamat").value.trim();
+
+if(!nama || !alamat){
+
+showNotif("Lengkapi data terlebih dahulu");
+return;
+
+}
+
+currentUser = nama;
+currentAlamat = alamat;
+
+showLoading("Sedang login pemilih...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=login&nama=${encodeURIComponent(nama)}&alamat=${encodeURIComponent(alamat)}`
+);
+
+const data = await res.json();
+
+hideLoading();
+
+if(data.status=="success"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("adminPage").style.display="none";
+document.getElementById("votingPage").style.display="block";
+
+loadCalon();
+
+}else{
+
+showNotif(data.message);
+
+}
+
+}
+
+async function loadCalon(){
+
+showLoading("Memuat data calon...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=getCalon`
+);
+
+const data = await res.json();
+
+let html="";
+
+data.forEach(c=>{
+
+html += `
+
+<div class="calon-card">
+
+<img src="${convertDrive(c.foto)}">
+
+<h3>${c.nama}</h3>
+
+<p>
+<b>Visi:</b><br>
+${c.visi}
+</p>
+
+<p style="margin-top:10px;">
+<b>Misi:</b><br>
+${c.misi}
+</p>
+
+<button class="vote-btn"
+onclick="vote('${c.id}')">
+PILIH CALON
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("calonList").innerHTML=html;
+
+hideLoading();
+
+}
+
+async function vote(id){
+
+if(!confirm("Yakin memilih calon ini?")){
+return;
+}
+
+showLoading("Mengirim suara...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=vote&nama=${encodeURIComponent(currentUser)}&alamat=${encodeURIComponent(currentAlamat)}&id=${id}`
+);
+
+const data = await res.json();
+
+hideLoading();
+
+if(data.status=="success"){
+
+showNotif("Terima kasih sudah memilih");
+
+setTimeout(()=>{
+
+document.getElementById("votingPage").style.display="none";
+document.getElementById("loginPage").style.display="block";
+
+document.getElementById("nama").value="";
+document.getElementById("alamat").value="";
+
+},2000);
+
+}else{
+
+showNotif(data.message);
+
+}
+
+}
+
+async function loginAdmin(){
+
+const username = prompt("Masukkan Username Admin");
+const password = prompt("Masukkan Password Admin");
+
+if(!username || !password) return;
+
+showLoading("Login admin...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=adminLogin&username=${username}&password=${password}`
+);
+
+const data = await res.json();
+
+hideLoading();
+
+if(data.status=="success"){
+
+document.getElementById("loginPage").style.display="none";
+document.getElementById("votingPage").style.display="none";
+document.getElementById("adminPage").style.display="block";
+
+loadSummary();
+loadHasil();
+
+setInterval(loadSummary,3000);
+setInterval(loadHasil,3000);
+
+}else{
+
+showNotif(data.message);
+
+}
+
+}
+
+async function loadSummary(){
+
+const res = await fetch(
+`${WEB_APP_URL}?action=summary`
+);
+
+const data = await res.json();
+
+document.getElementById("summaryBox").innerHTML=`
+
+<div class="summary-card">
+Total Pemilih
+<br><br>
+${data.totalPemilih}
+</div>
+
+<div class="summary-card">
+Sudah Voting
+<br><br>
+${data.sudahVoting}
+</div>
+
+<div class="summary-card">
+Belum Voting
+<br><br>
+${data.belumVoting}
+</div>
+
+<div class="summary-card">
+Status Voting
+<br><br>
+${data.statusVoting}
+</div>
+
+`;
+
+}
+
+async function loadHasil(){
+
+const res = await fetch(
+`${WEB_APP_URL}?action=hasil`
+);
+
+const data = await res.json();
+
+let html=`<h2>HASIL PEMILIHAN</h2>`;
+
+let labels=[];
+let votes=[];
+
+data.forEach(d=>{
+
+labels.push(d.nama);
+votes.push(d.suara);
+
+html+=`
+<div class="rank">
+${d.jabatan} : ${d.nama}
+<br>
+Jumlah Suara : ${d.suara}
+</div>
+`;
+
+});
+
+document.getElementById("hasilBox").innerHTML=html;
+
+renderChart(labels,votes);
+
+}
+
+function renderChart(labels,votes){
+
+const ctx=document.getElementById('voteChart');
+
+if(chart){
+chart.destroy();
+}
+
+chart=new Chart(ctx,{
+type:'bar',
+data:{
+labels:labels,
+datasets:[{
+label:'Jumlah Suara',
+data:votes
+}]
+},
+options:{
+responsive:true
+}
+});
+
+}
+
+async function toggleVoting(status){
+
+showLoading("Mengubah status voting...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=toggleVoting&status=${status}`
+);
+
+const data = await res.json();
+
+hideLoading();
+
+showNotif(data.message);
+
+}
+
+async function resetVoting(){
+
+if(!confirm("Yakin reset voting?")){
+return;
+}
+
+showLoading("Mereset voting...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=resetVoting`
+);
+
+const data = await res.json();
+
+hideLoading();
+
+showNotif(data.message);
+
+}
+
+async function resetTotal(){
+
+if(!confirm("Yakin reset TOTAL seluruh data?")){
+return;
+}
+
+showLoading("Mereset seluruh data...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=resetTotal`
+);
+
+const data = await res.json();
+
+hideLoading();
+
+showNotif(data.message);
+
+}
+
+function downloadExcel(){
+
+window.open(WEB_APP_URL + "?action=exportExcel");
+
+}
+
+function convertDrive(url){
+
+const id = url.match(/[-\w]{25,}/);
+
+return `https://drive.google.com/thumbnail?id=${id}`;
 
 }
 
