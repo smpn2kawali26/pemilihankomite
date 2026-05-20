@@ -132,6 +132,60 @@ background:#d62828;
 color:white;
 }
 
+.calon-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:20px;
+margin-top:30px;
+}
+
+.calon-card{
+background:white;
+border-radius:20px;
+padding:20px;
+color:#333;
+text-align:left;
+box-shadow:0 5px 20px rgba(0,0,0,0.2);
+transition:0.3s;
+}
+
+.calon-card:hover{
+transform:translateY(-5px);
+}
+
+.calon-card img{
+width:100%;
+height:320px;
+object-fit:contain;
+background:#f5f5f5;
+border-radius:15px;
+margin-bottom:15px;
+padding:5px;
+}
+
+.calon-card h3{
+color:#003566;
+margin-bottom:10px;
+}
+
+.vote-btn{
+width:100%;
+padding:12px;
+background:#0077b6;
+border:none;
+border-radius:10px;
+color:white;
+font-size:16px;
+font-weight:600;
+cursor:pointer;
+margin-top:15px;
+transition:0.3s;
+}
+
+.vote-btn:hover{
+background:#003566;
+}
+
 .summary{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
@@ -236,6 +290,7 @@ transform:translateY(0);
 
 <div class="container">
 
+<!-- LOGIN -->
 <div class="card" id="loginPage">
 
 <img src="logo.png" class="logo">
@@ -268,6 +323,20 @@ LOGIN ADMIN
 
 </div>
 
+<!-- PEMILIH -->
+<div id="votingPage" style="display:none;">
+
+<div class="card">
+
+<h1>DAFTAR CALON KOMITE</h1>
+
+<div class="calon-container" id="calonList"></div>
+
+</div>
+
+</div>
+
+<!-- ADMIN -->
 <div id="adminPage" style="display:none;">
 
 <div class="card">
@@ -331,6 +400,8 @@ Sedang memproses...
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxf0OKDjaz-WPGqPRxPxlqsi7gcTFOOcqRnTYPQhBLFEZSDu3WqZZLfRnNdJxA_Ee_1/exec";
 
 let chart;
+let currentUser = "";
+let currentAlamat = "";
 
 function realtimeClock(){
 
@@ -409,7 +480,10 @@ return;
 
 }
 
-showLoading("Sedang login...");
+currentUser = nama;
+currentAlamat = alamat;
+
+showLoading("Sedang login pemilih...");
 
 const res = await fetch(
 `${WEB_APP_URL}?action=login&nama=${encodeURIComponent(nama)}&alamat=${encodeURIComponent(alamat)}`
@@ -421,12 +495,101 @@ hideLoading();
 
 if(data.status=="success"){
 
-showNotif("Silakan memilih");
+document.getElementById("loginPage").style.display="none";
+
+document.getElementById("adminPage").style.display="none";
+
+document.getElementById("votingPage").style.display="block";
+
+loadCalon();
+
+}else{
+
+showNotif(data.message);
+
+}
+
+}
+
+async function loadCalon(){
+
+showLoading("Memuat data calon...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=getCalon`
+);
+
+const data = await res.json();
+
+let html="";
+
+data.forEach(c=>{
+
+html += `
+
+<div class="calon-card">
+
+<img src="${convertDrive(c.foto)}">
+
+<h3>${c.nama}</h3>
+
+<p>
+<b>Visi:</b><br>
+${c.visi}
+</p>
+
+<p style="margin-top:10px;">
+<b>Misi:</b><br>
+${c.misi}
+</p>
+
+<button class="vote-btn"
+onclick="vote('${c.id}')">
+PILIH CALON
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("calonList").innerHTML=html;
+
+hideLoading();
+
+}
+
+async function vote(id){
+
+if(!confirm("Yakin memilih calon ini?")){
+return;
+}
+
+showLoading("Mengirim suara...");
+
+const res = await fetch(
+`${WEB_APP_URL}?action=vote&nama=${encodeURIComponent(currentUser)}&alamat=${encodeURIComponent(currentAlamat)}&id=${id}`
+);
+
+const data = await res.json();
+
+hideLoading();
+
+if(data.status=="success"){
+
+showNotif("Terima kasih sudah memilih");
 
 setTimeout(()=>{
-location.href="#";
-location.reload();
-},1500);
+
+document.getElementById("votingPage").style.display="none";
+
+document.getElementById("loginPage").style.display="block";
+
+document.getElementById("nama").value="";
+document.getElementById("alamat").value="";
+
+},2000);
 
 }else{
 
@@ -456,6 +619,9 @@ hideLoading();
 if(data.status=="success"){
 
 document.getElementById("loginPage").style.display="none";
+
+document.getElementById("votingPage").style.display="none";
+
 document.getElementById("adminPage").style.display="block";
 
 loadSummary();
@@ -546,13 +712,13 @@ renderChart(labels,votes);
 
 function renderChart(labels,votes){
 
-const ctx = document.getElementById('voteChart');
+const ctx=document.getElementById('voteChart');
 
 if(chart){
 chart.destroy();
 }
 
-chart = new Chart(ctx,{
+chart=new Chart(ctx,{
 type:'bar',
 data:{
 labels:labels,
@@ -607,6 +773,14 @@ showNotif(data.message);
 function downloadExcel(){
 
 window.open(WEB_APP_URL + "?action=exportExcel");
+
+}
+
+function convertDrive(url){
+
+const id = url.match(/[-\w]{25,}/);
+
+return `https://drive.google.com/thumbnail?id=${id}`;
 
 }
 
