@@ -138,7 +138,7 @@
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     
-    /* MODAL */
+    /* MODAL KONFIRMASI */
     .modal-overlay {
       position: fixed;
       top: 0;
@@ -221,7 +221,7 @@
       width: 100%;
     }
     
-    /* TOAST */
+    /* TOAST NOTIFIKASI */
     .toast {
       position: fixed;
       bottom: 30px;
@@ -428,7 +428,7 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
   // ==================== KONFIGURASI ====================
-  // GANTI URL_INI dengan URL Apps Script Anda!
+  // URL APPS SCRIP ANDA
   const API_URL = 'https://script.google.com/macros/s/AKfycbwlSgpfOKI5WhPR0f9ePd7G5veuxvFJY_ZHgHrbH37tVugNYr7BGCtEGx2vwtkqTTu2/exec';
   
   let currentUser = null;
@@ -441,7 +441,6 @@
       showLoading('Sedang memproses...');
       const response = await fetch(API_URL, {
         method: 'POST',
-        mode: 'no-cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ action, ...data })
       });
@@ -553,7 +552,7 @@
 
   async function loadCandidates() {
     var grid = document.getElementById('candidatesGrid');
-    grid.innerHTML = '<div class="loading-spinner"><div class="spinner"></div><p>Memuat data calon...</p></div>';
+    grid.innerHTML = '<div style="text-align:center; padding:40px; background:white; border-radius:20px;"><div style="width:40px; height:40px; border:3px solid #e0e0e0; border-top-color:#1a237e; border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 15px;"></div><p>Memuat data calon...</p></div>';
     
     try {
       const data = await callAPI('getCalon');
@@ -637,6 +636,8 @@
     if (!username) { showToast('Username harus diisi!', 'error'); return; }
     if (!password) { showToast('Password harus diisi!', 'error'); return; }
     
+    showLoading('Memverifikasi admin...');
+    
     try {
       const res = await callAPI('loginAdmin', { username, password });
       if (res.success) {
@@ -680,7 +681,7 @@
     }
     var html = '<table class="rekap-table"><thead><tr><th>Posisi</th><th>Nama Calon</th><th>Suara</th></thead><tbody>';
     for (var i = 0; i < hasil.length; i++) {
-      html += '<tr><td><strong>' + (hasil[i].posisi || '-') + '</strong></td><td>' + hasil[i].nama + '</td><td><strong>' + hasil[i].suara + '</strong></td></tr>';
+      html += '<tr><td><strong>' + (hasil[i].posisi || '-') + '</strong></td>lakang' + hasil[i].nama + '</td>lakang<strong>' + hasil[i].suara + '</strong></td></tr>';
     }
     var total = hasil.reduce(function(s,c) { return s + c.suara; }, 0);
     html += '<tr class="total-row"><td colspan="2">📊 TOTAL SUARA</td><td><strong>' + total + '</strong></td></tr>';
@@ -718,12 +719,15 @@
 
   async function resetVoting() {
     showConfirm('⚠️ PERINGATAN! ⚠️\n\nReset semua data voting?\n\nTINDAKAN INI TIDAK DAPAT DIURUNGKAN!', async function() {
+      showLoading('Merreset data voting...');
       try {
         await callAPI('resetVoting');
+        hideLoading();
         showAlert('✅ BERHASIL!', 'Semua data voting telah direset!', function() {
           loadAdminData();
         });
       } catch(e) {
+        hideLoading();
         showToast('Error: ' + e.message, 'error');
       }
     });
