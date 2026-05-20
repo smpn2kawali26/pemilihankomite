@@ -40,16 +40,18 @@ border-radius:25px;
 box-shadow:0 8px 30px rgba(0,0,0,0.3);
 text-align:center;
 color:white;
-animation:fadeIn 1s ease;
+animation:fadeIn 0.8s ease;
 }
 
 .logo{
-width:120px;
-height:120px;
+width:130px;
+height:130px;
+object-fit:contain;
 border-radius:50%;
 background:white;
 padding:10px;
 margin-bottom:20px;
+box-shadow:0 5px 20px rgba(0,0,0,0.3);
 }
 
 h1{
@@ -65,8 +67,6 @@ margin-bottom:20px;
 }
 
 #clock{
-font-size:18px;
-font-weight:600;
 margin-bottom:25px;
 }
 
@@ -131,10 +131,12 @@ transform:translateY(-5px);
 
 .calon-card img{
 width:100%;
-height:260px;
-object-fit:cover;
+height:320px;
+object-fit:contain;
+background:#f5f5f5;
 border-radius:15px;
 margin-bottom:15px;
+padding:5px;
 }
 
 .calon-card h3{
@@ -153,6 +155,7 @@ font-size:16px;
 font-weight:600;
 cursor:pointer;
 margin-top:15px;
+transition:0.3s;
 }
 
 .vote-btn:hover{
@@ -191,16 +194,51 @@ color:#333;
 font-weight:600;
 }
 
-.loading{
-display:none;
-margin-top:20px;
-font-weight:600;
-}
-
 footer{
 margin-top:20px;
 font-size:14px;
 opacity:0.9;
+}
+
+.overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.5);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.popup{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+min-width:300px;
+max-width:90%;
+animation:fadeIn 0.3s ease;
+color:#333;
+box-shadow:0 10px 30px rgba(0,0,0,0.3);
+}
+
+.spinner{
+width:50px;
+height:50px;
+border:5px solid #eee;
+border-top:5px solid #d62828;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin:0 auto 20px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
 }
 
 @keyframes fadeIn{
@@ -247,10 +285,6 @@ LOGIN PEMILIH
 LOGIN ADMIN
 </button>
 
-<div class="loading" id="loading">
-Memproses...
-</div>
-
 <footer>
 © SMP Negeri 2 Kawali 2026
 </footer>
@@ -275,6 +309,20 @@ Memproses...
 
 </div>
 
+<div class="overlay" id="overlay">
+
+<div class="popup">
+
+<div class="spinner"></div>
+
+<div id="popupText">
+Sedang memproses...
+</div>
+
+</div>
+
+</div>
+
 <script>
 
 const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxf0OKDjaz-WPGqPRxPxlqsi7gcTFOOcqRnTYPQhBLFEZSDu3WqZZLfRnNdJxA_Ee_1/exec";
@@ -286,15 +334,86 @@ function realtimeClock(){
 
 const now = new Date();
 
-document.getElementById("clock").innerHTML =
-now.toLocaleDateString('id-ID') +
-" | " +
+const hari = [
+"Minggu",
+"Senin",
+"Selasa",
+"Rabu",
+"Kamis",
+"Jumat",
+"Sabtu"
+];
+
+const bulan = [
+"Januari",
+"Februari",
+"Maret",
+"April",
+"Mei",
+"Juni",
+"Juli",
+"Agustus",
+"September",
+"Oktober",
+"November",
+"Desember"
+];
+
+const tanggal =
+hari[now.getDay()] + ", " +
+now.getDate() + " " +
+bulan[now.getMonth()] + " " +
+now.getFullYear();
+
+const jam =
 now.toLocaleTimeString('id-ID');
+
+document.getElementById("clock").innerHTML = `
+
+<div style="font-size:22px;font-weight:700;">
+${tanggal}
+</div>
+
+<div style="margin-top:8px;font-size:18px;">
+${jam}
+</div>
+
+`;
 
 }
 
 setInterval(realtimeClock,1000);
 realtimeClock();
+
+function showLoading(text="Sedang memproses..."){
+
+document.getElementById("overlay").style.display = "flex";
+
+document.getElementById("popupText").innerHTML = text;
+
+}
+
+function hideLoading(){
+
+document.getElementById("overlay").style.display = "none";
+
+}
+
+function showNotif(text){
+
+document.getElementById("overlay").style.display = "flex";
+
+document.getElementById("popupText").innerHTML = `
+<div style="font-size:18px;font-weight:600;">
+${text}
+</div>
+`;
+
+setTimeout(()=>{
+hideLoading();
+},2000);
+
+}
 
 async function loginPemilih(){
 
@@ -303,7 +422,7 @@ const alamat = document.getElementById("alamat").value.trim();
 
 if(!nama || !alamat){
 
-alert("Lengkapi data terlebih dahulu");
+showNotif("Lengkapi data terlebih dahulu");
 return;
 
 }
@@ -311,7 +430,7 @@ return;
 currentUser = nama;
 currentAlamat = alamat;
 
-document.getElementById("loading").style.display = "block";
+showLoading("Sedang login...");
 
 const res = await fetch(
 `${WEB_APP_URL}?action=login&nama=${encodeURIComponent(nama)}&alamat=${encodeURIComponent(alamat)}`
@@ -319,18 +438,26 @@ const res = await fetch(
 
 const data = await res.json();
 
-document.getElementById("loading").style.display = "none";
+hideLoading();
 
 if(data.status == "success"){
+
+showLoading("Membuka halaman voting...");
+
+setTimeout(()=>{
 
 document.getElementById("loginPage").style.display = "none";
 document.getElementById("votingPage").style.display = "block";
 
 loadCalon();
 
+hideLoading();
+
+},1000);
+
 }else{
 
-alert(data.message);
+showNotif(data.message);
 
 }
 
@@ -343,13 +470,21 @@ const password = prompt("Masukkan Password Admin");
 
 if(!username || !password) return;
 
+showLoading("Login admin...");
+
 const res = await fetch(
 `${WEB_APP_URL}?action=adminLogin&username=${username}&password=${password}`
 );
 
 const data = await res.json();
 
+hideLoading();
+
 if(data.status == "success"){
+
+showLoading("Membuka dashboard admin...");
+
+setTimeout(()=>{
 
 document.getElementById("loginPage").style.display = "none";
 document.getElementById("votingPage").style.display = "block";
@@ -360,15 +495,21 @@ loadSummary();
 setInterval(loadHasil,3000);
 setInterval(loadSummary,3000);
 
+hideLoading();
+
+},1000);
+
 }else{
 
-alert(data.message);
+showNotif(data.message);
 
 }
 
 }
 
 async function loadCalon(){
+
+showLoading("Memuat data calon...");
 
 const res = await fetch(
 `${WEB_APP_URL}?action=getCalon`
@@ -411,6 +552,8 @@ PILIH CALON
 
 document.getElementById("calonList").innerHTML = html;
 
+hideLoading();
+
 }
 
 async function vote(id){
@@ -419,19 +562,33 @@ if(!confirm("Yakin memilih calon ini?")){
 return;
 }
 
+showLoading("Mengirim suara...");
+
 const res = await fetch(
 `${WEB_APP_URL}?action=vote&nama=${encodeURIComponent(currentUser)}&alamat=${encodeURIComponent(currentAlamat)}&id=${id}`
 );
 
 const data = await res.json();
 
-alert(data.message);
+hideLoading();
 
 if(data.status == "success"){
 
-document.getElementById("calonList").innerHTML = `
-<h2>Terima kasih telah menggunakan hak suara Anda</h2>
-`;
+showNotif("Terima kasih sudah memilih");
+
+setTimeout(()=>{
+
+document.getElementById("votingPage").style.display = "none";
+document.getElementById("loginPage").style.display = "block";
+
+document.getElementById("nama").value = "";
+document.getElementById("alamat").value = "";
+
+},2000);
+
+}else{
+
+showNotif(data.message);
 
 }
 
